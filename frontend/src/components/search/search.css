@@ -1,0 +1,30 @@
+.schoolSearch{
+    border: 2px solid var(--color_5);
+    padding: 5px 10px;
+    background-color: var(--color_4);
+    position: relative;
+    bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.schoolSearch input, select{
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: var(--fontSize_7);
+    font-family: var(--fontFamily_2);
+}
+
+.Searchbutton{
+    background-color: var(--color_5);
+    border: none;
+    color: var(--color_4);
+    width: 120px;
+    font-family: var(--fontFamily_2);
+    font-weight: 500;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

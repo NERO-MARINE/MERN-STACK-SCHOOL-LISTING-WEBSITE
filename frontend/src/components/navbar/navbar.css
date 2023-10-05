@@ -1,0 +1,43 @@
+.header{
+    background-color: var(--color_1);
+}
+
+.headerNotHomePage{
+    background-color: var(--color_1);
+    padding-bottom: 10px;
+}
+
+.navbar{
+    padding-top: 10px;
+    color: var(--color_4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar_right .logo{
+    font-weight: var(--fontWeight_2);
+    font-family: var(--fontFamily_4);
+    font-size: var(--fontSize_5);
+}
+
+.navbar_left{
+  display: flex;
+  gap: 20px;
+}
+
+.intro{
+    padding: 100px 0;
+}
+
+.intro_text h1{
+   color: white;
+   font-family: var(--fontFamily_4);
+   font-size: var(--fontSize_2);
+}
+
+@media(max-width:768px){
+    .intro{
+        padding: 80px 0;
+    }
+}

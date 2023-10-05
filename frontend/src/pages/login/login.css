@@ -1,0 +1,106 @@
+.LoginPage{
+    display: grid;
+    min-height: 100vh;
+}
+
+.headerNotHomePgae{
+    align-self: start;
+}
+
+.footer{
+    align-self: end;
+}
+
+.formGrid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 100vh;
+}
+
+.formImage{
+    background: green;
+}
+
+.formContainer{
+    align-self: center;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.473);
+    padding: 20px;
+    box-shadow: 1px 2px 2px 1px white;
+}
+
+.formContainer .line{
+    height: 2px;
+    width: 100%;
+    background-color: var(--color_1);
+}
+
+.formContainer input, .formContainer button{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(180, 178, 178);
+    outline: none;
+}
+
+.formContainer button{
+    background-color: var(--color_2);
+    color: var(--color_7);
+    cursor: pointer;
+}
+
+@media(max-width: 1000px){
+    .formGrid{
+        grid-template-columns: 1fr;
+    }
+
+    .formImage{
+        display: none;
+    }
+
+    .formContainer{
+        width: 50%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 90%
+    }
+   
+}
+
+@media(max-width: 700px){
+
+    .formContainer{
+        width: 80%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 90%
+    }
+   
+}
+
+@media(max-width: 500px){
+
+    .formContainer{
+        width: 90%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 100%
+    }
+   
+}
+

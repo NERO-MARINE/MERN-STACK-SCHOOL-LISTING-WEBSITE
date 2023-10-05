@@ -1,0 +1,12 @@
+.footer{
+    padding: 20px 0;
+    background-color: var(--color_1);
+    margin-top: 50px;
+}
+
+.footer_content{
+    text-align: center;
+    font-size: var(--fontSize_7);
+    font-family: var(--fontFamily_3);
+    color: var(--color_4);
+}

@@ -1,0 +1,63 @@
+.schoolDetails{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    overflow: auto;
+    height: 550px;
+    padding: 0 20px;
+    background: var(--color_7);
+    /* z-index: 1; */
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    box-shadow: 2px 3px 3px 2px whitesmoke;
+}
+
+.schoolDetails .closeBtn{
+    position: absolute;
+    right: 1px;
+    top: 0;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.details_left, .details_right{
+    padding-top: 50px;
+}
+
+.details_left{
+    padding-top: 50px;
+    padding-left: 20px;
+}
+
+
+.detailItem{
+    display: flex;
+    gap: 25px;
+    margin-bottom: 5px;
+}
+
+.detailItem .label{
+    color: var(--color_1);
+    font-size: 20px;
+    font-family: var(--fontFamily_4);
+    text-transform: capitalize;
+}
+
+.details_right .desc{
+    font-size: 14px;
+    line-height: 1.3;
+    font-family: var(--fontFamily_3);
+    margin-bottom: 30px;
+}
+
+
+@media(max-width: 900px){
+    .schoolDetails{
+        flex-direction: column;
+        gap: 2px;
+        padding: 0 30px;
+    }
+}

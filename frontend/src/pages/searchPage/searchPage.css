@@ -1,0 +1,85 @@
+.searchPage{
+    display: grid;
+    min-height: 100vh;
+}
+
+.headerNotHomePage{
+    align-self: start;
+}
+
+.footer{
+    align-self: end;
+}
+
+.searchResults{
+    padding: 50px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    gap: 100px;
+    font-family: var(--fontFamily_3);
+}
+
+.searchResultsLeft{
+    background-color: var(--color_6);
+    padding: 20px;
+    border-radius: 5px;
+    height: max-content;
+}
+
+.searchResultsLeft > h2{
+    color: var(--color_2);
+}
+
+.searchResultsLeft > select{
+    padding: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.543);
+    border-radius: 5px;
+}
+
+.searchResultsLeft > button{
+    background-color: var(--color_2);
+    color: var(--color_4);
+    border-radius: 5px;
+}
+
+.schoolShowCase{
+    border: 1px solid rgba(128, 128, 128, 0.543);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.schoolShowCase .label{
+    background-color: var(--color_5);
+    text-align: center;
+    color: var(--color_4);
+    font-size: var(--fontSize_8);
+}
+
+.detailsBtn{
+    background-color: var(--color_2);
+    color: var(--color_4);
+    border-radius: 5px;
+}
+
+.rating{
+    background-color: rgba(255, 0, 0, 0.744);
+    color: var(--color_4);
+    border-radius: 5px; 
+    width: 150px;
+}
+
+@media(max-width: 850px){
+    .searchResults{
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 600px){
+    .schoolShowCase{
+        flex-direction: column;
+    }
+}

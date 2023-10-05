@@ -1,0 +1,57 @@
+const express = require('express')
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config()
+const userRoutes = require('./routes/userRoutes')
+const schoolRoutes = require('./routes/schoolRoutes')
+const authRoutes = require('./routes/authRoutes')
+const cookieParser = require('cookie-parser')
+const cors = require('cors')
+
+const app = express()
+app.use(cors())
+
+app.use(cookieParser())
+app.use(express.json())
+
+const conectToMongoDb = async()=>{
+    try{
+        mongoose.connect(process.env.MONGO)
+        console.log('connected to DB')
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
+mongoose.connection.on('connected', ()=>{
+    console.log('MONGO db connected')
+})
+
+mongoose.connection.on('disconnected', ()=>{
+    console.log('MONGO db Disconnected')
+})
+
+
+// use routes
+app.use('/user', userRoutes)
+app.use('/schools', schoolRoutes)
+app.use('/auth', authRoutes)
+
+app.use((err, req,res,next)=>{
+    const errorStatus = err.status || 500
+    const errorMsg = err.message || 'something went wrong'
+
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMsg,
+        stack: err.stack // more details about the error
+    })
+})
+
+
+app.listen(5000,()=>{
+    conectToMongoDb()
+    console.log('listening to request at port 5000')
+})

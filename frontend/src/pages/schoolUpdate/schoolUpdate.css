@@ -1,0 +1,42 @@
+.SchoolUpdate{
+    display: grid;
+    min-height: 100vh;
+}
+
+.notHomePage{
+    align-self: start;
+}
+
+footer{
+    align-self: end;
+}
+
+.listSchool2{
+    width: 80%;
+    margin: 20px auto;
+}
+
+.listSchool2{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.listSchool2 input, .listSchool2 select, .listSchool2 button, .listSchool2 textarea{
+    padding: 10px;
+    border-radius: 5px;
+    outline: none; 
+    border: 1px solid var(--color_2);  
+}
+
+.listSchool2 button{
+    background-color: var(--color_2);
+    color: white;
+    cursor: pointer;
+}
+
+@media(max-width:768px){
+    .listSchool2{
+        width: 100%;
+    }
+}
