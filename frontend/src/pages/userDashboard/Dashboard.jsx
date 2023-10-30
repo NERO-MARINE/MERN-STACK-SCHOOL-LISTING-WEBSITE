@@ -36,6 +36,7 @@ const Dashboard = () => {
   switch (credentials.state) {
     case "Abia":
       lgaList = [
+        "Select LGA",
         "Aba North",
         "Aba South",
         "Arochukwu",
@@ -57,6 +58,7 @@ const Dashboard = () => {
       break;
     case "Adamawa":
       lgaList = [
+        "Select LGA",
         "Demsa",
         "Fufure",
         "Ganye",
@@ -82,6 +84,7 @@ const Dashboard = () => {
       break;
     case "AkwaIbom":
       lgaList = [
+        "Select LGA",
         "Abak",
         "Eastern Obolo",
         "Eket",
@@ -118,6 +121,7 @@ const Dashboard = () => {
 
     case "Anambra":
       lgaList = [
+        "Select LGA",
         "Aguata",
         "Anambra East",
         "Anambra West",
@@ -144,6 +148,7 @@ const Dashboard = () => {
 
     case "Bauchi":
       lgaList = [
+        "Select LGA",
         "Alkaleri",
         "Bauchi",
         "Bogoro",
@@ -168,6 +173,7 @@ const Dashboard = () => {
       break;
     case "Bayelsa":
       lgaList = [
+        "Select LGA",
         "Brass",
         "Ekeremor",
         "Kolokuma Opokuma",
@@ -180,6 +186,7 @@ const Dashboard = () => {
       break;
     case "Benue":
       lgaList = [
+        "Select LGA",
         "Agatu",
         "Apa",
         "Ado",
@@ -207,6 +214,7 @@ const Dashboard = () => {
       break;
     case "Borno":
       lgaList = [
+        "Select LGA",
         "Abadam",
         "Askira-Uba",
         "Bama",
@@ -239,6 +247,7 @@ const Dashboard = () => {
 
     case "Cross River":
       lgaList = [
+        "Select LGA",
         "Abi",
         "Akamkpa",
         "Akpabuyo",
@@ -261,6 +270,7 @@ const Dashboard = () => {
       break;
     case "Delta":
       lgaList = [
+        "Select LGA",
         "Aniocha North",
         "Aniocha South",
         "Bomadi",
@@ -291,6 +301,7 @@ const Dashboard = () => {
 
     case "Ebonyi":
       lgaList = [
+        "Select LGA",
         "Abakaliki",
         "Afikpo North",
         "Afikpo South",
@@ -308,6 +319,7 @@ const Dashboard = () => {
       break;
     case "Edo":
       lgaList = [
+        "Select LGA",
         "Akoko-Edo",
         "Egor",
         "Esan Central",
@@ -331,6 +343,7 @@ const Dashboard = () => {
 
     case "Ekiti":
       lgaList = [
+        "Select LGA",
         "Ado Ekiti",
         "Efon",
         "Ekiti East",
@@ -351,6 +364,7 @@ const Dashboard = () => {
       break;
     case "Rivers":
       lgaList = [
+        "Select LGA",
         "Port Harcourt",
         "Obio-Akpor",
         "Okrika",
@@ -378,6 +392,7 @@ const Dashboard = () => {
       break;
     case "Enugu":
       lgaList = [
+        "Select LGA",
         "Aninri",
         "Awgu",
         "Enugu East",
@@ -399,6 +414,7 @@ const Dashboard = () => {
       break;
     case "FCT":
       lgaList = [
+        "Select LGA",
         "Abaji",
         "Bwari",
         "Gwagwalada",
@@ -409,6 +425,7 @@ const Dashboard = () => {
       break;
     case "Gombe":
       lgaList = [
+        "Select LGA",
         "Akko",
         "Balanga",
         "Billiri",
@@ -424,6 +441,7 @@ const Dashboard = () => {
       break;
     case "Imo":
       lgaList = [
+        "Select LGA",
         "Aboh Mbaise",
         "Ahiazu Mbaise",
         "Ehime Mbano",
@@ -455,6 +473,7 @@ const Dashboard = () => {
       break;
     case "Jigawa":
       lgaList = [
+        "Select LGA",
         "Auyo",
         "Babura",
         "Biriniwa",
@@ -486,6 +505,7 @@ const Dashboard = () => {
       break;
     case "Kaduna":
       lgaList = [
+        "Select LGA",
         "Birnin Gwari",
         "Chikun",
         "Giwa",
@@ -513,6 +533,7 @@ const Dashboard = () => {
       break;
     case "Kano":
       lgaList = [
+        "Select LGA",
         "Ajingi",
         "Albasu",
         "Bagwai",
@@ -561,6 +582,7 @@ const Dashboard = () => {
       break;
     case "Katsina":
       lgaList = [
+        "Select LGA",
         "Bakori",
         "Batagarawa",
         "Batsari",
@@ -599,6 +621,7 @@ const Dashboard = () => {
       break;
     case "Kebbi":
       lgaList = [
+        "Select LGA",
         "Aleiro",
         "Arewa Dandi",
         "Argungu",
@@ -624,6 +647,7 @@ const Dashboard = () => {
       break;
     case "Kogi":
       lgaList = [
+        "Select LGA",
         "Adavi",
         "Ajaokuta",
         "Ankpa",
@@ -649,6 +673,7 @@ const Dashboard = () => {
       break;
     case "Kwara":
       lgaList = [
+        "Select LGA",
         "Asa",
         "Baruten",
         "Edu",
@@ -669,6 +694,7 @@ const Dashboard = () => {
       break;
     case "Lagos":
       lgaList = [
+        "Select LGA",
         "Agege",
         "Ajeromi-Ifelodun",
         "Alimosho",
@@ -693,6 +719,7 @@ const Dashboard = () => {
       break;
     case "Nasarawa":
       lgaList = [
+        "Select LGA",
         "Akwanga",
         "Awe",
         "Doma",
@@ -710,6 +737,7 @@ const Dashboard = () => {
       break;
     case "Niger":
       lgaList = [
+        "Select LGA",
         "Agaie",
         "Agwara",
         "Bida",
@@ -739,6 +767,7 @@ const Dashboard = () => {
       break;
     case "Ogun":
       lgaList = [
+        "Select LGA",
         "Abeokuta North",
         "Abeokuta South",
         "Ado-Odo Ota",
@@ -763,6 +792,7 @@ const Dashboard = () => {
       break;
     case "Ondo":
       lgaList = [
+        "Select LGA",
         "Akoko North-East",
         "Akoko North-West",
         "Akoko South-West",
@@ -785,6 +815,7 @@ const Dashboard = () => {
       break;
     case "Osun":
       lgaList = [
+        "Select LGA",
         "Atakunmosa East",
         "Atakunmosa West",
         "Aiyedaade",
@@ -819,6 +850,7 @@ const Dashboard = () => {
       break;
     case "Oyo":
       lgaList = [
+        "Select LGA",
         "Afijio",
         "Akinyele",
         "Atiba",
@@ -856,6 +888,7 @@ const Dashboard = () => {
       break;
     case "Plateau":
       lgaList = [
+        "Select LGA",
         "Bokkos",
         "Barkin Ladi",
         "Bassa",
@@ -877,6 +910,7 @@ const Dashboard = () => {
       break;
     case "Sokoto":
       lgaList = [
+        "Select LGA",
         "Binji",
         "Bodinga",
         "Dange Shuni",
@@ -904,6 +938,7 @@ const Dashboard = () => {
       break;
     case "Taraba":
       lgaList = [
+        "Select LGA",
         "Ardo Kola",
         "Bali",
         "Donga",
@@ -924,6 +959,7 @@ const Dashboard = () => {
       break;
     case "Yobe":
       lgaList = [
+        "Select LGA",
         "Bade",
         "Bursari",
         "Damaturu",
@@ -945,6 +981,7 @@ const Dashboard = () => {
       break;
     case "Zamfara":
       lgaList = [
+        "Select LGA",
         "Anka",
         "Bakura",
         "Birnin Magaji Kiyaw",
@@ -980,7 +1017,7 @@ const Dashboard = () => {
       );
       console.log(res.data);
       setResError("");
-      alert('School created and awaiting approval');
+      alert("School created and awaiting approval");
       window.location.reload(); // this plain javascript
     } catch (err) {
       const error = err.response.data;
@@ -1009,18 +1046,59 @@ const Dashboard = () => {
     }
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // navigate to edit page
-  const handleEdit = (schoolId)=>{
-    navigate('/update-school', {state: schoolId})
-  }
- 
+  const handleEdit = (schoolId) => {
+    navigate("/update-school", { state: schoolId });
+  };
 
   return (
     <div className="dashboard">
       <Navbar type="notHomePage" />
       <div className="dashboardFull container">
-        <div className="dashboard_left">
+        {error ? (
+          <span>{error.message}</span>
+        ) : (
+          <div className="dashboard_left">
+            {isLoading
+              ? "loading please wait"
+              : apiData &&
+                apiData.map((school) => (
+                  <div className="listedSchool flex" key={school._id}>
+                    <div className="school_details">
+                      <p>
+                        <span>School Name:</span> {school.name}
+                      </p>
+                      <p>
+                        <span>School Email:</span> {school.email}
+                      </p>
+                      <p>
+                        <span>School Category:</span> {school.category}
+                      </p>
+                      <p>
+                        <span>NSS Status:</span> {school.approved ? "approved" : "not Approved"}
+                      </p>
+                    </div>
+                    <div className="googleRating">{school.googleRating}</div>
+                    <div className="actionButtons">
+                      <button onClick={() => handleEdit(school._id)}>
+                        <FontAwesomeIcon icon={faEdit} />
+                      </button>
+                      <Link to={`/school/${school._id}`}>
+                        <button id="details">
+                          <FontAwesomeIcon icon={faBookOpen} />
+                        </button>
+                      </Link>
+                      <button onClick={() => handleDelete(school._id)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+          </div>
+        )}
+
+        <div className="dashboard_right">
           <div className="user_details">
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
@@ -1157,44 +1235,6 @@ const Dashboard = () => {
           </form>
           {resError && <div className="errorDiv">{resError}</div>}
         </div>
-        {error ? (
-          <span>{error.message}</span>
-        ) : (
-          <div className="dashboard_right">
-            {isLoading
-              ? "loading please wait"
-              : apiData &&
-                apiData.map((school) => (
-                  <div className="listedSchool flex" key={school._id}>
-                    <div className="school_details">
-                      <p>
-                        <span>School Name:</span> {school.name}
-                      </p>
-                      <p>
-                        <span>School Email:</span> {school.email}
-                      </p>
-                      <p>
-                        <span>School Category:</span> {school.category}
-                      </p>
-                    </div>
-                    <div className="googleRating">{school.googleRating}</div>
-                    <div className="actionButtons">
-                      <button onClick={()=>handleEdit(school._id)}>
-                        <FontAwesomeIcon icon={faEdit}/>
-                      </button>
-                      <Link to={`/school/${school._id}`}>
-                        <button id="details">
-                          <FontAwesomeIcon icon={faBookOpen} />
-                        </button>
-                      </Link>
-                      <button onClick={() => handleDelete(school._id)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-          </div>
-        )}
       </div>
       <Footer />
     </div>

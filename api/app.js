@@ -5,6 +5,7 @@ dotenv.config()
 const userRoutes = require('./routes/userRoutes')
 const schoolRoutes = require('./routes/schoolRoutes')
 const authRoutes = require('./routes/authRoutes')
+const forgotPswRoute = require('./routes/forgotPswRoute')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 
@@ -34,9 +35,10 @@ mongoose.connection.on('disconnected', ()=>{
 
 
 // use routes
-app.use('/user', userRoutes)
+app.use('/users', userRoutes)
 app.use('/schools', schoolRoutes)
 app.use('/auth', authRoutes)
+app.use('/account', forgotPswRoute)
 
 app.use((err, req,res,next)=>{
     const errorStatus = err.status || 500

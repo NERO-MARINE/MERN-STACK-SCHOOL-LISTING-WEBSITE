@@ -3,9 +3,10 @@ const bcrypt = require("bcryptjs");
 const createError = require("../utilitis/error");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 const login = async (req, res, next) => {
-  const maxAge = 3 * 24 * 60 * 60
+  const maxAge = 3 * 24 * 60 * 60;
   try {
     // check if user exist
     const user = await User.findOne({ username: req.body.username });
@@ -36,7 +37,7 @@ const login = async (req, res, next) => {
     res
       .cookie("access_token", token, { httpOnly: true, maxAge: maxAge * 60 })
       .status(200)
-      .json({...otherDetails});
+      .json({ details: { ...otherDetails }, isAdmin });
   } catch (err) {
     next(err);
   }
@@ -44,8 +45,8 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
-    if (!username || !email || !password) {
+    const { username, email, password, state, lga, schoolOwner } = req.body;
+    if (!username || !email || !password || !state || !lga || !schoolOwner) {
       throw Error("All fields must be field");
     }
 
@@ -77,11 +78,43 @@ const register = async (req, res, next) => {
     const newUser = new User({
       username: username,
       email: email,
+      state: state,
+      lga: lga,
+      schoolOwner: schoolOwner,
       password: hash,
     });
 
     await newUser.save();
     res.status(200).json(newUser);
+
+    //  sending email after sign up
+
+    const transporter = nodemailer.createTransport({
+      host: "mail.codebadgertech.com",
+      port: 465, // use out going server smtp port
+      auth: {
+        user: "info@codebadgertech.com",
+        pass: "codebadger@590",
+      },
+    });
+
+    const mailOptions = {
+      from: "info@codebadgertech.com",
+      to: req.body.email,
+      subject: `NSS Welcomes You`,
+      text: `Hello ${req.body.username}`,
+      html: `<h4> Welcome to Naija School search. Your Signup is Sucessful!</h4> <p>Are you a school owner? Help parents easily find your school.List your school for free on our website</p>`,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+        res.send("error");
+      } else {
+        console.log(info.response);
+ 
+      }
+    });
   } catch (err) {
     next(err);
   }

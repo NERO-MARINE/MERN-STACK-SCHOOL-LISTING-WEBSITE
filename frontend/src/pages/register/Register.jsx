@@ -6,33 +6,34 @@ import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
-    const [credentials, setCredentials] = useState({
-        email: undefined,
-        username: undefined,
-        password: undefined,
-    })
+  const [credentials, setCredentials] = useState({
+    email: undefined,
+    username: undefined,
+    password: undefined,
+    state: undefined,
+    lga: undefined,
+    schoolOwner: undefined,
+  });
 
-    const handleChange = (e)=>{
-        setCredentials((prev)=>({...prev, [e.target.id]: e.target.value}))
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const navigate = useNavigate();
+  const [error, setError] = useState();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:5000/auth/register", credentials);
+      //console.log(res.data) - to use this set const res = axios call
+      navigate("/login");
+    } catch (err) {
+      console.log(err.response.data);
+      const regError = err.response.data;
+      setError(regError.message);
     }
-
-    const navigate = useNavigate()
-    const [error, setError] = useState()
-
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
-        try{
-            await axios.post('http://localhost:5000/auth/register', credentials)
-            //console.log(res.data) - to use this set const res = axios call
-            navigate('/login')
-        }
-
-        catch(err){
-            console.log(err.response.data)
-            const regError =  err.response.data
-            setError(regError.message)
-        }
-    }
+  };
 
   return (
     <div className="RegisterPage">
@@ -45,23 +46,39 @@ const Register = () => {
             id="email"
             placeholder="Enter your Email"
             onChange={handleChange}
-            required
           />
           <input
             type="text"
             id="username"
             placeholder="Enter your username"
             onChange={handleChange}
-            required
           />
           <input
             type="password"
             id="password"
             placeholder="Enter your Password"
             onChange={handleChange}
-            required
           />
-          <button>Login</button>
+          <input
+            type="text"
+            id="state"
+            placeholder="Enter your state"
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            id="lga"
+            placeholder="Enter your LGA"
+            onChange={handleChange}
+          />
+
+          <input
+            type="text"
+            id="schoolOwner"
+            placeholder="Answer Yes or No"
+            onChange={handleChange}
+          />
+          <button>Register</button>
           <div className="line"></div>
           {/* {error && <span>{error.message}</span>} */}
           <Link to="/login">already have an account? Login here!</Link>

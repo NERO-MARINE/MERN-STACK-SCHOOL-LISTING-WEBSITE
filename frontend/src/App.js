@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
 import SearchPage from "./pages/searchPage/SearchPage";
@@ -7,22 +7,76 @@ import Login from "./pages/login/Login";
 import Dashboard from "./pages/userDashboard/Dashboard";
 import Register from "./pages/register/Register";
 import SchoolUpdate from "./pages/schoolUpdate/SchoolUpdate";
+import { AuthContext } from "./context/AuthContext";
+import { useContext } from "react";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 function App() {
+  // protected Routes
+  const ProtectedRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+
+    if (!user) {
+      return <Navigate to="/login" />;
+    }
+    // else
+    return children;
+  };
+
+  // LoggedIn already
+  const LoggedIn = ({ children }) => {
+    const { user } = useContext(AuthContext);
+
+    if (user) {
+      return <Navigate to="/" />;
+    }
+    // else
+    return children;
+  };
+
   return (
     <div className="App">
-         <BrowserRouter>
-         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/search" element={<SearchPage/>}/>
-          <Route path="/school/:id" element={<School/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/update-school" element={<SchoolUpdate/>}/>
-         </Routes>
-         </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/school/:id" element={<School />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/login"
+            element={
+              <LoggedIn>
+                <Login />
+              </LoggedIn>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <LoggedIn>
+                <Register />
+              </LoggedIn>
+            }
+          />
+          <Route path="/update-school" element={<SchoolUpdate />} />
+          <Route
+            path="/reset-password/:token"
+            element={
+              <LoggedIn>
+                <ResetPassword/>
+              </LoggedIn>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

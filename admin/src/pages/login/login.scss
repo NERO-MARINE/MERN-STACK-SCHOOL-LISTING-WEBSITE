@@ -1,0 +1,124 @@
+:root{
+    --fontWeight_1: 900;
+    --fontWeight_2: 700;
+    --fontWeight_3: 500;
+    --fontFamily_1: 'Montserrat', sans-serif;
+    --fontFamily_2: 'Open Sans', sans-serif;
+    --fontFamily_3: 'Poppins', sans-serif;
+    --fontFamily_4: 'Roboto Condensed', sans-serif;
+    --fontSize_1: 60px;
+    --fontSize_2: 50px;
+    --fontSize_3: 40px;
+    --fontSize_4: 30px;
+    --fontSize_5: 20px;
+    --fontSize_6: 18px;
+    --fontSize_7: 14px;
+    --fontSize_8: 12px;
+    --color_1: rgb(1, 27, 1);
+    --color_2: rgb(0, 128, 0);
+    --color_3: rgba(0, 128, 0, 0.283);
+    --color_4: rgb(255, 255, 255);
+    --color_5: rgb(19, 71, 19);
+    --color_7: rgb(221, 249, 221);
+    --color_6: rgb(255, 162, 0);
+  }
+  
+.responsiveImg{
+    max-width: 100%;
+    height: auto;
+  }
+
+.formGrid{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: 100vh;
+}
+
+.formImage{
+    background: whitesmoke;
+}
+
+
+.formContainer{
+    align-self: center;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.473);
+    padding: 20px;
+    box-shadow: 1px 2px 2px 1px white;
+}
+
+.formContainer .line{
+    height: 2px;
+    width: 100%;
+    background-color: var(--color_1);
+}
+
+.formContainer input, .formContainer button{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(180, 178, 178);
+    outline: none;
+}
+
+.formContainer button{
+    background-color: rgba(1, 27, 1, 0.57);
+    color: var(--color_7);
+    cursor: pointer;
+}
+
+@media(max-width: 1000px){
+    .formGrid{
+        grid-template-columns: 1fr;
+    }
+
+    .formImage{
+        display: none;
+    }
+
+    .formContainer{
+        width: 50%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 90%
+    }
+   
+}
+
+@media(max-width: 700px){
+
+    .formContainer{
+        width: 80%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 90%
+    }
+   
+}
+
+@media(max-width: 500px){
+
+    .formContainer{
+        width: 90%;
+        align-self: start;
+        margin-top: 100px;
+    }
+
+    .formContainer input, .formContainer button{
+        width: 100%
+    }
+   
+}
+

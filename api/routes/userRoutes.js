@@ -16,8 +16,8 @@ const {
 } = require("../utilitis/verifyToken");
 
 router.get("/", getAllUsers);
-router.get("/:id", verifyUser, getSingleUser);
-router.put("/:id", verifyUser, updateUser);
-router.delete("/:id", verifyUser, deleteUser);
+router.get("/:id", getSingleUser);
+router.put("/:id", updateUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;
