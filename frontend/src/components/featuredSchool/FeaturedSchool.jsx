@@ -27,7 +27,7 @@ const FeaturedSchool = () => {
     console.log(featuredSchools)*/
 
   const { apiData, isLoading} = useFetch(
-    "http://localhost:5000/schools/?featured=true"
+    "http://localhost:5000/schools/featuredSchools?featured=true"
   );
    // console.log(apiData)
   return (

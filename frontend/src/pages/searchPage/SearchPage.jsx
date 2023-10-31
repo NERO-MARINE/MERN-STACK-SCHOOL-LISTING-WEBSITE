@@ -20,7 +20,7 @@ const SearchPage = () => {
   const [newCategory, setNewCategory] = useState(category);
 
   const { apiData, isLoading, error } = useFetch(
-    `http://localhost:5000/schools/search/?featured=true&featured=false&state=${state}&lga=${lga}&category=${newCategory}`
+    `http://localhost:5000/schools/search/?featured=true&featured=false&approved=true&state=${state}&lga=${lga}&category=${newCategory}`
   );
 
   switch (state) {

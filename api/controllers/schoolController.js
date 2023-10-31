@@ -2,8 +2,19 @@ const School = require("../models/School");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 const createError = require("../utilitis/error");
+const nodemailer = require('nodemailer');
 
-// get all schools
+// get all  schools
+const schools = async (req, res, next) => {
+  try {
+    const allSchools = await School.find({});
+    res.status(200).json(allSchools);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// get all featured schools
 const getAllSchools = async (req, res, next) => {
   const { featured } = req.query;
   try {
@@ -16,15 +27,29 @@ const getAllSchools = async (req, res, next) => {
   }
 };
 
+// get all approved schools
+const getApprovedSchools = async (req, res, next) => {
+  const { approved } = req.query;
+  try {
+    const allSchools = await School.find({
+      approved: approved,
+    });
+    res.status(200).json(allSchools);
+  } catch (err) {
+    next(err);
+  }
+};
+
 // search all schools
 const searchAllSchools = async (req, res, next) => {
-  const { featured, state, lga, category } = req.query;
+  const { featured, state, lga, category, approved } = req.query;
   try {
     const allSchools = await School.find({
       featured: featured,
       state: state,
       lga: lga,
       category: category,
+      approved: approved,
     });
 
     if (allSchools.length == "") {
@@ -41,6 +66,7 @@ const searchAllSchools = async (req, res, next) => {
 const createSchool = async (req, res, next) => {
   const userId = req.params.userId;
   try {
+    const user = await User.findById(userId);
     const school = new School(req.body);
     const savedSchool = await school.save();
     try {
@@ -48,11 +74,41 @@ const createSchool = async (req, res, next) => {
       await User.findByIdAndUpdate(userId, {
         $push: { schools: savedSchool._id },
       });
+
     } catch (err) {
       next(err);
     }
 
     res.status(200).json(savedSchool);
+    //  sending email after school listing application
+
+    const transporter = nodemailer.createTransport({
+      host: "mail.codebadgertech.com",
+      port: 465, // use out going server smtp port
+      auth: {
+        user: "info@codebadgertech.com",
+        pass: "codebadger@590",
+      },
+    });
+
+    const mailOptions = {
+      from: "info@codebadgertech.com",
+      to: user.email,
+      subject: `School listing application`,
+      text: `Hello ${user.username}`,
+      html: `<p>Your school  ${savedSchool.name} listing application has been received and it is under review. Well send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log(err);
+        // res.send("error");
+      } else {
+        console.log(info.response);
+      }
+    });
+
+
   } catch (err) {
     next(err);
   }
@@ -68,9 +124,14 @@ const UserSchools = async (req, res, next) => {
         return School.findById(school);
       })
     );
-   
+
     if (listOfUsersSchool.length == "") {
-      return next(createError(404, "Your listed schools will appear here. You have not listed any school!"));
+      return next(
+        createError(
+          404,
+          "Your listed schools will appear here. You have not listed any school!"
+        )
+      );
     }
 
     res.status(200).json(listOfUsersSchool);
@@ -166,6 +227,22 @@ const countByState = async (req, res, next) => {
   }
 };
 
+// get all schools
+const countTotalSchools = async (req, res, next) => {
+  try {
+    const allSchools = await School.find();
+
+    if (allSchools.length == "") {
+      return next(createError(404, "No school Found!"));
+    }
+
+    res.status(200).json(allSchools);
+    // console.log(allSchools.length);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAllSchools,
   createSchool,
@@ -175,6 +252,9 @@ module.exports = {
   searchAllSchools,
   countByState,
   UserSchools,
+  countTotalSchools,
+  schools,
+  getApprovedSchools,
 };
 
 // illustration on how to use error handler middleware

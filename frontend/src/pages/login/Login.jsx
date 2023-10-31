@@ -5,35 +5,43 @@ import "./login.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+import PasswordResetReq from "../../components/passwordResetReq/PasswordResetReq";
+
 const Login = () => {
-    const [credentials, setCredentials] = useState({
-        username: undefined,
-        password: undefined,
-    });
-    
-    const {loading, error, dispatch} = useContext(AuthContext)
-    const navigate = useNavigate()
-    
-    const handleChange = (e)=>{
-        setCredentials((prev)=>({...prev, [e.target.id]: e.target.value}))
-    }
+  const [open, setOpen] = useState(false);
+  const [credentials, setCredentials] = useState({
+    username: undefined,
+    password: undefined,
+  });
 
-    const handleClick = async(e)=>{
-        e.preventDefault()
-        // console.log(credentials)
-        dispatch({type: 'LOGIN_START'})
+  const { loading, error, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-        try{
-            const res = await axios.post('http://localhost:5000/auth/login', credentials)
-            dispatch({type: 'LOGIN_SUCCESS', payload: res.data})
-             navigate('/')
-            // console.log(res.data)
-            
-        }
-        catch(err){
-            dispatch({type: 'LOGIN_FAILURE', payload: err.response.data})
-        }
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleEmailModal = () => {
+    setOpen(true);
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    // console.log(credentials)
+    dispatch({ type: "LOGIN_START" });
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/auth/login",
+        credentials
+      );
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      navigate("/");
+      // console.log(res.data)
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
+  };
 
   return (
     <div className="LoginPage">
@@ -41,12 +49,29 @@ const Login = () => {
       <div className="formGrid">
         <form className="formContainer" onSubmit={handleClick}>
           <h1>Login</h1>
-          <input type="text" id="username" placeholder="Enter your username" onChange={handleChange} required/>
-          <input type="password" id="password" placeholder="Enter your Password" onChange={handleChange} required/>
+          <input
+            type="text"
+            id="username"
+            placeholder="Enter your username"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your Password"
+            onChange={handleChange}
+            required
+          />
           <button disabled={loading}>Login</button>
           <div className="line"></div>
           {error && <span>{error.message}</span>}
-          <Link href="#">forgot password?</Link>
+          <Link onClick={handleEmailModal}>forgot password?</Link>
+          {open && (
+            <div className="emailModal">
+              <PasswordResetReq pswResetModal={setOpen} />
+            </div>
+          )}
         </form>
 
         <div className="formImage">

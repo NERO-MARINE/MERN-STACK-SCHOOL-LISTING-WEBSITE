@@ -11,6 +11,7 @@ const Search = () => {
   switch (nigerianState) {
     case "Abia":
       lgaList = [
+        "Select LGA",
         "Aba North",
         "Aba South",
         "Arochukwu",
@@ -32,6 +33,7 @@ const Search = () => {
       break;
     case "Adamawa":
       lgaList = [
+        "Select LGA",
         "Demsa",
         "Fufure",
         "Ganye",
@@ -57,6 +59,7 @@ const Search = () => {
       break;
     case "AkwaIbom":
       lgaList = [
+        "Select LGA",
         "Abak",
         "Eastern Obolo",
         "Eket",
@@ -93,6 +96,7 @@ const Search = () => {
 
     case "Anambra":
       lgaList = [
+        "Select LGA",
         "Aguata",
         "Anambra East",
         "Anambra West",
@@ -119,6 +123,7 @@ const Search = () => {
 
     case "Bauchi":
       lgaList = [
+        "Select LGA",
         "Alkaleri",
         "Bauchi",
         "Bogoro",
@@ -143,6 +148,7 @@ const Search = () => {
       break;
     case "Bayelsa":
       lgaList = [
+        "Select LGA",
         "Brass",
         "Ekeremor",
         "Kolokuma Opokuma",
@@ -155,6 +161,7 @@ const Search = () => {
       break;
     case "Benue":
       lgaList = [
+        "Select LGA",
         "Agatu",
         "Apa",
         "Ado",
@@ -182,6 +189,7 @@ const Search = () => {
       break;
     case "Borno":
       lgaList = [
+        "Select LGA",
         "Abadam",
         "Askira-Uba",
         "Bama",
@@ -214,6 +222,7 @@ const Search = () => {
 
     case "Cross River":
       lgaList = [
+        "Select LGA",
         "Abi",
         "Akamkpa",
         "Akpabuyo",
@@ -236,6 +245,7 @@ const Search = () => {
       break;
     case "Delta":
       lgaList = [
+        "Select LGA",
         "Aniocha North",
         "Aniocha South",
         "Bomadi",
@@ -266,6 +276,7 @@ const Search = () => {
 
     case "Ebonyi":
       lgaList = [
+        "Select LGA",
         "Abakaliki",
         "Afikpo North",
         "Afikpo South",
@@ -283,6 +294,7 @@ const Search = () => {
       break;
     case "Edo":
       lgaList = [
+        "Select LGA",
         "Akoko-Edo",
         "Egor",
         "Esan Central",
@@ -306,6 +318,7 @@ const Search = () => {
 
     case "Ekiti":
       lgaList = [
+        "Select LGA",
         "Ado Ekiti",
         "Efon",
         "Ekiti East",
@@ -326,6 +339,7 @@ const Search = () => {
       break;
     case "Rivers":
       lgaList = [
+        "Select LGA",
         "Port Harcourt",
         "Obio-Akpor",
         "Okrika",
@@ -353,6 +367,7 @@ const Search = () => {
       break;
     case "Enugu":
       lgaList = [
+        "Select LGA",
         "Aninri",
         "Awgu",
         "Enugu East",
@@ -374,6 +389,7 @@ const Search = () => {
       break;
     case "FCT":
       lgaList = [
+        "Select LGA",
         "Abaji",
         "Bwari",
         "Gwagwalada",
@@ -384,6 +400,7 @@ const Search = () => {
       break;
     case "Gombe":
       lgaList = [
+        "Select LGA",
         "Akko",
         "Balanga",
         "Billiri",
@@ -399,6 +416,7 @@ const Search = () => {
       break;
     case "Imo":
       lgaList = [
+        "Select LGA",
         "Aboh Mbaise",
         "Ahiazu Mbaise",
         "Ehime Mbano",
@@ -430,6 +448,7 @@ const Search = () => {
       break;
     case "Jigawa":
       lgaList = [
+        "Select LGA",
         "Auyo",
         "Babura",
         "Biriniwa",
@@ -461,6 +480,7 @@ const Search = () => {
       break;
     case "Kaduna":
       lgaList = [
+        "Select LGA",
         "Birnin Gwari",
         "Chikun",
         "Giwa",
@@ -488,6 +508,7 @@ const Search = () => {
       break;
     case "Kano":
       lgaList = [
+        "Select LGA",
         "Ajingi",
         "Albasu",
         "Bagwai",
@@ -536,6 +557,7 @@ const Search = () => {
       break;
     case "Katsina":
       lgaList = [
+        "Select LGA",
         "Bakori",
         "Batagarawa",
         "Batsari",
@@ -574,6 +596,7 @@ const Search = () => {
       break;
     case "Kebbi":
       lgaList = [
+        "Select LGA",
         "Aleiro",
         "Arewa Dandi",
         "Argungu",
@@ -599,6 +622,7 @@ const Search = () => {
       break;
     case "Kogi":
       lgaList = [
+        "Select LGA",
         "Adavi",
         "Ajaokuta",
         "Ankpa",
@@ -624,6 +648,7 @@ const Search = () => {
       break;
     case "Kwara":
       lgaList = [
+        "Select LGA",
         "Asa",
         "Baruten",
         "Edu",
@@ -644,6 +669,7 @@ const Search = () => {
       break;
     case "Lagos":
       lgaList = [
+        "Select LGA",
         "Agege",
         "Ajeromi-Ifelodun",
         "Alimosho",
@@ -668,6 +694,7 @@ const Search = () => {
       break;
     case "Nasarawa":
       lgaList = [
+        "Select LGA",
         "Akwanga",
         "Awe",
         "Doma",
@@ -685,6 +712,7 @@ const Search = () => {
       break;
     case "Niger":
       lgaList = [
+        "Select LGA",
         "Agaie",
         "Agwara",
         "Bida",
@@ -714,6 +742,7 @@ const Search = () => {
       break;
     case "Ogun":
       lgaList = [
+        "Select LGA",
         "Abeokuta North",
         "Abeokuta South",
         "Ado-Odo Ota",
@@ -738,6 +767,7 @@ const Search = () => {
       break;
     case "Ondo":
       lgaList = [
+        "Select LGA",
         "Akoko North-East",
         "Akoko North-West",
         "Akoko South-West",
@@ -760,6 +790,7 @@ const Search = () => {
       break;
     case "Osun":
       lgaList = [
+        "Select LGA",
         "Atakunmosa East",
         "Atakunmosa West",
         "Aiyedaade",
@@ -794,6 +825,7 @@ const Search = () => {
       break;
     case "Oyo":
       lgaList = [
+        "Select LGA",
         "Afijio",
         "Akinyele",
         "Atiba",
@@ -831,6 +863,7 @@ const Search = () => {
       break;
     case "Plateau":
       lgaList = [
+        "Select LGA",
         "Bokkos",
         "Barkin Ladi",
         "Bassa",
@@ -852,6 +885,7 @@ const Search = () => {
       break;
     case "Sokoto":
       lgaList = [
+        "Select LGA",
         "Binji",
         "Bodinga",
         "Dange Shuni",
@@ -879,6 +913,7 @@ const Search = () => {
       break;
     case "Taraba":
       lgaList = [
+        "Select LGA",
         "Ardo Kola",
         "Bali",
         "Donga",
@@ -899,6 +934,7 @@ const Search = () => {
       break;
     case "Yobe":
       lgaList = [
+        "Select LGA",
         "Bade",
         "Bursari",
         "Damaturu",
@@ -920,6 +956,7 @@ const Search = () => {
       break;
     case "Zamfara":
       lgaList = [
+        "Select LGA",
         "Anka",
         "Bakura",
         "Birnin Magaji Kiyaw",

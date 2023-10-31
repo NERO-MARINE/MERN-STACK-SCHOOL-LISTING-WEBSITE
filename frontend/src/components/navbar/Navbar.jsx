@@ -44,7 +44,9 @@ const Navbar = ({ type }) => {
             <h1>
               LETS HELP YOU FIND THE RIGHT SCHOOL FOR YOUR CHILD NEAR YOU!
             </h1>
-            <button className="button">Search School</button>
+            <Link to="/search">
+              <button className="button">Search School</button>
+            </Link>
           </div>
           <img
             src="./introImg.svg"

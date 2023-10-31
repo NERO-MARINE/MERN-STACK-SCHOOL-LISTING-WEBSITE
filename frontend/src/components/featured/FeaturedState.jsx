@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useFetch from "../../useFetch";
 import "./featuredState.css";
 const FeaturedState = () => {
@@ -14,7 +15,9 @@ const FeaturedState = () => {
         />
         <div className="owner_text flex">
           <h1>Are you a school owner? Help Parents Find Your School</h1>
-          <button className="ownerButton">List Your School</button>
+          <button className="ownerButton">
+            <Link to="/dashboard" style={{textDecoration: "none", color: "white"}}>List Your School</Link>
+          </button>
         </div>
       </div>
 

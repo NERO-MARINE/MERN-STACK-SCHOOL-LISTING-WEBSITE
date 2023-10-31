@@ -76,6 +76,11 @@ const schoolSchema = new mongoose.Schema({
         required: true
     },
 
+    approved:{
+        type: Boolean,
+        default: false
+    }
+
 },{
     collation: { locale: 'en', strength: 2 }
  }, {timestamps: true})

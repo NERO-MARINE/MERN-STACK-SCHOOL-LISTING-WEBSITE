@@ -35,9 +35,11 @@ const SchoolUpdate = () => {
     googleProfile: undefined,
   });
 
+  
   switch (credentials.state) {
     case "Abia":
       lgaList = [
+        "Select LGA",
         "Aba North",
         "Aba South",
         "Arochukwu",
@@ -59,6 +61,7 @@ const SchoolUpdate = () => {
       break;
     case "Adamawa":
       lgaList = [
+        "Select LGA",
         "Demsa",
         "Fufure",
         "Ganye",
@@ -84,6 +87,7 @@ const SchoolUpdate = () => {
       break;
     case "AkwaIbom":
       lgaList = [
+        "Select LGA",
         "Abak",
         "Eastern Obolo",
         "Eket",
@@ -120,6 +124,7 @@ const SchoolUpdate = () => {
 
     case "Anambra":
       lgaList = [
+        "Select LGA",
         "Aguata",
         "Anambra East",
         "Anambra West",
@@ -146,6 +151,7 @@ const SchoolUpdate = () => {
 
     case "Bauchi":
       lgaList = [
+        "Select LGA",
         "Alkaleri",
         "Bauchi",
         "Bogoro",
@@ -170,6 +176,7 @@ const SchoolUpdate = () => {
       break;
     case "Bayelsa":
       lgaList = [
+        "Select LGA",
         "Brass",
         "Ekeremor",
         "Kolokuma Opokuma",
@@ -182,6 +189,7 @@ const SchoolUpdate = () => {
       break;
     case "Benue":
       lgaList = [
+        "Select LGA",
         "Agatu",
         "Apa",
         "Ado",
@@ -209,6 +217,7 @@ const SchoolUpdate = () => {
       break;
     case "Borno":
       lgaList = [
+        "Select LGA",
         "Abadam",
         "Askira-Uba",
         "Bama",
@@ -241,6 +250,7 @@ const SchoolUpdate = () => {
 
     case "Cross River":
       lgaList = [
+        "Select LGA",
         "Abi",
         "Akamkpa",
         "Akpabuyo",
@@ -263,6 +273,7 @@ const SchoolUpdate = () => {
       break;
     case "Delta":
       lgaList = [
+        "Select LGA",
         "Aniocha North",
         "Aniocha South",
         "Bomadi",
@@ -293,6 +304,7 @@ const SchoolUpdate = () => {
 
     case "Ebonyi":
       lgaList = [
+        "Select LGA",
         "Abakaliki",
         "Afikpo North",
         "Afikpo South",
@@ -310,6 +322,7 @@ const SchoolUpdate = () => {
       break;
     case "Edo":
       lgaList = [
+        "Select LGA",
         "Akoko-Edo",
         "Egor",
         "Esan Central",
@@ -333,6 +346,7 @@ const SchoolUpdate = () => {
 
     case "Ekiti":
       lgaList = [
+        "Select LGA",
         "Ado Ekiti",
         "Efon",
         "Ekiti East",
@@ -353,6 +367,7 @@ const SchoolUpdate = () => {
       break;
     case "Rivers":
       lgaList = [
+        "Select LGA",
         "Port Harcourt",
         "Obio-Akpor",
         "Okrika",
@@ -380,6 +395,7 @@ const SchoolUpdate = () => {
       break;
     case "Enugu":
       lgaList = [
+        "Select LGA",
         "Aninri",
         "Awgu",
         "Enugu East",
@@ -401,6 +417,7 @@ const SchoolUpdate = () => {
       break;
     case "FCT":
       lgaList = [
+        "Select LGA",
         "Abaji",
         "Bwari",
         "Gwagwalada",
@@ -411,6 +428,7 @@ const SchoolUpdate = () => {
       break;
     case "Gombe":
       lgaList = [
+        "Select LGA",
         "Akko",
         "Balanga",
         "Billiri",
@@ -426,6 +444,7 @@ const SchoolUpdate = () => {
       break;
     case "Imo":
       lgaList = [
+        "Select LGA",
         "Aboh Mbaise",
         "Ahiazu Mbaise",
         "Ehime Mbano",
@@ -457,6 +476,7 @@ const SchoolUpdate = () => {
       break;
     case "Jigawa":
       lgaList = [
+        "Select LGA",
         "Auyo",
         "Babura",
         "Biriniwa",
@@ -488,6 +508,7 @@ const SchoolUpdate = () => {
       break;
     case "Kaduna":
       lgaList = [
+        "Select LGA",
         "Birnin Gwari",
         "Chikun",
         "Giwa",
@@ -515,6 +536,7 @@ const SchoolUpdate = () => {
       break;
     case "Kano":
       lgaList = [
+        "Select LGA",
         "Ajingi",
         "Albasu",
         "Bagwai",
@@ -563,6 +585,7 @@ const SchoolUpdate = () => {
       break;
     case "Katsina":
       lgaList = [
+        "Select LGA",
         "Bakori",
         "Batagarawa",
         "Batsari",
@@ -601,6 +624,7 @@ const SchoolUpdate = () => {
       break;
     case "Kebbi":
       lgaList = [
+        "Select LGA",
         "Aleiro",
         "Arewa Dandi",
         "Argungu",
@@ -626,6 +650,7 @@ const SchoolUpdate = () => {
       break;
     case "Kogi":
       lgaList = [
+        "Select LGA",
         "Adavi",
         "Ajaokuta",
         "Ankpa",
@@ -651,6 +676,7 @@ const SchoolUpdate = () => {
       break;
     case "Kwara":
       lgaList = [
+        "Select LGA",
         "Asa",
         "Baruten",
         "Edu",
@@ -671,6 +697,7 @@ const SchoolUpdate = () => {
       break;
     case "Lagos":
       lgaList = [
+        "Select LGA",
         "Agege",
         "Ajeromi-Ifelodun",
         "Alimosho",
@@ -695,6 +722,7 @@ const SchoolUpdate = () => {
       break;
     case "Nasarawa":
       lgaList = [
+        "Select LGA",
         "Akwanga",
         "Awe",
         "Doma",
@@ -712,6 +740,7 @@ const SchoolUpdate = () => {
       break;
     case "Niger":
       lgaList = [
+        "Select LGA",
         "Agaie",
         "Agwara",
         "Bida",
@@ -741,6 +770,7 @@ const SchoolUpdate = () => {
       break;
     case "Ogun":
       lgaList = [
+        "Select LGA",
         "Abeokuta North",
         "Abeokuta South",
         "Ado-Odo Ota",
@@ -765,6 +795,7 @@ const SchoolUpdate = () => {
       break;
     case "Ondo":
       lgaList = [
+        "Select LGA",
         "Akoko North-East",
         "Akoko North-West",
         "Akoko South-West",
@@ -787,6 +818,7 @@ const SchoolUpdate = () => {
       break;
     case "Osun":
       lgaList = [
+        "Select LGA",
         "Atakunmosa East",
         "Atakunmosa West",
         "Aiyedaade",
@@ -821,6 +853,7 @@ const SchoolUpdate = () => {
       break;
     case "Oyo":
       lgaList = [
+        "Select LGA",
         "Afijio",
         "Akinyele",
         "Atiba",
@@ -858,6 +891,7 @@ const SchoolUpdate = () => {
       break;
     case "Plateau":
       lgaList = [
+        "Select LGA",
         "Bokkos",
         "Barkin Ladi",
         "Bassa",
@@ -879,6 +913,7 @@ const SchoolUpdate = () => {
       break;
     case "Sokoto":
       lgaList = [
+        "Select LGA",
         "Binji",
         "Bodinga",
         "Dange Shuni",
@@ -906,6 +941,7 @@ const SchoolUpdate = () => {
       break;
     case "Taraba":
       lgaList = [
+        "Select LGA",
         "Ardo Kola",
         "Bali",
         "Donga",
@@ -926,6 +962,7 @@ const SchoolUpdate = () => {
       break;
     case "Yobe":
       lgaList = [
+        "Select LGA",
         "Bade",
         "Bursari",
         "Damaturu",
@@ -947,6 +984,7 @@ const SchoolUpdate = () => {
       break;
     case "Zamfara":
       lgaList = [
+        "Select LGA",
         "Anka",
         "Bakura",
         "Birnin Magaji Kiyaw",
@@ -1003,21 +1041,21 @@ const SchoolUpdate = () => {
             <label>School Name</label>
             <input
               type="text"
-              placeholder={apiData.name}
+              defaultValue={apiData.name}
               name="name"
               onChange={handleChange}
             />
             <label>School Address</label>
             <input
               type="text"
-              placeholder={apiData.address}
+              defaultValue={apiData.address}
               name="address"
               onChange={handleChange}
             />
             <label>School Phone Number</label>
             <input
               type="number"
-              placeholder={apiData.phone}
+              defaultValue={apiData.phone}
               name="phone"
               onChange={handleChange}
             />
@@ -1026,7 +1064,7 @@ const SchoolUpdate = () => {
               name="desc"
               cols="30"
               rows="10"
-              placeholder={apiData.desc}
+              defaultValue={apiData.desc}
               maxLength="300"
               onChange={handleChange}
             ></textarea>
@@ -1096,28 +1134,28 @@ const SchoolUpdate = () => {
             <label>Enter City School is Located</label>
             <input
               type="text"
-              placeholder={apiData.city}
+              defaultValue={apiData.city}
               name="city"
               onChange={handleChange}
             />
             <label>Google Profile Rating</label>
             <input
               type="text"
-              placeholder={apiData.googleRating}
+              defaultValue={apiData.googleRating}
               name="googleRating"
               onChange={handleChange}
             />
             <label>Enter School Email</label>
             <input
               type="email"
-              placeholder={apiData.email}
+              defaultValue={apiData.email}
               name="email"
               onChange={handleChange}
             />
             <label>Link To School Website</label>
             <input
               type="text"
-              placeholder={apiData.website}
+              defaultValue={apiData.website}
               name="website"
               onChange={handleChange}
             />
@@ -1135,7 +1173,7 @@ const SchoolUpdate = () => {
             <label>Google Profile Link</label>
             <input
               type="text"
-              placeholder={apiData.googleProfile}
+              defaultValue={apiData.googleProfile}
               name="googleProfile"
               onChange={handleChange}
             />

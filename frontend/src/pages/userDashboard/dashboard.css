@@ -13,7 +13,7 @@ footer{
 
 .dashboardFull{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     gap: 50px;
 }
 
@@ -84,15 +84,16 @@ footer{
 }
 
 .googleRating{
-    padding: 5px;
+    padding: 1px;
     background-color: goldenrod;
     color: white;
-    width: 40px;
+    font-size: 10px;
+    width: 30px;
     border-radius: 5px;
     text-align: center;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 2px;
+    right: 2px;
 }
 
 .actionButtons{
