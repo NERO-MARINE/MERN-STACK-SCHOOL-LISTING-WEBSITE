@@ -8,14 +8,12 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import SchoolDetails from "../../components/schoolDetails/SchoolDetails";
 import useFetch from "../../useFetch";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const School = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -34,11 +32,6 @@ const School = () => {
     setSlideNumber(newSlideNumber);
   };
 
-  const handleModal = (e) => {
-    setOpenModal(true);
-    setOpen(false) // incase the image silder is up
-  };
-
   const location = useLocation()
   // console.log(location)
   const id = location.pathname.split('/')[2]
@@ -48,29 +41,11 @@ const School = () => {
 
   // console.log(apiData)
 
-  const images = [
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX3XQqYGO_07DbEk9YU242aI0ZcCmJ1TpT2VdQhR84Xw&s",
-    },
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnBlF15I8_SB3vpYL-p-dOuQpCVeB-QKUkmC2oErfEEg&s",
-    },
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX3XQqYGO_07DbEk9YU242aI0ZcCmJ1TpT2VdQhR84Xw&s",
-    },
+  // <img key={index} src={`/uploads/${image}`} />
 
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnBlF15I8_SB3vpYL-p-dOuQpCVeB-QKUkmC2oErfEEg&s",
-    },
+  const images = apiData.images
+  // console.log(images && images[0])
 
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX3XQqYGO_07DbEk9YU242aI0ZcCmJ1TpT2VdQhR84Xw&s",
-    },
-
-    {
-      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnBlF15I8_SB3vpYL-p-dOuQpCVeB-QKUkmC2oErfEEg&s",
-    },
-  ];
   return (
     <div className="school">
       <Navbar type="notHomePage" />
@@ -90,7 +65,7 @@ const School = () => {
             />
 
             <div className="sliderWrapper">
-              <img src={images[slideNumber].src} alt="" className="sliderImg" />
+              <img src={images && 'http://localhost:5000/uploads/' + images[slideNumber]} alt="" className="sliderImg" />
             </div>
 
             <FontAwesomeIcon
@@ -101,10 +76,10 @@ const School = () => {
           </div>
         )}
        {isLoading ? 'Loading please wait' : apiData && <div className="schoolImageWrapper">
-          {images.map((photo, i) => (
+          {images && images.map((photo, i) => (
             <div className="schoolImages" key={i}>
               <img
-                src={photo.src}
+                src={`http://localhost:5000/uploads/${photo}`}
                 alt="schoolImages"
                 className="imageItem responsiveImg"
                 onClick={() => handleOpen(i)}
@@ -112,16 +87,24 @@ const School = () => {
             </div>
           ))}
         </div>}
-        {isLoading ? 'Loading please wait' : apiData && <button
-          onClick={handleModal}
-          className="button2"
-          style={{ marginTop: "10px" }}
-        >
-          SEE DETAILS
-        </button>}
-        <div className="schoolDescriptionWrapper">
-          {openModal && <SchoolDetails modal={setOpenModal} apiData={apiData}/>}
+
+        <div className="schoolInfo">
+          <ul>
+            <li>School Name: <h2>{apiData.name}</h2> </li>
+            <li>State: {apiData.state}</li>
+            <li>L.G.A: {apiData.lga}</li>
+            <li>City: {apiData.city}</li>
+            <li>Email Address: {apiData.email}</li>
+            <li>Phone: {apiData.phone}</li>
+            <li>School Address: {apiData.address}</li>
+            <li>School Website: <Link to={apiData.website}>{apiData.website}</Link></li>
+            <li>School Google Profile: <Link to={apiData.googleProfile}>{apiData.googleProfile}</Link></li>
+            <li>Fee Range per session: {apiData.feeRange}</li>
+            <li>Description: {apiData.desc}</li>
+            
+          </ul>
         </div>
+      
       </div>
       <Footer />
     </div>

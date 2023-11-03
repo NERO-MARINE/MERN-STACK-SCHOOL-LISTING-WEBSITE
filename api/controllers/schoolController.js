@@ -2,7 +2,20 @@ const School = require("../models/School");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 const createError = require("../utilitis/error");
+const multer = require('multer');
 const nodemailer = require('nodemailer');
+
+// Multer configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Set your upload folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // get all  schools
 const schools = async (req, res, next) => {
@@ -65,10 +78,38 @@ const searchAllSchools = async (req, res, next) => {
 // create a school
 const createSchool = async (req, res, next) => {
   const userId = req.params.userId;
+
   try {
+    if (!req.files || req.files.length === 0) {
+      return next(createError(404, "No files Selected."));
+    }
+
+    if (req.files.length < 6 || req.files.length > 6) {
+      return next(createError(404, "Select 6 quality images of your school "));
+    }
+
     const user = await User.findById(userId);
     const school = new School(req.body);
     const savedSchool = await school.save();
+
+     // Upload and associate multiple images with the school
+     const fileNames = [];
+
+     if (req.files && req.files.length > 0) {
+       // Handle multiple uploaded images
+       for (const file of req.files) {
+         // Save the file name to the array
+         fileNames.push(file.originalname);
+       }
+     }
+ 
+     // Add the file names to the school document
+     savedSchool.images = fileNames;
+ 
+     // Save the updated school document with file names
+     await savedSchool.save();
+
+
     try {
       // push school id into schools array of the user
       await User.findByIdAndUpdate(userId, {
@@ -255,6 +296,7 @@ module.exports = {
   countTotalSchools,
   schools,
   getApprovedSchools,
+  upload,
 };
 
 // illustration on how to use error handler middleware

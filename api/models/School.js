@@ -79,7 +79,13 @@ const schoolSchema = new mongoose.Schema({
     approved:{
         type: Boolean,
         default: false
-    }
+    },
+
+    images: [
+        {
+          type: String, // Each element in the array is a string
+        },
+      ],
 
 },{
     collation: { locale: 'en', strength: 2 }

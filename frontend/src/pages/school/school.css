@@ -38,15 +38,17 @@
 
 .sliderWrapper{
     width: 100%;
-    height: auto;
+    height: 550px;
+    /* border: 2px solid red; */
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
 }
 
 .sliderImg{
     width: 100%;
-    height: max-content;
     object-fit: cover;
 }
 
@@ -80,6 +82,49 @@
     top: 50%;
     right: 10px;
 }
+
+
+.schoolInfo{
+    overflow: auto;
+    width: 50%;
+    margin: 50px auto;
+    padding: 15px;
+}
+
+.schoolInfo ul{
+    list-style: none;
+}
+
+.schoolInfo ul li{
+    border-bottom: 1px solid green;
+    padding: 10px;
+}
+
+.schoolInfo ul li:nth-child(even){
+    background-color: rgba(168, 249, 168, 0.462);
+}
+
+.schoolInfo ul li:nth-child(odd){
+    background-color: rgba(212, 246, 212, 0.462);
+}
+
+@media(max-width: 1000px){
+   .schoolInfo{
+    width: 70%;
+   }
+}
+
+@media(max-width: 768px){
+    .schoolInfo{
+     width: 80%;
+    }
+ }
+
+ @media(max-width: 480px){
+    .schoolInfo{
+     width: 100%;
+    }
+ }
 
 @media(max-width:770px){
     .slider{

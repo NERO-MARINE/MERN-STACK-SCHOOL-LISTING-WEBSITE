@@ -63,7 +63,7 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-          <button disabled={loading}>Login</button>
+          <button disabled={loading}>{loading ? "Signing in, wait!": "Login"}</button>
           <div className="line"></div>
           {error && <span>{error.message}</span>}
           <Link onClick={handleEmailModal}>forgot password?</Link>

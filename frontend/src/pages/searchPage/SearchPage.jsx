@@ -1044,9 +1044,9 @@ const SearchPage = () => {
                   <div className="schoolShowCase" key={searchResult._id}>
                     <div className="photo flex">
                       <div className="label">Premises:</div>
-                      <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXF77jMzKge6Ve0MWp1b_bEprS69WKiIjGnzfR0p2Qog&s"
-                        alt=""
+                      <img width="120px" height="120px" style={{objectFit:"cover"}}
+                        src={'http://localhost:5000/uploads/' + searchResult.images[0]}
+                        alt="no-pics"
                       />
                     </div>
                     <div className="schoolName flex">
@@ -1058,7 +1058,7 @@ const SearchPage = () => {
                     </div>
                     <div className="feeRange flex">
                       <div className="label">Fee Range</div>
-                      <div className="fee">ommitted in Schema</div>
+                      <div className="fee">{searchResult.feeRange} per session</div>
                       <Link to={`/school/${searchResult._id}`}>
                         <button className="button detailsBtn">
                           View Details

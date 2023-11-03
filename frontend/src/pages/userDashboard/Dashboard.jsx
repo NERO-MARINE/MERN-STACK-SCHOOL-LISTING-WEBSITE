@@ -7,12 +7,26 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../../useFetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBookOpen,
+  faEdit,
+  faQuestion,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = () => {
   let lgaList;
   const { user } = useContext(AuthContext);
   // console.log(user._id)
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [files, setFiles] = useState([]);
+  const handleFileChange = (e) => {
+    setFiles(e.target.files);
+  };
+
+  const [showTip, setShowTip] = useState(false);
+
   const [credentials, setCredentials] = useState({
     name: undefined,
     address: undefined,
@@ -1008,12 +1022,26 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true)
     //console.log(credentials)
+
+    const formData = new FormData();
+
+    // Add the text input values to the FormData
+    for (const key in credentials) {
+      formData.append(key, credentials[key]);
+    }
+
+    // Add multiple images to the FormData
+    for (let i = 0; i < files.length; i++) {
+      formData.append('images', files[i]);
+    }
+
 
     try {
       const res = await axios.post(
         `http://localhost:5000/schools/${user._id}`,
-        credentials
+        formData
       );
       console.log(res.data);
       setResError("");
@@ -1025,6 +1053,9 @@ const Dashboard = () => {
       setResError(errorMsg);
       console.log(resError);
     }
+   finally {
+    setIsSubmitting(false); // Reset the state after submission is complete
+  }
   };
 
   //   get all schools listed by user
@@ -1035,21 +1066,34 @@ const Dashboard = () => {
   // delete school
   const handleDelete = async (schoolId) => {
     // console.log(schoolId);
-    try {
-      const res = await axios.delete(
-        `http://localhost:5000/schools/${schoolId}/${user._id}`
-      );
-      console.log(res.data);
-      window.location.reload(); // this plain javascript
-    } catch (err) {
-      console.log(err.response.data);
+    const shouldDelete = window.confirm('Are you sure you want to delete this school?');
+
+    if (shouldDelete) {
+      // Call your delete function when confirmed
+      try {
+        const res = await axios.delete(
+          `http://localhost:5000/schools/${schoolId}/${user._id}`
+        );
+        console.log(res.data);
+        window.location.reload(); // this plain javascript
+      } catch (err) {
+        console.log(err.response.data);
+      }
     }
+
+    
   };
 
   const navigate = useNavigate();
   // navigate to edit page
   const handleEdit = (schoolId) => {
-    navigate("/update-school", { state: schoolId });
+    const shouldDelete = window.confirm('Are you sure you want to edit this school?');
+
+    if (shouldDelete) {
+      // Call your delete function when confirmed
+      navigate("/update-school", { state: schoolId });
+    }
+ 
   };
 
   return (
@@ -1076,7 +1120,8 @@ const Dashboard = () => {
                         <span>School Category:</span> {school.category}
                       </p>
                       <p>
-                        <span>NSS Status:</span> {school.approved ? "approved" : "not Approved"}
+                        <span>NSS Status:</span>{" "}
+                        {school.approved ? "approved" : "not Approved"}
                       </p>
                     </div>
                     <div className="googleRating">{school.googleRating}</div>
@@ -1231,7 +1276,31 @@ const Dashboard = () => {
               onChange={handleChange}
               required
             />
-            <button>Apply</button>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+              <h3>upload six(6) quality images of your school</h3>
+              <FontAwesomeIcon
+                icon={faQuestion}
+                style={{
+                  padding: "5px",
+                  borderRadius: "50%",
+                  backgroundColor: "red",
+                  color: "white",
+                  fontSize: "8px",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShowTip(!showTip)}
+              />
+            </div>
+            {showTip && (
+              <p>
+                on a computer hold down control key to enable you select more
+                than one image
+              </p>
+            )}
+            <input type="file" multiple onChange={handleFileChange}/>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Apply'}
+            </button>
           </form>
           {resError && <div className="errorDiv">{resError}</div>}
         </div>

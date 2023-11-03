@@ -27,17 +27,17 @@ const resetRequest = async (req, res, next) => {
     }
 
     // Generate a JWT token with the user's email
-    const token = jwt.sign({ email }, secretKey, { expiresIn: "1h" });
+    const token = jwt.sign({ email }, secretKey, { expiresIn: "5m" });
 
     // Send a password reset email to the user
-    const resetLink = `http://localhost:3001/reset-password/${token}`;
+    const resetLink = `http://localhost:3000/reset-password/${token}`;
 
     const mailOptions = {
       from: "info@codebadgertech.com",
       to: email,
       subject: "Password Reset Request",
       text: `To reset your password, click on the following link: ${resetLink}`,
-      html: `<p>To reset your password, click on the following link: ${resetLink}</p>`,
+      html: `<p>You are receiving this email because you requested a password change. To reset your password, click on the following link: ${resetLink} . This link expires in 5m</p>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -51,7 +51,7 @@ const resetRequest = async (req, res, next) => {
     });
   } catch (error) {
     // console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error!" });
   }
 };
 
@@ -77,7 +77,7 @@ const resetPassword = async (req, res, next) => {
     res.json({ message: "Password reset successfully" });
   } catch (error) {
     // console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error! Seems your reset link has expired" });
   }
 };
 
