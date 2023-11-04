@@ -70,6 +70,18 @@ const Dashboard = () => {
         "Umu Nneochi",
       ];
       break;
+
+    case "Abuja":
+      lgaList = [
+        "Select LGA",
+        "Abaji",
+        "Abuja Municipal",
+        "Bwari",
+        "Gwagwalada",
+        "Kuje",
+        "Kwali",
+      ];
+      break;
     case "Adamawa":
       lgaList = [
         "Select LGA",
@@ -1022,7 +1034,7 @@ const Dashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     //console.log(credentials)
 
     const formData = new FormData();
@@ -1034,9 +1046,8 @@ const Dashboard = () => {
 
     // Add multiple images to the FormData
     for (let i = 0; i < files.length; i++) {
-      formData.append('images', files[i]);
+      formData.append("images", files[i]);
     }
-
 
     try {
       const res = await axios.post(
@@ -1052,10 +1063,9 @@ const Dashboard = () => {
       const errorMsg = error.message;
       setResError(errorMsg);
       console.log(resError);
+    } finally {
+      setIsSubmitting(false); // Reset the state after submission is complete
     }
-   finally {
-    setIsSubmitting(false); // Reset the state after submission is complete
-  }
   };
 
   //   get all schools listed by user
@@ -1066,7 +1076,9 @@ const Dashboard = () => {
   // delete school
   const handleDelete = async (schoolId) => {
     // console.log(schoolId);
-    const shouldDelete = window.confirm('Are you sure you want to delete this school?');
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this school?"
+    );
 
     if (shouldDelete) {
       // Call your delete function when confirmed
@@ -1080,20 +1092,19 @@ const Dashboard = () => {
         console.log(err.response.data);
       }
     }
-
-    
   };
 
   const navigate = useNavigate();
   // navigate to edit page
   const handleEdit = (schoolId) => {
-    const shouldDelete = window.confirm('Are you sure you want to edit this school?');
+    const shouldDelete = window.confirm(
+      "Are you sure you want to edit this school?"
+    );
 
     if (shouldDelete) {
       // Call your delete function when confirmed
       navigate("/update-school", { state: schoolId });
     }
- 
   };
 
   return (
@@ -1181,6 +1192,7 @@ const Dashboard = () => {
             ></textarea>
             <select onChange={handleChange} name="state">
               <option value="">Enter Your State</option>
+              <option value="Abuja">Abuja</option>
               <option value="Abia">Abia</option>
               <option value="Adamawa">Adamawa</option>
               <option value="AkwaIbom">AkawIbom</option>
@@ -1231,7 +1243,7 @@ const Dashboard = () => {
               <option value="primary school">Primary School</option>
               <option value="secondary school">Secondary School</option>
               <option value="Nursery school">Nursery School</option>
-              <option value="daycare school">daycare</option>
+              <option value="daycare school">Daycare</option>
             </select>
             <input
               type="text"
@@ -1297,9 +1309,9 @@ const Dashboard = () => {
                 than one image
               </p>
             )}
-            <input type="file" multiple onChange={handleFileChange}/>
+            <input type="file" multiple onChange={handleFileChange} />
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Submitting...' : 'Apply'}
+              {isSubmitting ? "Submitting..." : "Apply"}
             </button>
           </form>
           {resError && <div className="errorDiv">{resError}</div>}

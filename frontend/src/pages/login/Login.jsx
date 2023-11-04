@@ -67,6 +67,7 @@ const Login = () => {
           <div className="line"></div>
           {error && <span>{error.message}</span>}
           <Link onClick={handleEmailModal}>forgot password?</Link>
+          <Link to="/register">don't have an account? register here!</Link>
           {open && (
             <div className="emailModal">
               <PasswordResetReq pswResetModal={setOpen} />

@@ -35,7 +35,6 @@ const SchoolUpdate = () => {
     googleProfile: undefined,
   });
 
-  
   switch (credentials.state) {
     case "Abia":
       lgaList = [
@@ -57,6 +56,17 @@ const SchoolUpdate = () => {
         "Umuahia North",
         "muahia South",
         "Umu Nneochi",
+      ];
+      break;
+    case "Abuja":
+      lgaList = [
+        "Select LGA",
+        "Abaji",
+        "Abuja Municipal",
+        "Bwari",
+        "Gwagwalada",
+        "Kuje",
+        "Kwali",
       ];
       break;
     case "Adamawa":
@@ -1010,15 +1020,12 @@ const SchoolUpdate = () => {
     setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (schoolId) => {
+  const handleSubmit = async (e, schoolId) => {
+    e.preventDefault();
     try {
-         await axios.put(
-        `http://localhost:5000/schools/${schoolId}`,
-        credentials
-      );
+      await axios.put(`http://localhost:5000/schools/${schoolId}`, credentials);
       // console.log(res.data); - to use this set const res = axios call
-      window.location.reload()
-       
+      window.location.reload();
     } catch (err) {
       console.log(err.response.data);
     }
@@ -1033,7 +1040,7 @@ const SchoolUpdate = () => {
         ) : (
           <form
             className="listSchool2"
-            onSubmit={() => handleSubmit(apiData._id)}
+            onSubmit={(e) => handleSubmit(e, apiData._id)}
           >
             <h1 style={{ color: "green", textAlign: "center" }}>
               UPDATE {apiData.name}
@@ -1073,6 +1080,7 @@ const SchoolUpdate = () => {
               <option value={apiData.state}>
                 want to Change the State from {apiData.state}?
               </option>
+              <option value="Abuja">Abuja</option>
               <option value="Abia">Abia</option>
               <option value="Adamawa">Adamawa</option>
               <option value="AkwaIbom">AkawIbom</option>
@@ -1129,7 +1137,7 @@ const SchoolUpdate = () => {
               <option value="primary school">Primary School</option>
               <option value="secondary school">Secondary School</option>
               <option value="Nursery school">Nursery School</option>
-              <option value="daycare school">daycare</option>
+              <option value="daycare school">Daycare</option>
             </select>
             <label>Enter City School is Located</label>
             <input

@@ -35,7 +35,7 @@ const FeaturedState = () => {
           <div className="state_card flex">
             <div className="stateTitle">
               <div className="state">Enugu State</div>
-              <div className="number_of_LGA">25 LGAS</div>
+              <div className="number_of_LGA">17 LGAS</div>
             </div>
             <div className="desc">{isLoading ? 'loading' : apiData[1]} schools Available</div>
           </div>
@@ -43,7 +43,7 @@ const FeaturedState = () => {
           <div className="state_card flex">
             <div className="stateTitle">
               <div className="state">Abuja State</div>
-              <div className="number_of_LGA">25 LGAS</div>
+              <div className="number_of_LGA">6 LGAS</div>
             </div>
             <div className="desc">{isLoading ? 'loading' : apiData[2]} schools Available</div>
           </div>
@@ -51,7 +51,7 @@ const FeaturedState = () => {
           <div className="state_card flex">
             <div className="stateTitle">
               <div className="state">Lagos State</div>
-              <div className="number_of_LGA">25 LGAS</div>
+              <div className="number_of_LGA">20 LGAS</div>
             </div>
             <div className="desc">{isLoading ? 'loading' : apiData[3]} schools Available</div>
           </div>

@@ -6,6 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [credentials, setCredentials] = useState({
     email: undefined,
     username: undefined,
@@ -24,6 +26,8 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     try {
       await axios.post("http://localhost:5000/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
@@ -32,6 +36,8 @@ const Register = () => {
       console.log(err.response.data);
       const regError = err.response.data;
       setError(regError.message);
+    } finally {
+      setIsSubmitting(false); // Reset the state after submission is complete
     }
   };
 
@@ -78,7 +84,9 @@ const Register = () => {
             placeholder="Answer Yes or No"
             onChange={handleChange}
           />
-          <button>Register</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting Your data! Wait..." : "Register"}
+          </button>
           <div className="line"></div>
           {/* {error && <span>{error.message}</span>} */}
           <Link to="/login">already have an account? Login here!</Link>

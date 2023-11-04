@@ -137,7 +137,7 @@ const createSchool = async (req, res, next) => {
       to: user.email,
       subject: `School listing application`,
       text: `Hello ${user.username}`,
-      html: `<p>Your school  ${savedSchool.name} listing application has been received and it is under review. Well send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
+      html: `<p style="color: white; background:green; padding: 10px;"">Your school  ${savedSchool.name} listing application has been received and it is under review. We will send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

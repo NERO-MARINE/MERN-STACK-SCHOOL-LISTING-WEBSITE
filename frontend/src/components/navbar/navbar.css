@@ -36,6 +36,11 @@
    font-size: var(--fontSize_2);
 }
 
+.intro_text h2{
+    color: white;
+    font-family: var(--fontFamily_4);
+ }
+
 @media(max-width:768px){
     .intro{
         padding: 80px 0;

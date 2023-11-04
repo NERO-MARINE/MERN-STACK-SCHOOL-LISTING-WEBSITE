@@ -37,7 +37,7 @@ const resetRequest = async (req, res, next) => {
       to: email,
       subject: "Password Reset Request",
       text: `To reset your password, click on the following link: ${resetLink}`,
-      html: `<p>You are receiving this email because you requested a password change. To reset your password, click on the following link: ${resetLink} . This link expires in 5m</p>`,
+      html: `<pstyle="padding: 10px; line-height:1.8;">You are receiving this email because you requested a password change. To reset your password, click on the following link: ${resetLink} . This link expires in 5m</p>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

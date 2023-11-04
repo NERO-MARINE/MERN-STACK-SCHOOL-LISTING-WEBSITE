@@ -57,6 +57,7 @@
     text-align: center;
     color: var(--color_4);
     font-size: var(--fontSize_8);
+    padding: 5px;
 }
 
 .detailsBtn{

@@ -55,10 +55,10 @@ const register = async (req, res, next) => {
       return next(createError(503, "email is not valid"));
     }
 
-    if (!validator.isStrongPassword(password)) {
-      // throw Error('password is not strong enough')
-      return next(createError(503, "password is not strong enough"));
-    }
+    // if (!validator.isStrongPassword(password)) {
+    //   // throw Error('password is not strong enough')
+    //   return next(createError(503, "password is not strong enough!(example: 123Abc@#aed3)"));
+    // }
 
     const isUserNameExisting = await User.findOne({ username: username });
     if (isUserNameExisting) {
@@ -102,8 +102,20 @@ const register = async (req, res, next) => {
       from: "info@codebadgertech.com",
       to: req.body.email,
       subject: `NSS Welcomes You`,
-      text: `Hello ${req.body.username}`,
-      html: `<h4> Welcome to Naija School search. Your Signup is Sucessful!</h4> <p>Are you a school owner? Help parents easily find your school.List your school for free on our website</p>`,
+      text: `Dear ${req.body.username}`,
+      html: `<p>We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
+      
+      <h4 style="color: white; margin-top:20px; background:green; padding: 10px;">Here's what you can do at NSS:</h4>
+
+      <ul style="margin-top: 20px;">
+      <li>Apply For Your School to be listed if You are a school owner</li>
+      <li>Explore a wide range of schools, from Daycare to secondary.</li>
+      <li>Find detailed information about each school, including location, facilities, and more.</li>
+      </ul>
+
+      <h4 style="color: white; margin-top:20px; background:green; padding: 10px; line-height:1.8;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team. We're here to help you every step of the way.
+      </h4>
+      `,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

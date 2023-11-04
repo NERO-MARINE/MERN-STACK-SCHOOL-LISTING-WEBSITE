@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 const Search = () => {
   let lgaList;
-  const [nigerianState, setNigerianState] = useState('');
-  const [nigerianLga, setNigerianLga] = useState('');
-  const [category, setCategory] = useState('');
+  const [nigerianState, setNigerianState] = useState("");
+  const [nigerianLga, setNigerianLga] = useState("");
+  const [category, setCategory] = useState("");
 
   switch (nigerianState) {
     case "Abia":
@@ -29,6 +29,17 @@ const Search = () => {
         "Umuahia North",
         "muahia South",
         "Umu Nneochi",
+      ];
+      break;
+    case "Abuja":
+      lgaList = [
+        "Select LGA",
+        "Abaji",
+        "Abuja Municipal",
+        "Bwari",
+        "Gwagwalada",
+        "Kuje",
+        "Kwali",
       ];
       break;
     case "Adamawa":
@@ -994,6 +1005,7 @@ const Search = () => {
     <div className="schoolSearch container">
       <select onChange={(e) => setNigerianState(e.target.value)}>
         <option>Enter Your State</option>
+        <option value="Abuja">Abuja</option>
         <option value="Abia">Abia</option>
         <option value="Adamawa">Adamawa</option>
         <option value="AkwaIbom">AkawIbom</option>
@@ -1038,13 +1050,13 @@ const Search = () => {
           </option>
         ))}
       </select>
-      
+
       <select onChange={(e) => setCategory(e.target.value)}>
-      <option value="pick a category">Pick a category</option>
-          <option value="primary school">Primary School</option>
-          <option value="secondary school">Secondary School</option>
-          <option value="Nursery school">Nursery School</option>
-          <option value="daycare school">daycare</option>
+        <option value="pick a category">Pick a category</option>
+        <option value="primary school">Primary School</option>
+        <option value="secondary school">Secondary School</option>
+        <option value="Nursery school">Nursery School</option>
+        <option value="daycare school">Daycare</option>
       </select>
 
       <button className="Searchbutton" onClick={handleSearch}>

@@ -45,6 +45,17 @@ const SearchPage = () => {
         "Umu Nneochi",
       ];
       break;
+    case "Abuja":
+      lgaList = [
+        "Select LGA",
+        "Abaji",
+        "Abuja Municipal",
+        "Bwari",
+        "Gwagwalada",
+        "Kuje",
+        "Kwali",
+      ];
+      break;
     case "Adamawa":
       lgaList = [
         "Demsa",
@@ -972,6 +983,7 @@ const SearchPage = () => {
             <option value={state}>
               {state === "" ? "pick a state" : state}
             </option>
+            <option value="Abuja">Abuja</option>
             <option value="Abia">Abia</option>
             <option value="Adamawa">Adamawa</option>
             <option value="AkwaIbom">AkawIbom</option>
@@ -1028,7 +1040,7 @@ const SearchPage = () => {
             <option value="primary school">Primary School</option>
             <option value="secondary school">Secondary School</option>
             <option value="Nursery school">Nursery School</option>
-            <option value="daycare school">daycare</option>
+            <option value="daycare school">Daycare</option>
           </select>
           <button className="button searchBtn">Search</button>
         </div>
@@ -1044,8 +1056,14 @@ const SearchPage = () => {
                   <div className="schoolShowCase" key={searchResult._id}>
                     <div className="photo flex">
                       <div className="label">Premises:</div>
-                      <img width="120px" height="120px" style={{objectFit:"cover"}}
-                        src={'http://localhost:5000/uploads/' + searchResult.images[0]}
+                      <img
+                        width="100%"
+                        height="120px"
+                        style={{ objectFit: "cover" }}
+                        src={
+                          "http://localhost:5000/uploads/" +
+                          searchResult.images[0]
+                        }
                         alt="no-pics"
                       />
                     </div>
@@ -1056,9 +1074,15 @@ const SearchPage = () => {
                         {searchResult.googleRating} Google Rating
                       </button>
                     </div>
+                    <div className="schoolName flex">
+                      <div className="label">City/Town</div>
+                      <div className="name">{searchResult.city}</div>
+                    </div>
                     <div className="feeRange flex">
                       <div className="label">Fee Range</div>
-                      <div className="fee">{searchResult.feeRange} per session</div>
+                      <div className="fee">
+                        {searchResult.feeRange} per session
+                      </div>
                       <Link to={`/school/${searchResult._id}`}>
                         <button className="button detailsBtn">
                           View Details
