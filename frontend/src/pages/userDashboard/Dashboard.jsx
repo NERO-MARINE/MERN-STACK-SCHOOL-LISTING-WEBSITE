@@ -1025,7 +1025,7 @@ const Dashboard = () => {
       ];
       break;
     default:
-      lgaList = ["Select A State to see your LGAs"];
+      lgaList = ["Select A State to see your LGAs*"];
       break;
   }
 
@@ -1081,7 +1081,7 @@ const Dashboard = () => {
     );
 
     if (shouldDelete) {
-      // Call your delete function when confirmed
+      // Call delete function when confirmed
       try {
         const res = await axios.delete(
           `http://localhost:5000/schools/${schoolId}/${user._id}`
@@ -1132,10 +1132,10 @@ const Dashboard = () => {
                       </p>
                       <p>
                         <span>NSS Status:</span>{" "}
-                        {school.approved ? "approved" : "not Approved"}
+                        {school.approved ? "approved(Your School is now public)" : "not Approved(Only you can see this School"}
                       </p>
                     </div>
-                    <div className="googleRating">{school.googleRating}</div>
+                    {school.googleRating === "undefined" ? <div className="googleRating">N/A</div> : <div className="googleRating">{school.googleRating}</div>}
                     <div className="actionButtons">
                       <button onClick={() => handleEdit(school._id)}>
                         <FontAwesomeIcon icon={faEdit} />
@@ -1162,21 +1162,21 @@ const Dashboard = () => {
           <form className="listSchool" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Name of School"
+              placeholder="Name of School*"
               name="name"
               onChange={handleChange}
               required
             />
             <input
               type="text"
-              placeholder="Address Of School"
+              placeholder="Address Of School*"
               name="address"
               onChange={handleChange}
               required
             />
             <input
               type="number"
-              placeholder="Enter Phone number"
+              placeholder="Enter Phone number*"
               name="phone"
               onChange={handleChange}
               required
@@ -1185,13 +1185,13 @@ const Dashboard = () => {
               name="desc"
               cols="30"
               rows="10"
-              placeholder="description of school not more than 200 words"
+              placeholder="Tell us briefly about your school, admission requirements and school bus availability*"
               maxLength="300"
               required
               onChange={handleChange}
             ></textarea>
             <select onChange={handleChange} name="state">
-              <option value="">Enter Your State</option>
+              <option value="">Enter Your State*</option>
               <option value="Abuja">Abuja</option>
               <option value="Abia">Abia</option>
               <option value="Adamawa">Adamawa</option>
@@ -1239,54 +1239,77 @@ const Dashboard = () => {
             </select>
 
             <select onChange={handleChange} name="category">
-              <option value="">Pick a category</option>
+              <option value="">Pick a category*</option>
               <option value="primary school">Primary School</option>
               <option value="secondary school">Secondary School</option>
               <option value="Nursery school">Nursery School</option>
               <option value="daycare school">Daycare</option>
+              <option value="Tailoring school">Tailoring School</option>
+              <option value="Hairstyling">Hair Styling School</option>
+              <option value="Software Development and IT school">
+                Software Development and IT School
+              </option>
+              <option value="Catering school">Catering School</option>
+              <option value="Carpentry school">Carpentry School</option>
+              <option value="Interior Decoration school">
+                Interior Decoration School
+              </option>
+              <option value="Arts and Printing school">
+                Arts and Printing School
+              </option>
             </select>
             <input
               type="text"
-              placeholder="Enter City"
+              placeholder="Enter City*"
               name="city"
               onChange={handleChange}
               required
             />
             <input
               type="text"
-              placeholder="Enter Schools Google Rating"
+              placeholder="Enter School's Google Rating If you have"
               name="googleRating"
               onChange={handleChange}
-              required
             />
             <input
               type="email"
-              placeholder="Enter Your Email"
+              placeholder="Please Enter a valid Email Address of your school*"
               name="email"
               onChange={handleChange}
               required
             />
             <input
               type="text"
-              placeholder="Full link to school website"
+              placeholder="Full link to school website if you have one"
               name="website"
               onChange={handleChange}
-              required
             />
             <select onChange={handleChange} name="feeRange">
-              <option value="">Fee range per session</option>
-              <option value="10k to 30k">10k to 30k per session</option>
-              <option value="30k to 50k">30k to 50k per session</option>
-              <option value="50k to 100k">50k to 100k per session</option>
-              <option value="100k to 200k">100k to 200k per session</option>
-              <option value="200k to 500k">200k to 500k per session</option>
+              <option value="">Fee range per session*</option>
+              <option value="#10,000 to #30,000 per session">
+                #10,000 to #30,000 per session
+              </option>
+              <option value="#30,000 to #50,000 session">
+                #30,000 to #50,000 session
+              </option>
+              <option value="#50,000 to #100,000 per session">
+                #50,000 to #100,000 per session
+              </option>
+              <option value="#100,000 to #200,000 per session">
+                #100,000 to #200,000 per session
+              </option>
+              <option value="#200,000 to #500,000 per session">
+                #200,000 to #500,000 per session
+              </option>
+              <option value="#500,000 or more per session">
+                #500,000 or more per session
+              </option>
             </select>
             <input
               type="text"
-              placeholder="google business profile link"
+              placeholder="google business profile link if you have one"
               name="googleProfile"
               onChange={handleChange}
-              required
             />
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
               <h3>upload six(6) quality images of your school</h3>

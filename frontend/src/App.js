@@ -5,6 +5,7 @@ import SearchPage from "./pages/searchPage/SearchPage";
 import School from "./pages/school/School";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/userDashboard/Dashboard";
+import Favourite from "./pages/favoriteSchools/Favorite";
 import Register from "./pages/register/Register";
 import SchoolUpdate from "./pages/schoolUpdate/SchoolUpdate";
 import { AuthContext } from "./context/AuthContext";
@@ -59,6 +60,15 @@ function App() {
             }
           />
           <Route
+            path="/favoriteSchools"
+            element={
+              <ProtectedRoute>
+                <Favourite />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
             path="/register"
             element={
               <LoggedIn>
@@ -71,7 +81,7 @@ function App() {
             path="/reset-password/:token"
             element={
               <LoggedIn>
-                <ResetPassword/>
+                <ResetPassword />
               </LoggedIn>
             }
           />

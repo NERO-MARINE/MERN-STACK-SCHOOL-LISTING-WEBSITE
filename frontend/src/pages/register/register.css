@@ -49,10 +49,22 @@
     outline: none;
 }
 
+.formContainer select{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgb(180, 178, 178);
+    outline: none;
+}
+
 .formContainer button{
     background-color: var(--color_2);
     color: var(--color_7);
     cursor: pointer;
+}
+
+.formContainer p{
+    width: 100%;
 }
 
 @media(max-width: 1000px){
@@ -71,6 +83,10 @@
     }
 
     .formContainer input, .formContainer button{
+        width: 90%
+    }
+
+    .formContainer select, .formContainer p{
         width: 90%
     }
    

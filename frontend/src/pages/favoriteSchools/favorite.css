@@ -1,0 +1,63 @@
+.favorite{
+    display: grid;
+    min-height: 100vh;
+}
+
+.headerNotHomePage{
+    align-self: start;
+}
+
+.footer{
+    align-self: end;
+}
+
+.favSchools h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.favSchools h2{
+    text-align: center;
+    color: green;
+    margin-top: 20px;
+}
+
+.schoolShowCase{
+    border: 1px solid rgba(128, 128, 128, 0.543);
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.schoolShowCase .label{
+    background-color: var(--color_5);
+    text-align: center;
+    color: var(--color_4);
+    font-size: var(--fontSize_8);
+    padding: 5px;
+}
+
+
+.detailsBtn{
+    background-color: var(--color_2);
+    color: var(--color_4);
+    border-radius: 5px;
+}
+
+
+.rating{
+    background-color: rgba(255, 0, 0, 0.744);
+    color: var(--color_4);
+    border-radius: 5px; 
+    width: 150px;
+}
+
+
+@media(max-width: 600px){
+    .schoolShowCase{
+        margin-top: 30px;
+        flex-direction: column;
+    }
+}

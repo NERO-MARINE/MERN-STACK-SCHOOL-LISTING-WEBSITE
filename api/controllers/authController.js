@@ -9,9 +9,9 @@ const login = async (req, res, next) => {
   const maxAge = 3 * 24 * 60 * 60;
   try {
     // check if user exist
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return next(createError(404, "Username is not registered"));
+      return next(createError(404, "email is not registered"));
     }
     // if theres a user, compare password entered passowrd with user password
     const isPasswordCorrect = await bcrypt.compare(
@@ -20,10 +20,10 @@ const login = async (req, res, next) => {
     );
 
     if (!isPasswordCorrect) {
-      return next(createError(404, "username or password is incorrect"));
+      return next(createError(404, "email or password is incorrect"));
     }
 
-    // if password is correct, we create a jwt token with the user id and isAdmin. W e will use this to identify the user on protected routes
+    // if password is correct, we create a jwt token with the user id and isAdmin. We will use this to identify the user on protected routes
 
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
@@ -103,8 +103,8 @@ const register = async (req, res, next) => {
       to: req.body.email,
       subject: `NSS Welcomes You`,
       text: `Dear ${req.body.username}`,
-      html: `<p>We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
-      
+      html: `<p style="line-height:2.0;">We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
+    
       <h4 style="color: white; margin-top:20px; background:green; padding: 10px;">Here's what you can do at NSS:</h4>
 
       <ul style="margin-top: 20px;">
@@ -113,7 +113,7 @@ const register = async (req, res, next) => {
       <li>Find detailed information about each school, including location, facilities, and more.</li>
       </ul>
 
-      <h4 style="color: white; margin-top:20px; background:green; padding: 10px; line-height:1.8;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team. We're here to help you every step of the way.
+      <h4 style="color: white; margin-top:20px; background:green; padding: 10px; line-height:2.0;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team. We're here to help you every step of the way.
       </h4>
       `,
     };

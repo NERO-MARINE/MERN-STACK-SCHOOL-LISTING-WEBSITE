@@ -1,11 +1,15 @@
 // import { useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import "./searchPage.css";
 import Footer from "../../components/footer/Footer";
 import useFetch from "../../useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faRemove } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 const SearchPage = () => {
   //const location = useLocation()
@@ -13,6 +17,16 @@ const SearchPage = () => {
   // const [state, setState] = useState(location.state.nigerianState)
   // const [lga, setLga] = useState(location.state.nigerianLga)
   // const [category, setCategory] = useState(location.state.category)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useContext(AuthContext);
+  const userId = user._id;
+
+  const { apiData: data, refetch} = useFetch(
+    `http://localhost:5000/schools/getFavorites/${userId}`
+  );
+
+  // console.log(data); // this gives us the favorite schools of the user
+
   let lgaList;
   const { nigerianState, nigerianLga, category } = useContext(SearchContext);
   const [state, setState] = useState(nigerianState);
@@ -966,12 +980,56 @@ const SearchPage = () => {
       lgaList = ["Select A State to see your LGAs"];
       break;
   }
-  //console.log(apiData)
 
-  // const navigate = useNavigate()
-  // const handleDetails = () => {
-  //   navigate("/school/466")
-  // };
+  const navigate = useNavigate();
+  // save school to favorite school
+  const handleAddToFav = async (schoolId) => {
+    if (user) {
+      try {
+        setIsSubmitting(true)
+         await axios.post(
+          `http://localhost:5000/schools/addSchoolToFavorite/${schoolId}/${userId}`
+        );
+        // console.log(res.data);
+       
+      } catch (err) {
+        console.log(err.response.data);
+      }finally{
+        setIsSubmitting(false)
+      }
+
+      refetch()
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+  };
+
+   // delete school from favorite school
+   const handleDeleteFromFav = async (schoolId) => {
+    if (user) {
+      try {
+        setIsSubmitting(true)
+        await axios.post(
+          `http://localhost:5000/schools/removeFavoriteSchool/${schoolId}/${userId}`
+        );
+        // console.log(res.data);
+      
+      } catch (err) {
+        console.log(err.response.data);
+      }finally{
+        setIsSubmitting(false)
+      }
+
+      refetch()
+    }
+
+    if (!user) {
+      navigate("/login");
+    }
+  };
+
 
   return (
     <div className="searchPage">
@@ -1041,6 +1099,19 @@ const SearchPage = () => {
             <option value="secondary school">Secondary School</option>
             <option value="Nursery school">Nursery School</option>
             <option value="daycare school">Daycare</option>
+            <option value="Tailoring school">Tailoring School</option>
+            <option value="Hairstyling">Hair Styling School</option>
+            <option value="Software Development and IT school">
+              Software Development and IT School
+            </option>
+            <option value="Catering school">Catering School</option>
+            <option value="Carpentry school">Carpentry School</option>
+            <option value="Interior Decoration school">
+              Interior Decoration School
+            </option>
+            <option value="Arts and Printing school">
+              Arts and Printing School
+            </option>
           </select>
           <button className="button searchBtn">Search</button>
         </div>
@@ -1075,8 +1146,25 @@ const SearchPage = () => {
                       </button>
                     </div>
                     <div className="schoolName flex">
-                      <div className="label">City/Town</div>
+                      <div className="label">City/Town/community</div>
                       <div className="name">{searchResult.city}</div>
+                      {data.includes(searchResult._id) ? (
+                        <button
+                          className="removeFav"
+                          onClick={() => handleDeleteFromFav(searchResult._id)}
+                          disabled={isSubmitting}
+                        >
+                          <FontAwesomeIcon icon={faRemove} /> { isSubmitting ? "removing, wait!" : "Unsave School"}
+                        </button>
+                      ) : (
+                        <button
+                          className="addFav"
+                          onClick={() => handleAddToFav(searchResult._id)}
+                          disabled={isSubmitting}
+                        >
+                          <FontAwesomeIcon icon={faHeart} /> {isSubmitting ? "Adding, wait" : "Add to Favorite"}
+                        </button>
+                      )}
                     </div>
                     <div className="feeRange flex">
                       <div className="label">Fee Range</div>

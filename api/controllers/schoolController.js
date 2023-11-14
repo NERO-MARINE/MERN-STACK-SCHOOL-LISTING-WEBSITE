@@ -137,7 +137,7 @@ const createSchool = async (req, res, next) => {
       to: user.email,
       subject: `School listing application`,
       text: `Hello ${user.username}`,
-      html: `<p style="color: white; background:green; padding: 10px;"">Your school  ${savedSchool.name} listing application has been received and it is under review. We will send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
+      html: `<p style="color: white; background:green; padding: 10px; line-height: 2.0;">Your school  ${savedSchool.name} listing application has been received and it is under review. We will send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -238,7 +238,7 @@ const deleteSchool = async (req, res, next) => {
       return res.status(404).json("school not found");
     }
     try {
-      // pull room id from rooms array of the hotel when room is deleted
+      // pull school id from schoools array of the user when school is deleted
       await User.findByIdAndUpdate(userId, {
         $pull: { schools: id },
       });
@@ -284,6 +284,92 @@ const countTotalSchools = async (req, res, next) => {
   }
 };
 
+
+// Add a new favorite school
+const addNewFavoriteSchool = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const schoolId = req.params.schoolId;
+    // console.log(userId);
+
+    // Check if the favorite school already exists
+    const user = await User.findById(userId);
+
+    // Check if the schoolId already exists in the user's favoriteSchools array
+    if (user.favoriteSchools.includes(schoolId)) {
+      return next(createError(409, "School already exists in favorites!"));
+    }
+
+    user.favoriteSchools.push(schoolId);
+    await user.save();
+
+   res.status(201).json(user); // Use 201 for resource creation
+  //  res.status(201).json('School added to favorites')
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Remove a favorite school
+const removeFavoriteSchool = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const schoolId = req.params.schoolId;
+
+    const user = await User.findById(userId);
+
+    // Check if the schoolId exists in the user's favoriteSchools array
+    if (!user.favoriteSchools.includes(schoolId)) {
+      return next(createError(404, "School not found in favorites!"));
+    }
+
+    // Remove the schoolId from the user's favoriteSchools array. Return only the ids that do not match the toBeDeleted schoolId
+    user.favoriteSchools = user.favoriteSchools.filter(id => id.toString() !== schoolId);
+    
+    await user.save();
+
+    res.status(200).json(user.favoriteSchools);
+  } catch (err) {
+    next(err);
+  }
+};
+
+
+// Get user's favorite school ids
+const getUsersFavoriteSchools = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId); 
+
+    res.status(200).json(user.favoriteSchools);
+  } catch (err) {
+    next(err);
+  }
+}
+
+// Get user's actual favorite schools
+const getFavoriteSchools = async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId); 
+    const listOfFavSchools = await Promise.all(
+      user.favoriteSchools.map((school) => {
+        return School.findById(school);
+      })
+    );
+
+    if(listOfFavSchools.length < 1){
+      return next(createError(409, "You have not added any school to your favorite list!"));
+    }
+
+    res.status(200).json(listOfFavSchools);
+ 
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   getAllSchools,
   createSchool,
@@ -297,6 +383,10 @@ module.exports = {
   schools,
   getApprovedSchools,
   upload,
+  addNewFavoriteSchool,
+  getUsersFavoriteSchools,
+  removeFavoriteSchool,
+  getFavoriteSchools
 };
 
 // illustration on how to use error handler middleware

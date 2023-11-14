@@ -26,7 +26,20 @@ const useFetch = (url)=>{
         fetchData()
     }, [url])
 
-    return {apiData, isLoading, error}
+     // refetching
+  const refetch = async () => {
+    setIsLoading(true);
+    try {
+      const res = await axios.get(url);
+      // if no error
+      setApiData(res.data);
+    } catch (err) {
+      setError(err);
+    }
+    setIsLoading(false);
+  };
+
+    return {apiData, isLoading, error, refetch}
 }
 
 export default useFetch

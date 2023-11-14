@@ -10,7 +10,7 @@ import PasswordResetReq from "../../components/passwordResetReq/PasswordResetReq
 const Login = () => {
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({
-    username: undefined,
+    email: undefined,
     password: undefined,
   });
 
@@ -51,8 +51,8 @@ const Login = () => {
           <h1>Login</h1>
           <input
             type="text"
-            id="username"
-            placeholder="Enter your username"
+            id="email"
+            placeholder="Enter your email"
             onChange={handleChange}
             required
           />

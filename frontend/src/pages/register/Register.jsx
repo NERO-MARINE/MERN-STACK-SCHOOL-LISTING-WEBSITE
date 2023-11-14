@@ -27,11 +27,13 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
 
     try {
       await axios.post("http://localhost:5000/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
       navigate("/login");
+      
     } catch (err) {
       console.log(err.response.data);
       const regError = err.response.data;
@@ -78,12 +80,12 @@ const Register = () => {
             onChange={handleChange}
           />
 
-          <input
-            type="text"
-            id="schoolOwner"
-            placeholder="Answer Yes or No"
-            onChange={handleChange}
-          />
+          <p>Do you own a school?</p>
+          <select id="schoolOwner" onChange={handleChange}>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Submitting Your data! Wait..." : "Register"}
           </button>

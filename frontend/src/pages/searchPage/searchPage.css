@@ -60,10 +60,29 @@
     padding: 5px;
 }
 
+
 .detailsBtn{
     background-color: var(--color_2);
     color: var(--color_4);
     border-radius: 5px;
+}
+
+.addFav{
+    background-color: var(--color_2);
+    color: var(--color_4);
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.removeFav{
+    background-color: red;
+    color: var(--color_4);
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .rating{

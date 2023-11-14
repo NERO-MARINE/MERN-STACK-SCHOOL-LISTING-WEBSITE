@@ -47,8 +47,7 @@ const schoolSchema = new mongoose.Schema({
     },
 
     googleRating:{
-        type: Number,
-        required: true
+        type: String,
     },
 
     lga:{
@@ -63,7 +62,6 @@ const schoolSchema = new mongoose.Schema({
     },
     website:{
         type: String,
-        required: true
     },
   
     feeRange:{
@@ -73,7 +71,6 @@ const schoolSchema = new mongoose.Schema({
 
     googleProfile:{
         type: String,
-        required: true
     },
 
     approved:{

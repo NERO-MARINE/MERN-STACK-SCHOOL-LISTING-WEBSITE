@@ -97,8 +97,8 @@ const School = () => {
             <li>Email Address: {apiData.email}</li>
             <li>Phone: {apiData.phone}</li>
             <li>School Address: {apiData.address}</li>
-            <li>School Website: <Link to={apiData.website}>{apiData.website}</Link></li>
-            <li>School Google Profile: <Link to={apiData.googleProfile}>{apiData.googleProfile}</Link></li>
+            {apiData.website === "undefined" ?  <li>Website: Not Available</li> : <li>School Website: <Link to={apiData.website}>{apiData.website}</Link></li>}
+            {apiData.googleProfile === "undefined" ? <li>School Google Profile: Not Available</li> : <li>School Google Profile: <Link to={apiData.googleProfile}>{apiData.googleProfile}</Link></li>}
             <li>Fee Range per session: {apiData.feeRange}</li>
             <li>Description: {apiData.desc}</li>
             

@@ -54,7 +54,7 @@ app.use((err, req,res,next)=>{
 })
 
 
-app.listen(5000,()=>{
+app.listen(5000, ()=>{
     conectToMongoDb()
     console.log('listening to request at port 5000')
 })

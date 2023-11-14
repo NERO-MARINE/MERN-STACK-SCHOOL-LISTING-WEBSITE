@@ -42,6 +42,10 @@ const UserSchema = new mongoose.Schema(
     schools: {
       type: [String],
     },
+
+    favoriteSchools: {
+      type: [String],
+    },
   },
   {
     collation: { locale: "en", strength: 2 },

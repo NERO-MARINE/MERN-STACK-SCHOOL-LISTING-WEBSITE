@@ -23,7 +23,20 @@
 
 .navbar_left{
   display: flex;
+  align-items: center;
   gap: 20px;
+}
+
+.navbar_left a{
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+
+
+.navbar .username{
+    color: goldenrod;
 }
 
 .intro{

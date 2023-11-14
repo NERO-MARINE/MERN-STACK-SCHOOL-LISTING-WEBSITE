@@ -1057,6 +1057,19 @@ const Search = () => {
         <option value="secondary school">Secondary School</option>
         <option value="Nursery school">Nursery School</option>
         <option value="daycare school">Daycare</option>
+        <option value="Tailoring school">Tailoring School</option>
+        <option value="Hairstyling">Hair Styling School</option>
+        <option value="Software Development and IT school">
+          Software Development and IT School
+        </option>
+        <option value="Catering school">Catering School</option>
+        <option value="Carpentry school">Carpentry School</option>
+        <option value="Interior Decoration school">
+          Interior Decoration School
+        </option>
+        <option value="Arts and Printing school">
+          Arts and Printing School
+        </option>
       </select>
 
       <button className="Searchbutton" onClick={handleSearch}>

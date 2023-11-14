@@ -22,10 +22,16 @@ const Navbar = ({ type }) => {
         </div>
         {user ? (
           <div className="navbar_left"> 
-              <button className="button" onClick={handleLogout}>Logout</button>
+            <p className="username">
+              Welcome {user.username}
+            </p>
             <Link to="/dashboard">
-              <button className="button">List School</button>
+              List a School
             </Link>
+            <Link to="/favoriteSchools">
+              Favorites
+            </Link>
+            <button className="button" onClick={handleLogout}>Logout</button>
           </div>
         ) : (
           <div className="navbar_left">

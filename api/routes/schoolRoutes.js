@@ -18,7 +18,11 @@ const {
   countTotalSchools,
   schools,
   getApprovedSchools,
-  upload
+  upload,
+  addNewFavoriteSchool,
+  getUsersFavoriteSchools,
+  removeFavoriteSchool,
+  getFavoriteSchools
 } = require("../controllers/schoolController")
 
 router.get("/", schools)
@@ -32,5 +36,11 @@ router.put('/:id', updateSchool)
 router.delete('/:id/:userId?', deleteSchool)
 router.get('/count/countByState', countByState)
 router.get('/count/countAllschools', countTotalSchools)
+router.post('/addSchoolToFavorite/:schoolId/:userId', addNewFavoriteSchool)
+router.post('/removeFavoriteSchool/:schoolId/:userId', removeFavoriteSchool);
+// get the favorite school ids
+router.get('/getFavorites/:userId', getUsersFavoriteSchools)
+// get the actual favorite schools
+router.get('/favorite/Schools/:userId', getFavoriteSchools)
 
 module.exports = router;
