@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useFetch from "../../useFetch";
 import "./featuredState.css";
 const FeaturedState = () => {
-    const {apiData, isLoading} = useFetch('http://localhost:5000/schools/count/countByState/?states=Delta,Enugu,Abuja,Lagos')
+    const {apiData, isLoading} = useFetch('/schools/count/countByState/?states=Delta,Enugu,Abuja,Lagos')
 
     // console.log(apiData)
   return (
@@ -42,7 +42,7 @@ const FeaturedState = () => {
 
           <div className="state_card flex">
             <div className="stateTitle">
-              <div className="state">Abuja State</div>
+              <div className="state">Abuja FCT</div>
               <div className="number_of_LGA">6 LGAS</div>
             </div>
             <div className="desc">{isLoading ? 'loading' : apiData[2]} schools Available</div>

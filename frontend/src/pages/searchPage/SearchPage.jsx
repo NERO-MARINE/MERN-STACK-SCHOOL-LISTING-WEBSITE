@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import "./searchPage.css";
 import Footer from "../../components/footer/Footer";
 import useFetch from "../../useFetch";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faRemove } from "@fortawesome/free-solid-svg-icons";
@@ -17,12 +17,13 @@ const SearchPage = () => {
   // const [state, setState] = useState(location.state.nigerianState)
   // const [lga, setLga] = useState(location.state.nigerianLga)
   // const [category, setCategory] = useState(location.state.category)
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submittingItemId, setSubmittingItemId] = useState(null);
+
   const { user } = useContext(AuthContext);
   const userId = user._id;
 
   const { apiData: data, refetch} = useFetch(
-    `http://localhost:5000/schools/getFavorites/${userId}`
+    `/schools/getFavorites/${userId}`
   );
 
   // console.log(data); // this gives us the favorite schools of the user
@@ -34,7 +35,7 @@ const SearchPage = () => {
   const [newCategory, setNewCategory] = useState(category);
 
   const { apiData, isLoading, error } = useFetch(
-    `http://localhost:5000/schools/search/?featured=true&featured=false&approved=true&state=${state}&lga=${lga}&category=${newCategory}`
+    `/schools/search/?featured=true&featured=false&approved=true&state=${state}&lga=${lga}&category=${newCategory}`
   );
 
   switch (state) {
@@ -986,16 +987,17 @@ const SearchPage = () => {
   const handleAddToFav = async (schoolId) => {
     if (user) {
       try {
-        setIsSubmitting(true)
+        setSubmittingItemId(schoolId);
+
          await axios.post(
-          `http://localhost:5000/schools/addSchoolToFavorite/${schoolId}/${userId}`
+          `/schools/addSchoolToFavorite/${schoolId}/${userId}`
         );
         // console.log(res.data);
        
       } catch (err) {
         console.log(err.response.data);
       }finally{
-        setIsSubmitting(false)
+        setSubmittingItemId(null);
       }
 
       refetch()
@@ -1010,16 +1012,16 @@ const SearchPage = () => {
    const handleDeleteFromFav = async (schoolId) => {
     if (user) {
       try {
-        setIsSubmitting(true)
+        setSubmittingItemId(schoolId);
         await axios.post(
-          `http://localhost:5000/schools/removeFavoriteSchool/${schoolId}/${userId}`
+          `/schools/removeFavoriteSchool/${schoolId}/${userId}`
         );
         // console.log(res.data);
       
       } catch (err) {
         console.log(err.response.data);
       }finally{
-        setIsSubmitting(false)
+        setSubmittingItemId(null);
       }
 
       refetch()
@@ -1030,6 +1032,9 @@ const SearchPage = () => {
     }
   };
 
+  useEffect(() => {
+    document.title = 'Naija School Search - Search Results';
+  }, []);
 
   return (
     <div className="searchPage">
@@ -1132,10 +1137,10 @@ const SearchPage = () => {
                         height="120px"
                         style={{ objectFit: "cover" }}
                         src={
-                          "http://localhost:5000/uploads/" +
+                          "/uploads/" +
                           searchResult.images[0]
                         }
-                        alt="no-pics"
+                        alt={searchResult.name}
                       />
                     </div>
                     <div className="schoolName flex">
@@ -1152,17 +1157,17 @@ const SearchPage = () => {
                         <button
                           className="removeFav"
                           onClick={() => handleDeleteFromFav(searchResult._id)}
-                          disabled={isSubmitting}
+                          disabled={submittingItemId === searchResult._id}
                         >
-                          <FontAwesomeIcon icon={faRemove} /> { isSubmitting ? "removing, wait!" : "Unsave School"}
+                          <FontAwesomeIcon icon={faRemove} /> { submittingItemId === searchResult._id ? "removing, wait!" : "Remove Favorite"}
                         </button>
                       ) : (
                         <button
                           className="addFav"
                           onClick={() => handleAddToFav(searchResult._id)}
-                          disabled={isSubmitting}
+                          disabled={submittingItemId === searchResult._id}
                         >
-                          <FontAwesomeIcon icon={faHeart} /> {isSubmitting ? "Adding, wait" : "Add to Favorite"}
+                          <FontAwesomeIcon icon={faHeart} /> {submittingItemId === searchResult._id ? "Adding, wait" : "Add to Favorite"}
                         </button>
                       )}
                     </div>

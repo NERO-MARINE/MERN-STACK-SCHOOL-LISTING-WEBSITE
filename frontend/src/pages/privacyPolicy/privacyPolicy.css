@@ -1,5 +1,4 @@
-/* About.css */
-.about{
+.PrivacyPolicy{
     display: grid;
     min-height: 100vh;
 }
@@ -12,23 +11,22 @@
     align-self: end;
 }
 
-.about-container {
+.privacy-policy-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  .about-section {
-    background-color: #f4e4a1;
+  .privacy-policy-section {
+    background-color: #dbe9f1; /* Light blue background */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    text-align: left;
   }
   
-  h1 {
-    color: #196127; /* Nigerian green color */
-    margin-bottom: 15px;
+  h1, h2 {
+    color: #004080; /* Dark blue color */
   }
   
   .para{
@@ -38,7 +36,7 @@
   
   /* Responsive Styles */
   @media (max-width: 768px) {
-    .about-container {
+    .privacy-policy-container {
       padding: 10px;
     }
   }

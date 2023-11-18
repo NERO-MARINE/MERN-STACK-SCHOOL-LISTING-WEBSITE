@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "./schoolUpdate.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import useFetch from "../../useFetch";
@@ -13,7 +13,7 @@ const SchoolUpdate = () => {
 
   // fetch school
   const { apiData, isLoading } = useFetch(
-    `http://localhost:5000/schools/${id}`
+    `/schools/${id}`
   );
   // console.log(apiData);
 
@@ -1023,13 +1023,17 @@ const SchoolUpdate = () => {
   const handleSubmit = async (e, schoolId) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/schools/${schoolId}`, credentials);
+      await axios.put(`/schools/${schoolId}`, credentials);
       // console.log(res.data); - to use this set const res = axios call
       window.location.reload();
     } catch (err) {
       console.log(err.response.data);
     }
   };
+
+  useEffect(() => {
+    document.title = `Naija School Search - Update ${apiData.name}`;
+  }, [apiData.name]);
 
   return (
     <div className="SchoolUpdate">

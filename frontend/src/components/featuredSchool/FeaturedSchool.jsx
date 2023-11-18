@@ -27,7 +27,7 @@ const FeaturedSchool = () => {
     console.log(featuredSchools)*/
 
   const { apiData, isLoading} = useFetch(
-    "http://localhost:5000/schools/featuredSchools?featured=true"
+    "/schools/featuredSchools?featured=true"
   );
    // console.log(apiData)
   return (
@@ -41,7 +41,7 @@ const FeaturedSchool = () => {
               <div className="F_school" key={school._id}>
                 <img
                    src={
-                    "http://localhost:5000/uploads/" +
+                    "/uploads/" +
                     school.images[0]
                   }
                   alt="featuredSchool"

@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./login.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import PasswordResetReq from "../../components/passwordResetReq/PasswordResetReq";
@@ -32,7 +32,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/auth/login",
+        "/auth/login",
         credentials
       );
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
@@ -42,6 +42,10 @@ const Login = () => {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
     }
   };
+
+  useEffect(() => {
+    document.title = 'Naija School Search - Login';
+  }, []);
 
   return (
     <div className="LoginPage">

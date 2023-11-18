@@ -2,13 +2,13 @@ const School = require("../models/School");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 const createError = require("../utilitis/error");
-const multer = require('multer');
-const nodemailer = require('nodemailer');
+const multer = require("multer");
+const nodemailer = require("nodemailer");
 
 // Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Set your upload folder
+    cb(null, "uploads/"); // Set your upload folder
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -92,30 +92,28 @@ const createSchool = async (req, res, next) => {
     const school = new School(req.body);
     const savedSchool = await school.save();
 
-     // Upload and associate multiple images with the school
-     const fileNames = [];
+    // Upload and associate multiple images with the school
+    const fileNames = [];
 
-     if (req.files && req.files.length > 0) {
-       // Handle multiple uploaded images
-       for (const file of req.files) {
-         // Save the file name to the array
-         fileNames.push(file.originalname);
-       }
-     }
- 
-     // Add the file names to the school document
-     savedSchool.images = fileNames;
- 
-     // Save the updated school document with file names
-     await savedSchool.save();
+    if (req.files && req.files.length > 0) {
+      // Handle multiple uploaded images
+      for (const file of req.files) {
+        // Save the file name to the array
+        fileNames.push(file.originalname);
+      }
+    }
 
+    // Add the file names to the school document
+    savedSchool.images = fileNames;
+
+    // Save the updated school document with file names
+    await savedSchool.save();
 
     try {
       // push school id into schools array of the user
       await User.findByIdAndUpdate(userId, {
         $push: { schools: savedSchool._id },
       });
-
     } catch (err) {
       next(err);
     }
@@ -137,7 +135,12 @@ const createSchool = async (req, res, next) => {
       to: user.email,
       subject: `School listing application`,
       text: `Hello ${user.username}`,
-      html: `<p style="color: white; background:green; padding: 10px; line-height: 2.0;">Your school  ${savedSchool.name} listing application has been received and it is under review. We will send you the feedback of the review shortly.</p> <a href="#">check your dashboard to see status of your school listing</a>`,
+      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
+      <p style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px;">Your Application to List ${savedSchool.name} has been received and it is under review. We will send you the feedback of the review shortly.</p>
+      <a href="#">check your dashboard to see status of your school listing</a>
+      <p style="color: white; background:limegreen; padding: 10px; line-height: 1.5; border-radius: 10px; margin-top: 10px;"><br> Best, <br> Naija School Search.
+      </p>
+    </div>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -148,8 +151,6 @@ const createSchool = async (req, res, next) => {
         console.log(info.response);
       }
     });
-
-
   } catch (err) {
     next(err);
   }
@@ -284,7 +285,6 @@ const countTotalSchools = async (req, res, next) => {
   }
 };
 
-
 // Add a new favorite school
 const addNewFavoriteSchool = async (req, res, next) => {
   try {
@@ -303,9 +303,8 @@ const addNewFavoriteSchool = async (req, res, next) => {
     user.favoriteSchools.push(schoolId);
     await user.save();
 
-   res.status(201).json(user); // Use 201 for resource creation
-  //  res.status(201).json('School added to favorites')
-
+    res.status(201).json(user); // Use 201 for resource creation
+    //  res.status(201).json('School added to favorites')
   } catch (err) {
     next(err);
   }
@@ -325,8 +324,10 @@ const removeFavoriteSchool = async (req, res, next) => {
     }
 
     // Remove the schoolId from the user's favoriteSchools array. Return only the ids that do not match the toBeDeleted schoolId
-    user.favoriteSchools = user.favoriteSchools.filter(id => id.toString() !== schoolId);
-    
+    user.favoriteSchools = user.favoriteSchools.filter(
+      (id) => id.toString() !== schoolId
+    );
+
     await user.save();
 
     res.status(200).json(user.favoriteSchools);
@@ -335,40 +336,89 @@ const removeFavoriteSchool = async (req, res, next) => {
   }
 };
 
-
 // Get user's favorite school ids
 const getUsersFavoriteSchools = async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId); 
+    const user = await User.findById(userId);
 
     res.status(200).json(user.favoriteSchools);
   } catch (err) {
     next(err);
   }
-}
+};
 
 // Get user's actual favorite schools
 const getFavoriteSchools = async (req, res, next) => {
   try {
     const userId = req.params.userId;
-    const user = await User.findById(userId); 
+    const user = await User.findById(userId);
     const listOfFavSchools = await Promise.all(
       user.favoriteSchools.map((school) => {
         return School.findById(school);
       })
     );
 
-    if(listOfFavSchools.length < 1){
-      return next(createError(409, "You have not added any school to your favorite list!"));
+    if (listOfFavSchools.length < 1) {
+      return next(
+        createError(409, "You have not added any school to your favorite list!")
+      );
     }
 
     res.status(200).json(listOfFavSchools);
- 
   } catch (err) {
     next(err);
   }
-}
+};
+
+// send message to a school from details page
+const sendMsgToSchool = async (req, res, next) => {
+  const schoolEmail = req.params.schoolEmail;
+  const schoolName = req.params.schoolName
+
+  const {name, phone, message } = req.body;
+  // console.log(schoolEmail, schoolName, name, phone, message);
+  
+  const transporter = nodemailer.createTransport({
+    host: "mail.codebadgertech.com",
+    port: 465, // use out going server smtp port
+    auth: {
+      user: "info@codebadgertech.com",
+      pass: "codebadger@590",
+    },
+  });
+
+  const mailOptions = {
+    from: "info@codebadgertech.com",
+    to: schoolEmail,
+    subject: `School listing application`,
+    text: `Hello ${schoolName}, ${name} wants to make an enquiry!`,
+    html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
+    <h2 style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px;">Hello ${schoolName}, ${name} wants to make an enquiry!</h2>
+
+    <p style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px; margin-top: 15px;"><b>This is a message from ${name}:</b> ${message}. Please reach out to me on this number ${phone}</p>
+
+    <p style="color: white; background:limegreen; padding: 10px; line-height: 1.5; border-radius: 10px; margin-top: 10px;">Reach out to ${name} with <b>${phone}</b>
+    <br> Best, <br> Naija School Search.
+    </p>
+  </div>`,
+  };
+
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log(err);
+      // res.send("error");
+    } else {
+      console.log(info.response);
+    }
+  });
+
+  res.status(200).json('Message sent')
+  try {
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
   getAllSchools,
@@ -386,7 +436,8 @@ module.exports = {
   addNewFavoriteSchool,
   getUsersFavoriteSchools,
   removeFavoriteSchool,
-  getFavoriteSchools
+  getFavoriteSchools,
+  sendMsgToSchool,
 };
 
 // illustration on how to use error handler middleware

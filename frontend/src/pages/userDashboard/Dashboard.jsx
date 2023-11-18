@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "./dashboard.css";
 import Navbar from "../../components/navbar/Navbar";
@@ -1051,7 +1051,7 @@ const Dashboard = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/schools/${user._id}`,
+        `/schools/${user._id}`,
         formData
       );
       console.log(res.data);
@@ -1070,7 +1070,7 @@ const Dashboard = () => {
 
   //   get all schools listed by user
   const { apiData, isLoading, error } = useFetch(
-    `http://localhost:5000/schools/my-schools/${user._id}`
+    `/schools/my-schools/${user._id}`
   );
 
   // delete school
@@ -1084,7 +1084,7 @@ const Dashboard = () => {
       // Call delete function when confirmed
       try {
         const res = await axios.delete(
-          `http://localhost:5000/schools/${schoolId}/${user._id}`
+          `/schools/${schoolId}/${user._id}`
         );
         console.log(res.data);
         window.location.reload(); // this plain javascript
@@ -1106,6 +1106,10 @@ const Dashboard = () => {
       navigate("/update-school", { state: schoolId });
     }
   };
+
+  useEffect(() => {
+    document.title = `Naija School Search - ${user.username}'s Dashboard`;
+  }, [user.username]);
 
   return (
     <div className="dashboard">
@@ -1158,6 +1162,7 @@ const Dashboard = () => {
           <div className="user_details">
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
+            <p style={{color: "red"}}>Fields marked (*) are compulsory</p>
           </div>
           <form className="listSchool" onSubmit={handleSubmit}>
             <input
@@ -1280,7 +1285,7 @@ const Dashboard = () => {
             />
             <input
               type="text"
-              placeholder="Full link to school website if you have one"
+              placeholder="Full Link to school website(https://myschool.com)"
               name="website"
               onChange={handleChange}
             />
@@ -1312,7 +1317,7 @@ const Dashboard = () => {
               onChange={handleChange}
             />
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <h3>upload six(6) quality images of your school</h3>
+              <h3>upload six(6) quality images of your school *</h3>
               <FontAwesomeIcon
                 icon={faQuestion}
                 style={{

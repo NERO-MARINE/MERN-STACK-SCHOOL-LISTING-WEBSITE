@@ -7,9 +7,10 @@ import {
   faCircleArrowRight,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "../../useFetch";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const School = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -32,23 +33,74 @@ const School = () => {
     setSlideNumber(newSlideNumber);
   };
 
-  const location = useLocation()
+  const location = useLocation();
   // console.log(location)
-  const id = location.pathname.split('/')[2]
+  const id = location.pathname.split("/")[2];
   // console.log(id)
 
-  const {apiData, isLoading} = useFetch(`http://localhost:5000/schools/${id}`)
+  const { apiData, isLoading } = useFetch(
+    `/schools/${id}`
+  );
 
-  // console.log(apiData)
+  const images = apiData.images;
 
-  // <img key={index} src={`/uploads/${image}`} />
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const images = apiData.images
-  // console.log(images && images[0])
+  const [credentials, setCredentials] = useState({
+    name: undefined,
+    phone: undefined,
+    message: undefined,
+  });
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsSubmitting(true);
+      await axios.post(`/schools/contact/school/${apiData.email}/${apiData.name}`, credentials);
+      alert(`Message Sent Sucessfully to ${apiData.name}`);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const encodedAddress = encodeURIComponent(apiData.address);
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+
+  // open school address on google map
+  const openGoogleMaps = () => {
+    window.open(googleMapsUrl, '_blank');
+  };
+// console.log('Google Maps URL:', googleMapsUrl);
+
+  // open school website
+  const schoolWebsite = apiData.website
+  const openSchoolWebsite = () => {
+    window.open(schoolWebsite, '_blank');
+  };
+
+    // open school google-profile
+    const schoolGoogleProfile = apiData.website
+    const openSchoolGoogleProfile = () => {
+      window.open(schoolGoogleProfile, '_blank');
+    };
+
+    useEffect(() => {
+      document.title = `Naija School Search - ${apiData.name}`;
+    }, [apiData.name]);
+
 
   return (
     <div className="school">
       <Navbar type="notHomePage" />
+      <h1 style={{ textAlign: "center", marginTop: "20px" }}>
+        DETAILS OF {apiData.name}
+      </h1>
       <div className="schoolWrapper container">
         {open && (
           <div className="slider">
@@ -65,7 +117,14 @@ const School = () => {
             />
 
             <div className="sliderWrapper">
-              <img src={images && 'http://localhost:5000/uploads/' + images[slideNumber]} alt="" className="sliderImg" />
+              <img
+                src={
+                  images &&
+                  "http://localhost:5000/uploads/" + images[slideNumber]
+                }
+                alt=""
+                className="sliderImg"
+              />
             </div>
 
             <FontAwesomeIcon
@@ -75,36 +134,85 @@ const School = () => {
             />
           </div>
         )}
-       {isLoading ? 'Loading please wait' : apiData && <div className="schoolImageWrapper">
-          {images && images.map((photo, i) => (
-            <div className="schoolImages" key={i}>
-              <img
-                src={`http://localhost:5000/uploads/${photo}`}
-                alt="schoolImages"
-                className="imageItem responsiveImg"
-                onClick={() => handleOpen(i)}
-              />
-            </div>
-          ))}
-        </div>}
+        {isLoading
+          ? "Loading please wait"
+          : apiData && (
+              <div className="schoolImageWrapper">
+                {images &&
+                  images.map((photo, i) => (
+                    <div className="schoolImages" key={i}>
+                      <img
+                        src={`/uploads/${photo}`}
+                        alt="schoolImages"
+                        className="imageItem responsiveImg"
+                        onClick={() => handleOpen(i)}
+                      />
+                    </div>
+                  ))}
+              </div>
+            )}
 
         <div className="schoolInfo">
           <ul>
-            <li>School Name: <h2>{apiData.name}</h2> </li>
+            <li>
+              School Name: <h2>{apiData.name}</h2>{" "}
+            </li>
             <li>State: {apiData.state}</li>
             <li>L.G.A: {apiData.lga}</li>
             <li>City: {apiData.city}</li>
             <li>Email Address: {apiData.email}</li>
             <li>Phone: {apiData.phone}</li>
-            <li>School Address: {apiData.address}</li>
-            {apiData.website === "undefined" ?  <li>Website: Not Available</li> : <li>School Website: <Link to={apiData.website}>{apiData.website}</Link></li>}
-            {apiData.googleProfile === "undefined" ? <li>School Google Profile: Not Available</li> : <li>School Google Profile: <Link to={apiData.googleProfile}>{apiData.googleProfile}</Link></li>}
+            <li onClick={openGoogleMaps}>School Address: <b style={{color: "red"}}>{apiData.address}</b> <br></br> Click to View on google maps</li>
+            {apiData.website === "undefined" ? (
+              <li>Website: Not Available</li>
+            ) : (
+              <li>
+                School Website:{" "}
+                <b style={{color: "red"}} onClick={openSchoolWebsite}>{apiData.website}</b>
+              </li>
+            )}
+            {apiData.googleProfile === "undefined" ? (
+              <li>School Google Profile: Not Available</li>
+            ) : (
+              <li>
+                School Google Profile:{" "}
+                <b style={{color: "red"}} onClick={openSchoolGoogleProfile}>{apiData.googleProfile}</b>
+                
+              </li>
+            )}
             <li>Fee Range per session: {apiData.feeRange}</li>
             <li>Description: {apiData.desc}</li>
-            
           </ul>
         </div>
-      
+
+        <div className="messageSchool">
+          <h1>Leave A Message For {apiData.name}</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter Your name"
+              required
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              id="phone"
+              placeholder="Enter Your Phone"
+              required
+              onChange={handleChange}
+            />
+            <textarea
+              placeholder={"Leave a message for " + apiData.name}
+              id="message"
+              required
+              onChange={handleChange}
+            ></textarea>
+            <button>
+              {isSubmitting ? "sending message. Wait!" : "Send Message"}
+            </button>
+          </form>
+        </div>
       </div>
       <Footer />
     </div>

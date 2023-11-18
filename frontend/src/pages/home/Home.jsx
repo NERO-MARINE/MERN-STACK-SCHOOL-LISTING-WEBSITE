@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import FeaturedState from '../../components/featured/FeaturedState';
 import FeaturedSchool from '../../components/featuredSchool/FeaturedSchool';
 import Footer from '../../components/footer/Footer';
@@ -8,6 +9,10 @@ import './home.css'
 
 const Home = () => {
   
+    useEffect(() => {
+        document.title = 'Naija School Search -Home ';
+      },[]);
+    
     return (
         <div className="home">
             <Navbar/>

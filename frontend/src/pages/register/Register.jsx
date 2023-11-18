@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./register.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Register = () => {
@@ -30,7 +30,7 @@ const Register = () => {
     setError('');
 
     try {
-      await axios.post("http://localhost:5000/auth/register", credentials);
+      await axios.post("/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
       navigate("/login");
       
@@ -42,6 +42,10 @@ const Register = () => {
       setIsSubmitting(false); // Reset the state after submission is complete
     }
   };
+
+  useEffect(() => {
+    document.title = 'Naija School Search - Register';
+  }, []);
 
   return (
     <div className="RegisterPage">
@@ -82,6 +86,7 @@ const Register = () => {
 
           <p>Do you own a school?</p>
           <select id="schoolOwner" onChange={handleChange}>
+            <option value="">select option</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>

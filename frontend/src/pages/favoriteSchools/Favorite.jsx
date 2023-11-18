@@ -2,17 +2,21 @@ import { Link } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./favorite.css";
-import { useContext} from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../useFetch";
 const Favorite = () => {
   const { user } = useContext(AuthContext);
   const userId = user._id;
   const { apiData, isLoading, error } = useFetch(
-    `http://localhost:5000/schools/favorite/Schools/${userId}`
+    `/schools/favorite/Schools/${userId}`
   );
 
-//   console.log(apiData)
+  //   console.log(apiData)
+
+  useEffect(() => {
+    document.title = "Naija School Search - Favorite Schools";
+  }, []);
 
   return (
     <div className="favorite">
@@ -31,10 +35,8 @@ const Favorite = () => {
                     width="100%"
                     height="120px"
                     style={{ objectFit: "cover" }}
-                    src={
-                      "http://localhost:5000/uploads/" + favSchool.images[0]
-                    }
-                    alt="no-pics"
+                    src={"/uploads/" + favSchool.images[0]}
+                    alt={favSchool.name}
                   />
                 </div>
                 <div className="schoolName flex">
@@ -58,7 +60,7 @@ const Favorite = () => {
               </div>
             ))}
 
-            <h2>{error && error.message}</h2>
+        <h2>{error && error.message}</h2>
       </div>
 
       <Footer />

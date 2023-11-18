@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './resetPassword.css'
@@ -21,7 +21,7 @@ function ResetPassword() {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/account/reset-password', { token, password });
+      const response = await axios.post('/account/reset-password', { token, password });
 
       if (response.status === 200) {
         setMessage('Password reset is successful');
@@ -29,10 +29,14 @@ function ResetPassword() {
         setMessage('Failed to reset password');
       }
     } catch (err) {
-      console.error(err.response.data);
+      // console.error(err.response.data);
       setMessage(err.response.data.message);
     }
   };
+
+  useEffect(() => {
+    document.title = 'Naija School Search - Reset-Password';
+  }, []);
 
   return (
     <div className="passwordReset">

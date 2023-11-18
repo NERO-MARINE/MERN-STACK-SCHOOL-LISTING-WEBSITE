@@ -11,6 +11,8 @@ import SchoolUpdate from "./pages/schoolUpdate/SchoolUpdate";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
+import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
+
 
 function App() {
   // protected Routes
@@ -43,6 +45,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/school/:id" element={<School />} />
           <Route path="/about" element={<About />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route
             path="/login"
             element={
@@ -67,7 +70,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          
           <Route
             path="/register"
             element={
