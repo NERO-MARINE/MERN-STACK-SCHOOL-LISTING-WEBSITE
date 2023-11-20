@@ -66,7 +66,7 @@ const searchAllSchools = async (req, res, next) => {
     });
 
     if (allSchools.length == "") {
-      return next(createError(404, "No school Found!"));
+      return next(createError(404, "No school has been listed yet under these filters!"));
     }
 
     res.status(200).json(allSchools);
@@ -138,7 +138,7 @@ const createSchool = async (req, res, next) => {
       html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
       <p style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px;">Your Application to List ${savedSchool.name} has been received and it is under review. We will send you the feedback of the review shortly.</p>
       <a href="#">check your dashboard to see status of your school listing</a>
-      <p style="color: white; background:limegreen; padding: 10px; line-height: 1.5; border-radius: 10px; margin-top: 10px;"><br> Best, <br> Naija School Search.
+      <p style="color: white; background:limegreen; padding: 10px; line-height: 1.5; border-radius: 10px; margin-top: 10px;"><br> Best, <br> <p style="color: green;">Naija School Search</p>.
       </p>
     </div>`,
     };
@@ -171,7 +171,7 @@ const UserSchools = async (req, res, next) => {
       return next(
         createError(
           404,
-          "Your listed schools will appear here. You have not listed any school!"
+          "Your listed schools will appear here. You have not listed any school! If for example you have a Nusersy, primary and a secondary school, please list them seperately under the correct category."
         )
       );
     }

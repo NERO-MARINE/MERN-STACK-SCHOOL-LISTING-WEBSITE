@@ -42,9 +42,14 @@ const Favorite = () => {
                 <div className="schoolName flex">
                   <div className="label">School Name</div>
                   <div className="name">{favSchool.name}</div>
-                  <button className="button rating">
-                    {favSchool.googleRating} Google Rating
-                  </button>
+
+                  {favSchool.googleProfile === "undefined" ? (
+                    <button className="button rating">Google Rating N/A</button>
+                  ) : (
+                    <button className="button rating">
+                      {favSchool.googleRating} Google Rating
+                    </button>
+                  )}
                 </div>
                 <div className="schoolName flex">
                   <div className="label">City/Town/community</div>

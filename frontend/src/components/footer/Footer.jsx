@@ -8,9 +8,9 @@ const Footer = () => {
     <div className="footer">
       <div className="footer_content container">
         <FontAwesomeIcon icon={faFaceLaugh} />
-        All Rights Resverved, &copy; Niaja School Search 2023
+        All Rights Reserved, &copy; Naija School Search 2023
         <br />
-        <p><em>nss@support.com | +2347064938397</em></p>
+        <p><em>nss@support.com | +2347056961743</em></p>
       </div>
       <div className="P-policy">
           <Link to="/privacy-policy">

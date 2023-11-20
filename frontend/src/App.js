@@ -9,12 +9,19 @@ import Favourite from "./pages/favoriteSchools/Favorite";
 import Register from "./pages/register/Register";
 import SchoolUpdate from "./pages/schoolUpdate/SchoolUpdate";
 import { AuthContext } from "./context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
+import initGA from "./googleAnalytics";
 
 
 function App() {
+  // FOR GOOGLE ANALYTICS STARTS
+  useEffect(() => {
+    initGA();
+  }, []);
+  // FOR GOOGLE ANALYTICS ENDS
+
   // protected Routes
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);

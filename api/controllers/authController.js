@@ -103,18 +103,21 @@ const register = async (req, res, next) => {
       to: req.body.email,
       subject: `NSS Welcomes You`,
       text: `Dear ${req.body.username}`,
-      html: `<p style="line-height:2.0;">We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
+      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
+      <p style="color: black; background:white; padding: 10px; line-height: 2.0; border-radius: 10px;">We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
     
-      <h4 style="color: white; margin-top:20px; background:green; padding: 10px;">Here's what you can do at NSS:</h4>
+      <h4 style="margin-top:20px; padding: 10px;">Here's what you can do at NSS:</h4>
 
-      <ul style="margin-top: 20px;">
-      <li>Apply For Your School to be listed if You are a school owner</li>
-      <li>Explore a wide range of schools, from Daycare to secondary.</li>
-      <li>Find detailed information about each school, including location, facilities, and more.</li>
+      <ul style="margin: 20px 0;">
+      <li style="margin: 5px 0; font-size: 18px">Apply For Your School to be listed if You are a school owner</li>
+      <li style="margin: 5px 0; font-size: 18px">Explore a wide range of schools, from Daycare to secondary, including skills aquisition centers.</li>
+      <li style="margin: 5px 0; font-size: 18px">Find detailed information about each school, including location, facilities, and more.</li>
       </ul>
 
-      <h4 style="color: white; margin-top:20px; background:green; padding: 10px; line-height:2.0;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team. We're here to help you every step of the way.
-      </h4>
+      <h3 style="margin-top:20px; color: black; background:white; padding: 10px; line-height: 2.0; border-radius: 10px;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team via the number and email provided in the website. We're here to help you every step of the way.
+      </h3>
+      <br/> <b>Best</b>  <br/><b style="color: green;">Naija School Search</b>
+      </div>
       `,
     };
 
@@ -124,7 +127,6 @@ const register = async (req, res, next) => {
         res.send("error");
       } else {
         console.log(info.response);
- 
       }
     });
   } catch (err) {

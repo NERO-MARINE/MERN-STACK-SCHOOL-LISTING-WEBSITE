@@ -14,19 +14,17 @@ const About = () => {
         <section className="about-section">
           <h1>Welcome to Naija School Search</h1>
           <p className="para">
-            Naija School Search is your go-to platform for discovering and
-            exploring schools across Nigeria that offer quality education at no
-            cost.
+            Your FREE go-to platform for discovering and
+            exploring schools across Nigeria that offer quality education.
           </p>
           <p className="para">
-            Our mission is to break down barriers to education by providing a
-            comprehensive list of free schools, ensuring that every student has
-            the opportunity to learn and thrive.
+            Our mission is to help you discover schools/training centers where you can enroll your child to get training by providing a
+            comprehensive list of schools and training centers in your desired location (state and local government), ensuring that parents make informed decisions about their children's education
           </p>
           <p className="para">
-            Explore the diverse range of schools available on our platform and
+            Explore the diverse range of schools and training centers available on our platform and
             empower yourself with the knowledge to make informed decisions about
-            your education.
+            your child's education.
           </p>
           <p className="para">
             If you have any questions, feedback, or if you'd like to contribute

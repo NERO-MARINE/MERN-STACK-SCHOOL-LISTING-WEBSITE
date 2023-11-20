@@ -1050,10 +1050,7 @@ const Dashboard = () => {
     }
 
     try {
-      const res = await axios.post(
-        `/schools/${user._id}`,
-        formData
-      );
+      const res = await axios.post(`/schools/${user._id}`, formData);
       console.log(res.data);
       setResError("");
       alert("School created and awaiting approval");
@@ -1083,9 +1080,7 @@ const Dashboard = () => {
     if (shouldDelete) {
       // Call delete function when confirmed
       try {
-        const res = await axios.delete(
-          `/schools/${schoolId}/${user._id}`
-        );
+        const res = await axios.delete(`/schools/${schoolId}/${user._id}`);
         console.log(res.data);
         window.location.reload(); // this plain javascript
       } catch (err) {
@@ -1136,10 +1131,16 @@ const Dashboard = () => {
                       </p>
                       <p>
                         <span>NSS Status:</span>{" "}
-                        {school.approved ? "approved(Your School is now public)" : "not Approved(Only you can see this School"}
+                        {school.approved
+                          ? "approved(Your School is now public)"
+                          : "not Approved(Only you can see this School"}
                       </p>
                     </div>
-                    {school.googleRating === "undefined" ? <div className="googleRating">N/A</div> : <div className="googleRating">{school.googleRating}</div>}
+                    {school.googleRating === "undefined" ? (
+                      <div className="googleRating">N/A</div>
+                    ) : (
+                      <div className="googleRating">{school.googleRating}</div>
+                    )}
                     <div className="actionButtons">
                       <button onClick={() => handleEdit(school._id)}>
                         <FontAwesomeIcon icon={faEdit} />
@@ -1162,7 +1163,11 @@ const Dashboard = () => {
           <div className="user_details">
             <p>Username: {user.username}</p>
             <p>Email: {user.email}</p>
-            <p style={{color: "red"}}>Fields marked (*) are compulsory</p>
+            <p>
+              If for example you have a Nusersy, primary and a secondary school,
+              please list them seperately under the correct category.
+            </p>
+            <p style={{ color: "red" }}>Fields marked (*) are compulsory</p>
           </div>
           <form className="listSchool" onSubmit={handleSubmit}>
             <input
@@ -1174,7 +1179,7 @@ const Dashboard = () => {
             />
             <input
               type="text"
-              placeholder="Address Of School*"
+              placeholder="Full Address Of School(include state and lga)*"
               name="address"
               onChange={handleChange}
               required
@@ -1317,7 +1322,9 @@ const Dashboard = () => {
               onChange={handleChange}
             />
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <h3>upload six(6) quality images of your school *</h3>
+              <h3>
+                upload six(6) quality images of your school*
+              </h3>
               <FontAwesomeIcon
                 icon={faQuestion}
                 style={{

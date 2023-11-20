@@ -74,7 +74,7 @@ const Navbar = ({ type }) => {
         <div className="intro container grid1">
           <div className="intro_text flex">
             <h1>Welcome To Naija School Search.</h1>
-            <h2>Search and Find The Right School For Your Child!</h2>
+            <h2>Search and Find The Right School/Skill Acquisition Center For Your Child!</h2>
             <Link to="/search">
               <button className="button">Search School</button>
             </Link>

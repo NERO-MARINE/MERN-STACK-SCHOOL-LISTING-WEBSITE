@@ -37,7 +37,10 @@ const resetRequest = async (req, res, next) => {
       to: email,
       subject: "Password Reset Request",
       text: `To reset your password, click on the following link: ${resetLink}`,
-      html: `<pstyle="padding: 10px; line-height:1.8;">You are receiving this email because you requested a password change. To reset your password, click on the following link: ${resetLink} . This link expires in 5m</p>`,
+      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
+      <p style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px;">You are receiving this email because you requested a password change. To reset your password, click on the following link: ${resetLink} . This link expires in just 5-munites</p>
+      <br/><b style="color: green;">Naija School Search</b>
+      </div>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {

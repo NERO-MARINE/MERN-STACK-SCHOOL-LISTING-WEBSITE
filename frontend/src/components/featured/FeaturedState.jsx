@@ -14,10 +14,22 @@ const FeaturedState = () => {
           className="responsiveImg ownerImage"
         />
         <div className="owner_text flex">
-          <h1>Are you a school owner? Help Parents Find Your School</h1>
+          <h1>Are you a school owner? Do you have any skill aquisition school? <span id="parents">Help Parents</span> Find Your School</h1>
           <button className="ownerButton">
             <Link to="/dashboard" style={{textDecoration: "none", color: "white"}}>List Your School</Link>
           </button>
+          <h2 style={{marginTop: "15px"}}>Steps to List Your School</h2>
+          <ul className="listing-steps">
+            <li>Register with us and login into your account </li>
+            <li>Click on list a school</li>
+            <li>Fill out your school details correctly and upload six quality photos of your school!</li>
+            <li>Your School will be visible in searches for our users after it has been approved</li>
+            <li>You can see the approval status of your listed school in the <q>list a school page</q></li>
+            <li>If for example you have a Nusersy, primary and a secondary school, please list them seperately under the correct category.</li>
+            <li>You can edit the details of your school at anytime. You can also unlist your school by deleting it.</li>
+            <li>Deleting your school removes it completely from our database.</li>
+            <li>For any diffculty you can reach out to us on our whatsapp number: <span id="whatsapp">+2347056961743</span></li>
+          </ul>
         </div>
       </div>
 

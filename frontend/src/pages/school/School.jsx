@@ -85,7 +85,7 @@ const School = () => {
   };
 
     // open school google-profile
-    const schoolGoogleProfile = apiData.website
+    const schoolGoogleProfile = apiData.googleProfile
     const openSchoolGoogleProfile = () => {
       window.open(schoolGoogleProfile, '_blank');
     };
@@ -120,7 +120,7 @@ const School = () => {
               <img
                 src={
                   images &&
-                  "http://localhost:5000/uploads/" + images[slideNumber]
+                  "/uploads/" + images[slideNumber]
                 }
                 alt=""
                 className="sliderImg"
@@ -160,6 +160,7 @@ const School = () => {
             <li>State: {apiData.state}</li>
             <li>L.G.A: {apiData.lga}</li>
             <li>City: {apiData.city}</li>
+            <li>Catgory: {apiData.category}</li>
             <li>Email Address: {apiData.email}</li>
             <li>Phone: {apiData.phone}</li>
             <li onClick={openGoogleMaps}>School Address: <b style={{color: "red"}}>{apiData.address}</b> <br></br> Click to View on google maps</li>

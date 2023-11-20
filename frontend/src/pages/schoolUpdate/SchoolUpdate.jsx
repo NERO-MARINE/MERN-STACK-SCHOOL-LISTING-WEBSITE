@@ -1142,6 +1142,19 @@ const SchoolUpdate = () => {
               <option value="secondary school">Secondary School</option>
               <option value="Nursery school">Nursery School</option>
               <option value="daycare school">Daycare</option>
+              <option value="Tailoring school">Tailoring School</option>
+              <option value="Hairstyling">Hair Styling School</option>
+              <option value="Software Development and IT school">
+                Software Development and IT School
+              </option>
+              <option value="Catering school">Catering School</option>
+              <option value="Carpentry school">Carpentry School</option>
+              <option value="Interior Decoration school">
+                Interior Decoration School
+              </option>
+              <option value="Arts and Printing school">
+                Arts and Printing School
+              </option>
             </select>
             <label>Enter City School is Located</label>
             <input
@@ -1153,7 +1166,7 @@ const SchoolUpdate = () => {
             <label>Google Profile Rating</label>
             <input
               type="text"
-              defaultValue={apiData.googleRating}
+              defaultValue={apiData.googleRating === 'undefined'? "N/A" : apiData.googleRating }
               name="googleRating"
               onChange={handleChange}
             />
@@ -1167,7 +1180,7 @@ const SchoolUpdate = () => {
             <label>Link To School Website</label>
             <input
               type="text"
-              defaultValue={apiData.website}
+              defaultValue={apiData.website === 'undefined'? "N/A" : apiData.website}
               name="website"
               onChange={handleChange}
             />
@@ -1185,7 +1198,7 @@ const SchoolUpdate = () => {
             <label>Google Profile Link</label>
             <input
               type="text"
-              defaultValue={apiData.googleProfile}
+              defaultValue={apiData.googleProfile === 'undefined'? "N/A" : apiData.googleProfile}
               name="googleProfile"
               onChange={handleChange}
             />
