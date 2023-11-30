@@ -49,7 +49,7 @@ const PasswordResetReq = ({ pswResetModal }) => {
         value={email}
         onChange={handleEmailChange}
       />
-      <Link onClick={handleRequestReset} className="emailResetLink">
+      <Link onClick={handleRequestReset} className={isSubmitting ? "emailResetLinkDisabled" : "emailResetLink"}>
         {isSubmitting ? "please wait.." : "Request Reset"}
       </Link>
       <p className="success">{message}</p>

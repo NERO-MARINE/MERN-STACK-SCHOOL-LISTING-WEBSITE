@@ -39,6 +39,16 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
+    hearAboutUs: {
+      type: String,
+      required: true,
+    },
+
+    agreedToTerms: {
+      type: String,
+      default: 'I Agree'
+    },
+
     schools: {
       type: [String],
     },

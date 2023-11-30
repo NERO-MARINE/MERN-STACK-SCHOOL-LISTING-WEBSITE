@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
+// install this to use react spinner: npm install react-loader-spinner
+import { TailSpin } from "react-loader-spinner";
 
 const SearchPage = () => {
   //const location = useLocation()
@@ -23,10 +25,10 @@ const SearchPage = () => {
   // const userId = user._id;
   const userId = user ? user._id : null;
 
-    const { apiData: data, refetch } = useFetch(
-      `/schools/getFavorites/${userId}`
-    );
-    
+  const { apiData: data, refetch } = useFetch(
+    `/schools/getFavorites/${userId}`
+  );
+
   // console.log(data); // this gives us the favorite schools of the user
 
   let lgaList;
@@ -1120,74 +1122,86 @@ const SearchPage = () => {
           <span>{error.message}</span>
         ) : (
           <div className="searchResultsRight">
-            {isLoading
-              ? "Loading please wait"
-              : apiData &&
-                apiData.map((searchResult) => (
-                  <div className="schoolShowCase" key={searchResult._id}>
-                    <div className="photo flex">
-                      <div className="label">Premises:</div>
-                      <img
-                        width="100%"
-                        height="120px"
-                        style={{ objectFit: "cover" }}
-                        src={"/uploads/" + searchResult.images[0]}
-                        alt={searchResult.name}
-                      />
-                    </div>
-                    <div className="schoolName flex">
-                      <div className="label">School Name</div>
-                      <div className="name">{searchResult.name}</div>
-                      {searchResult.googleProfile === "undefined" ? (
-                        <button className="button rating">
-                          Google Rating N/A
-                        </button>
-                      ) : (
-                        <button className="button rating">
-                          {searchResult.googleRating} Google Rating
-                        </button>
-                      )}
-                    </div>
-                    <div className="schoolName flex">
-                      <div className="label">City/Town/community</div>
-                      <div className="name">{searchResult.city}</div>
-                      {data.includes(searchResult._id) ? (
-                        <button
-                          className="removeFav"
-                          onClick={() => handleDeleteFromFav(searchResult._id)}
-                          disabled={submittingItemId === searchResult._id}
-                        >
-                          <FontAwesomeIcon icon={faRemove} />{" "}
-                          {submittingItemId === searchResult._id
-                            ? "removing, wait!"
-                            : "Remove Favorite"}
-                        </button>
-                      ) : (
-                        <button
-                          className="addFav"
-                          onClick={() => handleAddToFav(searchResult._id)}
-                          disabled={submittingItemId === searchResult._id}
-                        >
-                          <FontAwesomeIcon icon={faHeart} />{" "}
-                          {submittingItemId === searchResult._id
-                            ? "Adding, wait"
-                            : "Add to Favorite"}
-                        </button>
-                      )}
-                    </div>
-                    <div className="feeRange flex">
-                      <div className="label">Fee Range</div>
-                      <div className="fee">
-                        {searchResult.feeRange} per session
-                      </div>
-                      <Link to={`/school/${searchResult._id}`}>
-                        <button className="button detailsBtn">
-                          View Details
-                        </button>
-                      </Link>
-                    </div>
+            {isLoading ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100px",
+                }}
+              >
+                <TailSpin color="green" height={80} width={80} />
+                {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+              </div>
+            ) : (
+              apiData &&
+              apiData.map((searchResult) => (
+                <div className="schoolShowCase" key={searchResult._id}>
+                  <div className="photo flex">
+                    <div className="label">Premises:</div>
+                    <img
+                      width="100%"
+                      height="120px"
+                      style={{ objectFit: "cover" }}
+                      src={"/uploads/" + searchResult.images[0]}
+                      alt={searchResult.name}
+                    />
                   </div>
-                ))}
+                  <div className="schoolName flex">
+                    <div className="label">School Name</div>
+                    <div className="name">{searchResult.name}</div>
+                    {searchResult.googleProfile === "undefined" ? (
+                      <button className="button rating">
+                        Google Rating N/A
+                      </button>
+                    ) : (
+                      <button className="button rating">
+                        {searchResult.googleRating} Google Rating
+                      </button>
+                    )}
+                  </div>
+                  <div className="schoolName flex">
+                    <div className="label">City/Town/community</div>
+                    <div className="name">{searchResult.city}</div>
+                    {data.includes(searchResult._id) ? (
+                      <button
+                        className="removeFav"
+                        onClick={() => handleDeleteFromFav(searchResult._id)}
+                        disabled={submittingItemId === searchResult._id}
+                      >
+                        <FontAwesomeIcon icon={faRemove} />{" "}
+                        {submittingItemId === searchResult._id
+                          ? "removing, wait!"
+                          : "Remove Favorite"}
+                      </button>
+                    ) : (
+                      <button
+                        className="addFav"
+                        onClick={() => handleAddToFav(searchResult._id)}
+                        disabled={submittingItemId === searchResult._id}
+                      >
+                        <FontAwesomeIcon icon={faHeart} />{" "}
+                        {submittingItemId === searchResult._id
+                          ? "Adding, wait"
+                          : "Add to Favorite"}
+                      </button>
+                    )}
+                  </div>
+                  <div className="feeRange flex">
+                    <div className="label">Fee Range</div>
+                    <div className="fee">
+                      {searchResult.feeRange} per session
+                    </div>
+                    <Link to={`/school/${searchResult._id}`}>
+                      <button className="button detailsBtn">
+                        View Details
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>

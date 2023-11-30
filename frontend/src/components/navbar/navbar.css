@@ -21,7 +21,31 @@
     font-family: var(--fontFamily_4);
     font-size: var(--fontSize_5);
   }
+
+  .search{
+    display: flex;
+    align-items: center;
+    width: 400px;
+  }
   
+  .search input{
+    width: 100%;
+    padding: 4px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.876);
+    border: none;
+    outline: none;
+  }
+
+  .search button{
+    width: 50px;
+    padding: 4px;
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
   .menu-icon {
     font-size: 24px;
     cursor: pointer;
@@ -40,11 +64,13 @@
     text-decoration: none;
     color: white;
     font-size: 14px;
+    font-family: var(--fontFamily_2);
   }
 
   .username{
     color: white;
     opacity: 0.7;
+    font-family: var(--fontFamily_1);
 }
   
 
@@ -61,10 +87,10 @@
 
 .intro_text h2{
     color: white;
-    font-family: var(--fontFamily_4);
+    font-family: var(--fontFamily_2);
  }
 
-@media(max-width:768px){
+@media(max-width:1200px){
     .intro{
         padding: 80px 0;
     }
@@ -117,6 +143,16 @@
         color: var(--color_1);
       }
     
+}
+
+@media(max-width: 650px){
+  .search{
+    width: 200px;
+  }
+
+  .search button{
+    width: 30px;
+  }
 }
 
 

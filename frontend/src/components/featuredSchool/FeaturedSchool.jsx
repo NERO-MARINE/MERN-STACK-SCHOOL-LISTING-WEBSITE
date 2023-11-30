@@ -2,6 +2,9 @@
 import { Link } from "react-router-dom";
 import "./featuredSchool.css";
 import useFetch from "../../useFetch";
+// install this to use react spinner: npm install react-loader-spinner
+import { TailSpin } from "react-loader-spinner";
+
 
 const FeaturedSchool = () => {
   /* below i used "fetch api" - featuredSchools represents apiData in the axios method i used finally
@@ -26,36 +29,42 @@ const FeaturedSchool = () => {
   
     console.log(featuredSchools)*/
 
-  const { apiData, isLoading} = useFetch(
+  const { apiData, isLoading } = useFetch(
     "/schools/featuredSchools?featured=true"
   );
-   // console.log(apiData)
+  // console.log(apiData)
   return (
     <div className="featuredSchool">
       <div className="component_text">Featured Schools</div>
       <div className="featuredSchool_list container">
-        {isLoading
-          ? "Loading please wait"
-          : apiData &&
-            apiData.map((school) => (
-              <div className="F_school" key={school._id}>
-                <img
-                   src={
-                    "/uploads/" +
-                    school.images[0]
-                  }
-                  alt="featuredSchool"
-                />
-                <div className="F_school_details">
-                  <p>{school.name}</p>
-                  <p>{school.state}</p>
-                  <p>{school.lga}</p>
-                  <Link to={`/school/${school._id}`}>
+        {isLoading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100px",
+            }}
+          >
+            <TailSpin color="green" height={80} width={80} />
+            {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+          </div>
+        ) : (
+          apiData &&
+          apiData.map((school) => (
+            <div className="F_school" key={school._id}>
+              <img src={"/uploads/" + school.images[0]} alt="featuredSchool" />
+              <div className="F_school_details">
+                <p>{school.name}</p>
+                <p>{school.state}</p>
+                <p>{school.lga}</p>
+                <Link to={`/school/${school._id}`}>
                   <button className="button">SEE DETAILS</button>
-                  </Link>
-                </div>
+                </Link>
               </div>
-            ))}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

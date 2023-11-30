@@ -2,6 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Navbar = ({ type }) => {
   const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,6 +24,18 @@ const Navbar = ({ type }) => {
     setIsOpen(false);
   };
 
+  const [credentials, setCredentials] = useState({
+    search: undefined,
+  });
+
+  const handleChange = (e) => {
+    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSearch = async()=>{
+    navigate('/random-search', {state: credentials.search})
+  }
+
   return (
     <div className={type !== "notHomePage" ? "header" : "headerNotHomePage"}>
       <div className="container">
@@ -29,6 +43,10 @@ const Navbar = ({ type }) => {
           <Link to="/" className="logo">
             NSS
           </Link>
+          <div className="search">
+            <input type="text" placeholder="search..." onChange={handleChange} id="search"/>
+            <button onClick={handleSearch}><FontAwesomeIcon icon={faSearch} className="searchIcon"/></button>
+          </div>
           <div className="menu-icon" onClick={toggleNavbar}>
             ☰
           </div>

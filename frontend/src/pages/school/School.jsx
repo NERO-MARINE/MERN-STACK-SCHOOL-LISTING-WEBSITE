@@ -11,6 +11,8 @@ import { useEffect, useState } from "react";
 import useFetch from "../../useFetch";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+// install this to use react spinner: npm install react-loader-spinner
+import { TailSpin } from "react-loader-spinner";
 
 const School = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -38,9 +40,7 @@ const School = () => {
   const id = location.pathname.split("/")[2];
   // console.log(id)
 
-  const { apiData, isLoading } = useFetch(
-    `/schools/${id}`
-  );
+  const { apiData, isLoading } = useFetch(`/schools/${id}`);
 
   const images = apiData.images;
 
@@ -60,7 +60,10 @@ const School = () => {
     e.preventDefault();
     try {
       setIsSubmitting(true);
-      await axios.post(`/schools/contact/school/${apiData.email}/${apiData.name}`, credentials);
+      await axios.post(
+        `/schools/contact/school/${apiData.email}/${apiData.name}`,
+        credentials
+      );
       alert(`Message Sent Sucessfully to ${apiData.name}`);
     } catch (err) {
       console.log(err);
@@ -74,26 +77,25 @@ const School = () => {
 
   // open school address on google map
   const openGoogleMaps = () => {
-    window.open(googleMapsUrl, '_blank');
+    window.open(googleMapsUrl, "_blank");
   };
-// console.log('Google Maps URL:', googleMapsUrl);
+  // console.log('Google Maps URL:', googleMapsUrl);
 
   // open school website
-  const schoolWebsite = apiData.website
+  const schoolWebsite = apiData.website;
   const openSchoolWebsite = () => {
-    window.open(schoolWebsite, '_blank');
+    window.open(schoolWebsite, "_blank");
   };
 
-    // open school google-profile
-    const schoolGoogleProfile = apiData.googleProfile
-    const openSchoolGoogleProfile = () => {
-      window.open(schoolGoogleProfile, '_blank');
-    };
+  // open school google-profile
+  const schoolGoogleProfile = apiData.googleProfile;
+  const openSchoolGoogleProfile = () => {
+    window.open(schoolGoogleProfile, "_blank");
+  };
 
-    useEffect(() => {
-      document.title = `Naija School Search - ${apiData.name}`;
-    }, [apiData.name]);
-
+  useEffect(() => {
+    document.title = `Naija School Search - ${apiData.name}`;
+  }, [apiData.name]);
 
   return (
     <div className="school">
@@ -118,10 +120,7 @@ const School = () => {
 
             <div className="sliderWrapper">
               <img
-                src={
-                  images &&
-                  "/uploads/" + images[slideNumber]
-                }
+                src={images && "/uploads/" + images[slideNumber]}
                 alt=""
                 className="sliderImg"
               />
@@ -134,23 +133,35 @@ const School = () => {
             />
           </div>
         )}
-        {isLoading
-          ? "Loading please wait"
-          : apiData && (
-              <div className="schoolImageWrapper">
-                {images &&
-                  images.map((photo, i) => (
-                    <div className="schoolImages" key={i}>
-                      <img
-                        src={`/uploads/${photo}`}
-                        alt="schoolImages"
-                        className="imageItem responsiveImg"
-                        onClick={() => handleOpen(i)}
-                      />
-                    </div>
-                  ))}
-              </div>
-            )}
+        {isLoading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100px",
+            }}
+          >
+            <TailSpin color="green" height={80} width={80} />
+            {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+          </div>
+        ) : (
+          apiData && (
+            <div className="schoolImageWrapper">
+              {images &&
+                images.map((photo, i) => (
+                  <div className="schoolImages" key={i}>
+                    <img
+                      src={`/uploads/${photo}`}
+                      alt="schoolImages"
+                      className="imageItem responsiveImg"
+                      onClick={() => handleOpen(i)}
+                    />
+                  </div>
+                ))}
+            </div>
+          )
+        )}
 
         <div className="schoolInfo">
           <ul>
@@ -163,13 +174,18 @@ const School = () => {
             <li>Catgory: {apiData.category}</li>
             <li>Email Address: {apiData.email}</li>
             <li>Phone: {apiData.phone}</li>
-            <li onClick={openGoogleMaps}>School Address: <b style={{color: "red"}}>{apiData.address}</b> <br></br> Click to View on google maps</li>
+            <li onClick={openGoogleMaps}>
+              School Address: <b style={{ color: "red" }}>{apiData.address}</b>{" "}
+              <br></br> Click to View on google maps
+            </li>
             {apiData.website === "undefined" ? (
               <li>Website: Not Available</li>
             ) : (
               <li>
                 School Website:{" "}
-                <b style={{color: "red"}} onClick={openSchoolWebsite}>{apiData.website}</b>
+                <b style={{ color: "red" }} onClick={openSchoolWebsite}>
+                  {apiData.website}
+                </b>
               </li>
             )}
             {apiData.googleProfile === "undefined" ? (
@@ -177,8 +193,9 @@ const School = () => {
             ) : (
               <li>
                 School Google Profile:{" "}
-                <b style={{color: "red"}} onClick={openSchoolGoogleProfile}>{apiData.googleProfile}</b>
-                
+                <b style={{ color: "red" }} onClick={openSchoolGoogleProfile}>
+                  {apiData.googleProfile}
+                </b>
               </li>
             )}
             <li>Fee Range per session: {apiData.feeRange}</li>

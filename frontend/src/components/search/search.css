@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-@media(max-width: 780px){
+@media(max-width: 990px){
     .schoolSearch{
         flex-direction: column;
     }

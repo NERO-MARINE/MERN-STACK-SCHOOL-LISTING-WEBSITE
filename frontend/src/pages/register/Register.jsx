@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./register.css";
 import { useEffect, useState } from "react";
@@ -15,6 +14,8 @@ const Register = () => {
     state: undefined,
     lga: undefined,
     schoolOwner: undefined,
+    hearAboutUs: undefined,
+    agreedToTerms: undefined
   });
 
   const handleChange = (e) => {
@@ -91,13 +92,30 @@ const Register = () => {
             <option value="No">No</option>
           </select>
           
+          <p>How did you hear about us?</p>
+          <select id="hearAboutUs" onChange={handleChange}>
+            <option value="">select option</option>
+            <option value="facebook">Facebook</option>
+            <option value="instagram">Instagram</option>
+            <option value="whatsapp">Whatsapp</option>
+            <option value="google">Google</option>
+            <option value="family and friends">Family and friends</option>
+            <option value="others">Others</option>
+          </select>
+
+         <div id="terms">
+         <input type="checkbox"  required/>
+          <label htmlFor="agreedToTerms">I Agree to <Link to="#">Terms and Condition</Link></label>
+         </div>
+          
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Submitting Your data! Wait..." : "Register"}
           </button>
           <div className="line"></div>
+          {error && <p style={{color: "red"}}>{error}</p>}
           {/* {error && <span>{error.message}</span>} */}
           <Link to="/login">already have an account? Login here!</Link>
-          {error && <p>{error}</p>}
+        
         </form>
 
         <div className="formImage">
@@ -108,7 +126,6 @@ const Register = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { useContext, useEffect } from "react";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import initGA from "./googleAnalytics";
+import RandomSearch from "./pages/randomSearch/RandomSearch";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/random-search" element={<RandomSearch />} />
           <Route path="/school/:id" element={<School />} />
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

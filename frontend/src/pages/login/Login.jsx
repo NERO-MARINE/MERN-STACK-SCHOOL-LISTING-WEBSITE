@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import "./login.css";
 import { useContext, useEffect, useState } from "react";
@@ -69,7 +68,7 @@ const Login = () => {
           />
           <button disabled={loading}>{loading ? "Signing in, wait!": "Login"}</button>
           <div className="line"></div>
-          {error && <span>{error.message}</span>}
+          {error && <span style={{color: "red"}}>{error.message}</span>}
           <Link onClick={handleEmailModal}>forgot password?</Link>
           <Link to="/register">don't have an account? register here!</Link>
           {open && (
@@ -87,7 +86,6 @@ const Login = () => {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

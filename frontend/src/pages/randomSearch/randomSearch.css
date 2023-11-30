@@ -1,9 +1,9 @@
-.favorite{
+.randomSearch{
     display: grid;
     min-height: 100vh;
 }
 
-.headerNotHomePage{
+.headerNotHomePgae{
     align-self: start;
 }
 
@@ -11,13 +11,13 @@
     align-self: end;
 }
 
-.favSchools h1{
+.randomResults h1{
     text-align: center;
     margin-top: 20px;
     color: green;
 }
 
-.favSchools h2{
+.randomResults h2{
     text-align: center;
     color: green;
     margin-top: 20px;

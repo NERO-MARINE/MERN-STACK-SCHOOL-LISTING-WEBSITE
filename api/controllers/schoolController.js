@@ -34,6 +34,10 @@ const getAllSchools = async (req, res, next) => {
     const allSchools = await School.find({
       featured: featured,
     });
+
+    if (!allSchools) {
+      return res.status(404).json("No featured schools");
+    }
     res.status(200).json(allSchools);
   } catch (err) {
     next(err);
@@ -66,7 +70,9 @@ const searchAllSchools = async (req, res, next) => {
     });
 
     if (allSchools.length == "") {
-      return next(createError(404, "No school has been listed yet under these filters!"));
+      return next(
+        createError(404, "No school has been listed yet under these filters!")
+      );
     }
 
     res.status(200).json(allSchools);
@@ -89,6 +95,9 @@ const createSchool = async (req, res, next) => {
     }
 
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
     const school = new School(req.body);
     const savedSchool = await school.save();
 
@@ -135,12 +144,22 @@ const createSchool = async (req, res, next) => {
       to: user.email,
       subject: `School listing application`,
       text: `Hello ${user.username}`,
-      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
-      <p style="color: black; background:white; padding: 15px; line-height: 2.0; border-radius: 10px;">Your Application to List ${savedSchool.name} has been received and it is under review. We will send you the feedback of the review shortly.</p>
-      <a href="#">check your dashboard to see status of your school listing</a>
-      <p style="color: white; background:limegreen; padding: 10px; line-height: 1.5; border-radius: 10px; margin-top: 10px;"><br> Best, <br> <p style="color: green;">Naija School Search</p>.
+      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px; border-radius: 15px; text-align: center;">
+
+      <p style="color: black; background: white; padding: 15px; line-height: 1.8; border-radius: 10px; font-family: 'Arial', sans-serif;">
+          Your application to list ${savedSchool.name} has been received and is under review.
+          We will send you feedback shortly.
       </p>
-    </div>`,
+  
+      <a href="#" style="color: black; text-decoration: none; font-weight: bold; display: block; margin-top: 15px;">
+          Check your dashboard to see the status of your school listing.
+      </a>
+  
+      <p style="color: white; background: limegreen; padding: 12px; line-height: 1.5; border-radius: 10px; margin-top: 20px; font-family: 'Arial', sans-serif;">
+          Best, <br>
+          Naija School Search
+      </p>
+  </div>`,
     };
 
     transporter.sendMail(mailOptions, (err, info) => {
@@ -161,6 +180,10 @@ const UserSchools = async (req, res, next) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     const listOfUsersSchool = await Promise.all(
       user.schools.map((school) => {
         return School.findById(school);
@@ -292,8 +315,10 @@ const addNewFavoriteSchool = async (req, res, next) => {
     const schoolId = req.params.schoolId;
     // console.log(userId);
 
-    // Check if the favorite school already exists
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
     // Check if the schoolId already exists in the user's favoriteSchools array
     if (user.favoriteSchools.includes(schoolId)) {
@@ -317,6 +342,9 @@ const removeFavoriteSchool = async (req, res, next) => {
     const schoolId = req.params.schoolId;
 
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
     // Check if the schoolId exists in the user's favoriteSchools array
     if (!user.favoriteSchools.includes(schoolId)) {
@@ -341,6 +369,9 @@ const getUsersFavoriteSchools = async (req, res, next) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
     res.status(200).json(user.favoriteSchools);
   } catch (err) {
@@ -353,19 +384,40 @@ const getFavoriteSchools = async (req, res, next) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
     const listOfFavSchools = await Promise.all(
-      user.favoriteSchools.map((school) => {
-        return School.findById(school);
+      user.favoriteSchools.map(async (schoolId) => {
+        try {
+          const school = await School.findById(schoolId);
+
+          // incase a favorited school was delete by the owner
+          if (!school) {
+            throw new Error(`School not found for ID: ${schoolId}`);
+          }
+
+          return school;
+        } catch (error) {
+          // console.error('Error:', error.message); // error is caught here
+          return null;
+        }
       })
     );
 
-    if (listOfFavSchools.length < 1) {
+    // Filter out null values (schools not found) from the array
+    const validListOfFavSchools = listOfFavSchools.filter(
+      (school) => school !== null
+    );
+
+    if (validListOfFavSchools.length < 1) {
       return next(
         createError(409, "You have not added any school to your favorite list!")
       );
     }
 
-    res.status(200).json(listOfFavSchools);
+    res.status(200).json(validListOfFavSchools);
   } catch (err) {
     next(err);
   }
@@ -374,11 +426,11 @@ const getFavoriteSchools = async (req, res, next) => {
 // send message to a school from details page
 const sendMsgToSchool = async (req, res, next) => {
   const schoolEmail = req.params.schoolEmail;
-  const schoolName = req.params.schoolName
+  const schoolName = req.params.schoolName;
 
-  const {name, phone, message } = req.body;
+  const { name, phone, message } = req.body;
   // console.log(schoolEmail, schoolName, name, phone, message);
-  
+
   const transporter = nodemailer.createTransport({
     host: "mail.codebadgertech.com",
     port: 465, // use out going server smtp port
@@ -413,8 +465,37 @@ const sendMsgToSchool = async (req, res, next) => {
     }
   });
 
-  res.status(200).json('Message sent')
+  res.status(200).json("Message sent");
   try {
+  } catch (err) {
+    next(err);
+  }
+};
+
+// random search with mongodb search function
+const randomSearch = async (req, res, next) => {
+  try {
+    // let search = req.body.search;
+    const searchParams = req.params.searchParams;
+    // console.log(searchParams)
+    let searchResults = await School.find({
+      $text: {
+        $search: searchParams,
+        $diacriticSensitive: true,
+      },
+      approved: true,
+    });
+
+    if (searchResults.length === 0) {
+      return next(
+        createError(
+          409,
+          "Sorry! No matching results. Try using the filters on the search page."
+        )
+      );
+    }
+
+    res.status(200).json(searchResults);
   } catch (err) {
     next(err);
   }
@@ -438,6 +519,7 @@ module.exports = {
   removeFavoriteSchool,
   getFavoriteSchools,
   sendMsgToSchool,
+  randomSearch,
 };
 
 // illustration on how to use error handler middleware

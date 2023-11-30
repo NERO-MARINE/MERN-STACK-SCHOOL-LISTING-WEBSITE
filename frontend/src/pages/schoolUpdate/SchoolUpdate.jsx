@@ -1198,7 +1198,7 @@ const SchoolUpdate = () => {
             <label>Google Profile Link</label>
             <input
               type="text"
-              defaultValue={apiData.googleProfile === 'undefined'? "N/A" : apiData.googleProfile}
+              defaultValue={apiData.googleProfile === 'undefined' ? "N/A" : apiData.googleProfile}
               name="googleProfile"
               onChange={handleChange}
             />

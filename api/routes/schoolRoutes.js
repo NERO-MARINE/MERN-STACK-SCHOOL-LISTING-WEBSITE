@@ -23,7 +23,8 @@ const {
   getUsersFavoriteSchools,
   removeFavoriteSchool,
   getFavoriteSchools,
-  sendMsgToSchool
+  sendMsgToSchool,
+  randomSearch
 } = require("../controllers/schoolController")
 
 router.get("/", schools)
@@ -44,5 +45,6 @@ router.get('/getFavorites/:userId', getUsersFavoriteSchools)
 // get the actual favorite schools
 router.get('/favorite/Schools/:userId', getFavoriteSchools)
 router.post('/contact/school/:schoolEmail/:schoolName', sendMsgToSchool)
+router.post('/random-search/:searchParams', randomSearch)
 
 module.exports = router;

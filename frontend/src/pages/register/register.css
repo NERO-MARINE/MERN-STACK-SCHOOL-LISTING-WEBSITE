@@ -67,6 +67,10 @@
     width: 100%;
 }
 
+.formContainer #terms input, .formContainer #terms label{
+    width: 30px;
+}
+
 @media(max-width: 1000px){
     .formGrid{
         grid-template-columns: 1fr;

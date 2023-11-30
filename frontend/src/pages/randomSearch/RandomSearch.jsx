@@ -1,32 +1,50 @@
-import { Link } from "react-router-dom";
+import "./randomSearch.css";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
-import "./favorite.css";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import useFetch from "../../useFetch";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
 
-const Favorite = () => {
-  const { user } = useContext(AuthContext);
-  const userId = user._id;
-  const { apiData, isLoading, error } = useFetch(
-    `/schools/favorite/Schools/${userId}`
-  );
+const RandomSearch = () => {
+  const location = useLocation();
+  let searchTexts = location.state;
+  const [apiData, setApiData] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  //   console.log(apiData)
-
+  // console.log(searchTexts);
   useEffect(() => {
-    document.title = "Naija School Search - Favorite Schools";
-  }, []);
+    // Define an asynchronous function
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.post(
+          `/schools/random-search/${searchTexts}`
+        );
+        setApiData(response.data);
+        setError("");
+        // console.log(response.data)
+      } catch (error) {
+        // console.error("Error fetching data:", error.response.data);
+        setError(error.response.data);
+        setApiData("");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // Invoke the asynchronous function
+    fetchData();
+    document.title = "Naija School Search - Search Results";
+  }, [searchTexts]);
 
   return (
-    <div className="favorite">
+    <div className="randomSearch">
       <Navbar type="notHomePage" />
-
-      <div className="favSchools container">
-        <h1>Favourite Schools</h1>
+      <div className="randomResults container">
+        <h1>Random Search Results</h1>
         {isLoading ? (
           <div
             style={{
@@ -82,10 +100,9 @@ const Favorite = () => {
 
         <h2>{error && error.message}</h2>
       </div>
-
       <Footer />
     </div>
   );
 };
 
-export default Favorite;
+export default RandomSearch;

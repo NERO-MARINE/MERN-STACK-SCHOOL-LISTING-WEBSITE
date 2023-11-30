@@ -45,11 +45,11 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { username, email, password, state, lga, schoolOwner } = req.body;
-    if (!username || !email || !password || !state || !lga || !schoolOwner) {
+    const { username, email, password, state, lga, schoolOwner, hearAboutUs } = req.body;
+    if (!username || !email || !password || !state || !lga || !schoolOwner || !hearAboutUs) {
       throw Error("All fields must be field");
     }
-
+   
     if (!validator.isEmail(email)) {
       // throw Error('Email is not valid')
       return next(createError(503, "email is not valid"));
@@ -81,6 +81,7 @@ const register = async (req, res, next) => {
       state: state,
       lga: lga,
       schoolOwner: schoolOwner,
+      hearAboutUs: hearAboutUs,
       password: hash,
     });
 
@@ -103,21 +104,31 @@ const register = async (req, res, next) => {
       to: req.body.email,
       subject: `NSS Welcomes You`,
       text: `Dear ${req.body.username}`,
-      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px;">
-      <p style="color: black; background:white; padding: 10px; line-height: 2.0; border-radius: 10px;">We are delighted to have you as a part of our school listing community. Your registration with Naija School Search marks the beginning of an exciting journey to discover, and connect with the best educational institutions in your area.</p>
-    
-      <h4 style="margin-top:20px; padding: 10px;">Here's what you can do at NSS:</h4>
+      html: `<div style="background-color: rgb(238, 237, 237); padding: 20px; border-radius: 15px; text-align: left;">
 
-      <ul style="margin: 20px 0;">
-      <li style="margin: 5px 0; font-size: 18px">Apply For Your School to be listed if You are a school owner</li>
-      <li style="margin: 5px 0; font-size: 18px">Explore a wide range of schools, from Daycare to secondary, including skills aquisition centers.</li>
-      <li style="margin: 5px 0; font-size: 18px">Find detailed information about each school, including location, facilities, and more.</li>
+      <p style="color: black; background: white; padding: 15px; line-height: 1.8; border-radius: 10px; font-family: 'Arial', sans-serif;">
+          Welcome to Naija School Search! We are delighted to have you as a part of our school listing community. Your registration marks the beginning of an exciting journey to discover and connect with the best educational institutions in your area.
+      </p>
+  
+      <h4 style="margin-top: 20px; padding: 10px; color: black; background: white; border-radius: 10px; font-family: 'Arial', sans-serif;">
+          Here's what you can do at NSS:
+      </h4>
+  
+      <ul style="margin: 20px 0; padding-left: 20px; font-family: 'Arial', sans-serif;">
+          <li style="margin: 10px 0; font-size: 18px;">Apply for your school to be listed if you are a school owner</li>
+          <li style="margin: 10px 0; font-size: 18px;">Explore a wide range of schools, from daycare to secondary, including skills acquisition centers.</li>
+          <li style="margin: 10px 0; font-size: 18px;">Find detailed information about each school, including location, facilities, and more.</li>
       </ul>
-
-      <h3 style="margin-top:20px; color: black; background:white; padding: 10px; line-height: 2.0; border-radius: 10px;">If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team via the number and email provided in the website. We're here to help you every step of the way.
+  
+      <h3 style="margin-top: 20px; color: black; background: white; padding: 15px; line-height: 1.8; border-radius: 10px; font-family: 'Arial', sans-serif;">
+          If you have any questions, need assistance, or want to provide feedback, feel free to reach out to our support team via the contact information provided on the website. We're here to help you every step of the way.
       </h3>
-      <br/> <b>Best</b>  <br/><b style="color: green;">Naija School Search</b>
-      </div>
+  
+      <br/> 
+      <b>Best Regards,</b>  
+      <br/>
+      <b style="color: green; font-family: 'Arial', sans-serif;">Naija School Search</b>
+  </div>
       `,
     };
 

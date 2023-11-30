@@ -1195,8 +1195,8 @@ const Dashboard = () => {
               name="desc"
               cols="30"
               rows="10"
-              placeholder="Tell us briefly about your school, admission requirements and school bus availability*"
-              maxLength="300"
+              placeholder="Tell us briefly about your school, admission requirements, school clubs, outdoor activities, school bus availability etc.*"
+              maxLength="3000"
               required
               onChange={handleChange}
             ></textarea>

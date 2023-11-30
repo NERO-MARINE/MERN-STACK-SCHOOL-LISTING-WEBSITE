@@ -8,6 +8,7 @@ const AdvertisementModal = ({ isOpen, closeModal }) => {
       onRequestClose={closeModal}
       contentLabel="Advertisement Modal"
       className="advertisement-modal" // Apply a class for styling
+      appElement={document.getElementById('root')} 
     >
       {/* Your advertisement content goes here */}
       <div>
@@ -21,6 +22,8 @@ const AdvertisementModal = ({ isOpen, closeModal }) => {
     </ReactModal>
   );
 };
+
+// modal is used in the home page
 
 export default AdvertisementModal;
 
