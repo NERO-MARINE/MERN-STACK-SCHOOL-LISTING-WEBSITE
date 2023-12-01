@@ -34,7 +34,6 @@ mongoose.connection.on('disconnected', ()=>{
     console.log('MONGO db Disconnected')
 })
 
-
 // use routes
 app.use('/users', userRoutes)
 app.use('/schools', schoolRoutes)

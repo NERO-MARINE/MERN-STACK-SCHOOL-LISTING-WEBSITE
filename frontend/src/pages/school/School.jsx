@@ -13,8 +13,17 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
+// for recaptcha
+import ReCAPTCHA from "react-google-recaptcha";
 
 const School = () => {
+  // for recaptcha
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  // for recaptcha
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
+  };
+
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -58,11 +67,24 @@ const School = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Verify reCAPTCHA on the client-side
+    if (!recaptchaValue) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
+
     try {
       setIsSubmitting(true);
+
+      // for recaptcha: to send the form data and recaptcha value to the server for verification. This was done in the schoolsController.js for sendSchool message route
+      const sendEmailData = {
+        ...credentials,
+        recaptchaValue: recaptchaValue,
+      };
+
       await axios.post(
         `/schools/contact/school/${apiData.email}/${apiData.name}`,
-        credentials
+        sendEmailData
       );
       alert(`Message Sent Sucessfully to ${apiData.name}`);
     } catch (err) {
@@ -142,7 +164,7 @@ const School = () => {
               height: "100px",
             }}
           >
-            <TailSpin color="green" height={80} width={80} />
+            <TailSpin color="green" height={70} width={70} />
             {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
           </div>
         ) : (
@@ -226,6 +248,10 @@ const School = () => {
               required
               onChange={handleChange}
             ></textarea>
+            <ReCAPTCHA
+              sitekey="6LdePyIpAAAAAHxvjU8W1YD3Toff8uvvLpp4YrHc"
+              onChange={handleRecaptchaChange}
+            />
             <button>
               {isSubmitting ? "sending message. Wait!" : "Send Message"}
             </button>

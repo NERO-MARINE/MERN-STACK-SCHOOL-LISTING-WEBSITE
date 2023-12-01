@@ -84,7 +84,7 @@ const FeaturedState = () => {
                     height: "50px",
                   }}
                 >
-                  <TailSpin color="green" height={80} width={80} />
+                  <TailSpin color="green" height={25} width={25} />
                   {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
                 </div>
               ) : (
@@ -106,10 +106,10 @@ const FeaturedState = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  height: "60px",
+                  height: "50px",
                 }}
               >
-                <TailSpin color="green" height={80} width={80} />
+                <TailSpin color="green" height={25} width={25} />
                 {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
               </div>
             ) : apiData[1]} schools Available
@@ -131,7 +131,7 @@ const FeaturedState = () => {
                   height: "50px",
                 }}
               >
-                <TailSpin color="green" height={80} width={80} />
+                <TailSpin color="green" height={25} width={25} />
                 {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
               </div>
             ) : apiData[2]} schools Available
@@ -153,7 +153,7 @@ const FeaturedState = () => {
                   height: "50px",
                 }}
               >
-                <TailSpin color="green" height={80} width={80} />
+                <TailSpin color="green" height={25} width={25} />
                 {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
               </div>
             ) : apiData[3]} schools Available

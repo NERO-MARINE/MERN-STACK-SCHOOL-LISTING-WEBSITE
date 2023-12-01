@@ -3,8 +3,17 @@ import Navbar from "../../components/navbar/Navbar";
 import "./register.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+// for recaptcha
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Register = () => {
+  // for recaptcha
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  // for recaptcha
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [credentials, setCredentials] = useState({
@@ -15,7 +24,7 @@ const Register = () => {
     lga: undefined,
     schoolOwner: undefined,
     hearAboutUs: undefined,
-    agreedToTerms: undefined
+    agreedToTerms: undefined,
   });
 
   const handleChange = (e) => {
@@ -27,14 +36,27 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Verify reCAPTCHA on the client-side
+    if (!recaptchaValue) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
+
     setIsSubmitting(true);
-    setError('');
+    setError("");
 
     try {
-      await axios.post("/auth/register", credentials);
+      // for recaptcha: to send the form data and recaptcha value to the server for verification. This was done in the authController.js for register route
+
+      const registrationData = {
+        ...credentials,
+        recaptchaValue: recaptchaValue,
+      };
+
+      await axios.post("/auth/register", registrationData);
+      // await axios.post("/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
       navigate("/login");
-      
     } catch (err) {
       console.log(err.response.data);
       const regError = err.response.data;
@@ -45,7 +67,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    document.title = 'Naija School Search - Register';
+    document.title = "Naija School Search - Register";
   }, []);
 
   return (
@@ -91,7 +113,7 @@ const Register = () => {
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
-          
+
           <p>How did you hear about us?</p>
           <select id="hearAboutUs" onChange={handleChange}>
             <option value="">select option</option>
@@ -103,19 +125,25 @@ const Register = () => {
             <option value="others">Others</option>
           </select>
 
-         <div id="terms">
-         <input type="checkbox"  required/>
-          <label htmlFor="agreedToTerms">I Agree to <Link to="#">Terms and Condition</Link></label>
-         </div>
-          
+          <div id="terms">
+            <input type="checkbox" required />
+            <label htmlFor="agreedToTerms">
+              I Agree to <Link to="/terms-and-conditions">Terms and Condition</Link>
+            </label>
+          </div>
+
+          <ReCAPTCHA
+            sitekey="6LdePyIpAAAAAHxvjU8W1YD3Toff8uvvLpp4YrHc"
+            onChange={handleRecaptchaChange}
+          />
+
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Submitting Your data! Wait..." : "Register"}
           </button>
           <div className="line"></div>
-          {error && <p style={{color: "red"}}>{error}</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           {/* {error && <span>{error.message}</span>} */}
           <Link to="/login">already have an account? Login here!</Link>
-        
         </form>
 
         <div className="formImage">

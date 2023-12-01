@@ -1,0 +1,42 @@
+.TermsAndConditions {
+    display: grid;
+    min-height: 100vh;
+}
+
+.headerNotHomePage {
+    align-self: start;
+}
+
+.footer {
+    align-self: end;
+}
+
+.terms-and-conditions-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.terms-and-conditions-section {
+    background-color: #dbe9f1; /* Light blue background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+h1, h2 {
+    color: #004080; /* Dark blue color */
+}
+
+.para {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .terms-and-conditions-container {
+        padding: 10px;
+    }
+}

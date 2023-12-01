@@ -4,6 +4,23 @@ const createError = require("../utilitis/error");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const axios = require("axios");
+
+// recaptcha verification
+const recaptchaVerification = async (recaptchaValue) => {
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const recaptchaVerificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaValue}`;
+
+  try {
+    const recaptchaResponse = await axios.post(recaptchaVerificationURL);
+    return recaptchaResponse.data.success;
+  } catch (error) {
+    console.error("reCAPTCHA verification failed:", error.message);
+    return false;
+  }
+};
+
+
 
 const login = async (req, res, next) => {
   const maxAge = 3 * 24 * 60 * 60;
@@ -45,7 +62,13 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const { username, email, password, state, lga, schoolOwner, hearAboutUs } = req.body;
+    const { username, email, password, state, lga, schoolOwner, hearAboutUs, recaptchaValue } = req.body;
+       // Verify reCAPTCHA
+       const isRecaptchaValid = await recaptchaVerification(recaptchaValue);
+       if (!isRecaptchaValid) {
+         return next(createError(503, "reCAPTCHA verification failed"));
+       }
+
     if (!username || !email || !password || !state || !lga || !schoolOwner || !hearAboutUs) {
       throw Error("All fields must be field");
     }

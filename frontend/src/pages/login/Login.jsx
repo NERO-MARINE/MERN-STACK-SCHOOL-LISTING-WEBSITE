@@ -5,8 +5,17 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import PasswordResetReq from "../../components/passwordResetReq/PasswordResetReq";
+// for recaptcha
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
+  // for recaptcha
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
+  // for recaptcha
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
+  };
+
   const [open, setOpen] = useState(false);
   const [credentials, setCredentials] = useState({
     email: undefined,
@@ -26,14 +35,17 @@ const Login = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    // Verify reCAPTCHA on the client-side
+    if (!recaptchaValue) {
+      alert("Please complete the reCAPTCHA");
+      return;
+    }
+
     // console.log(credentials)
     dispatch({ type: "LOGIN_START" });
 
     try {
-      const res = await axios.post(
-        "/auth/login",
-        credentials
-      );
+      const res = await axios.post("/auth/login", credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/");
       // console.log(res.data)
@@ -43,7 +55,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    document.title = 'Naija School Search - Login';
+    document.title = "Naija School Search - Login";
   }, []);
 
   return (
@@ -66,9 +78,15 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-          <button disabled={loading}>{loading ? "Signing in, wait!": "Login"}</button>
+            <ReCAPTCHA
+            sitekey="6LdePyIpAAAAAHxvjU8W1YD3Toff8uvvLpp4YrHc"
+            onChange={handleRecaptchaChange}
+          />
+          <button disabled={loading}>
+            {loading ? "Signing in, wait!" : "Login"}
+          </button>
           <div className="line"></div>
-          {error && <span style={{color: "red"}}>{error.message}</span>}
+          {error && <span style={{ color: "red" }}>{error.message}</span>}
           <Link onClick={handleEmailModal}>forgot password?</Link>
           <Link to="/register">don't have an account? register here!</Link>
           {open && (

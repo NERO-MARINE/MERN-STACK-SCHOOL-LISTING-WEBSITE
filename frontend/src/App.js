@@ -14,7 +14,8 @@ import ResetPassword from "./pages/resetPassword/ResetPassword";
 import PrivacyPolicy from "./pages/privacyPolicy/PrivacyPolicy";
 import initGA from "./googleAnalytics";
 import RandomSearch from "./pages/randomSearch/RandomSearch";
-
+import ScrollToTop from "./scrollToTop";
+import TermsAndConditions from "./pages/termsAndConditions/TermsAndConditions";
 
 function App() {
   // FOR GOOGLE ANALYTICS STARTS
@@ -49,12 +50,37 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/search" element={<SearchPage />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <ScrollToTop />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <>
+                <ScrollToTop />
+                <SearchPage />
+              </>
+            }
+          />
           <Route path="/random-search" element={<RandomSearch />} />
-          <Route path="/school/:id" element={<School />} />
+          <Route
+            path="/school/:id"
+            element={
+              <>
+                <ScrollToTop />
+                <School />
+              </>
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route
             path="/login"
             element={

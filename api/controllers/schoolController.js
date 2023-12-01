@@ -4,14 +4,35 @@ const mongoose = require("mongoose");
 const createError = require("../utilitis/error");
 const multer = require("multer");
 const nodemailer = require("nodemailer");
+const axios = require("axios");
+
+// for recaptcha verification
+const recaptchaVerification = async (recaptchaValue) => {
+  const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const recaptchaVerificationURL = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaValue}`;
+
+  try {
+    const recaptchaResponse = await axios.post(recaptchaVerificationURL);
+    return recaptchaResponse.data.success;
+  } catch (error) {
+    console.error("reCAPTCHA verification failed:", error.message);
+    return false;
+  }
+};
 
 // Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/"); // Set your upload folder
   },
+  // filename: function (req, file, cb) {
+  //   cb(null, file.originalname);
+  // },
+
+  // I want unique names for my files to aviod conflict
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + "-" + file.originalname);
   },
 });
 
@@ -428,8 +449,13 @@ const sendMsgToSchool = async (req, res, next) => {
   const schoolEmail = req.params.schoolEmail;
   const schoolName = req.params.schoolName;
 
-  const { name, phone, message } = req.body;
+  const { name, phone, message, recaptchaValue } = req.body;
   // console.log(schoolEmail, schoolName, name, phone, message);
+  // Verify reCAPTCHA
+  const isRecaptchaValid = await recaptchaVerification(recaptchaValue);
+  if (!isRecaptchaValid) {
+    return next(createError(503, "reCAPTCHA verification failed"));
+  }
 
   const transporter = nodemailer.createTransport({
     host: "mail.codebadgertech.com",
