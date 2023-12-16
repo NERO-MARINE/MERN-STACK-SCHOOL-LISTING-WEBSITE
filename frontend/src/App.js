@@ -16,6 +16,7 @@ import initGA from "./googleAnalytics";
 import RandomSearch from "./pages/randomSearch/RandomSearch";
 import ScrollToTop from "./scrollToTop";
 import TermsAndConditions from "./pages/termsAndConditions/TermsAndConditions";
+import NotFound from "./pages/notFound/NotFound";
 
 function App() {
   // FOR GOOGLE ANALYTICS STARTS
@@ -80,7 +81,10 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          <Route
+            path="/terms-and-conditions"
+            element={<TermsAndConditions />}
+          />
           <Route
             path="/login"
             element={
@@ -122,6 +126,7 @@ function App() {
               </LoggedIn>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>

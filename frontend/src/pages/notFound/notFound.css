@@ -1,0 +1,17 @@
+.notFound {
+  display: grid;
+  min-height: 100vh;
+}
+
+.headerNotHomePage {
+  align-self: start;
+}
+
+.footer {
+  align-self: end;
+}
+
+.notFoundPara {
+  text-align: center;
+  font-size: 25px;
+}
