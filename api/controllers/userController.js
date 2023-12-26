@@ -1,14 +1,14 @@
-const User = require("../models/User")
-const mongoose = require("mongoose")
-const createError = require("../utilitis/error")
+const User = require("../models/User");
+const mongoose = require("mongoose");
+const createError = require("../utilitis/error");
 
 // get all users
 const getAllUsers = async (req, res, next) => {
   try {
     const allUsers = await User.find({});
-    res.status(200).json(allUsers)
+    res.status(200).json(allUsers);
   } catch (err) {
-    next(err)
+    next(err);
   }
 };
 
@@ -17,15 +17,15 @@ const getSingleUser = async (req, res, next) => {
   try {
     const id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json("user does not exist")
+      return res.status(404).json("user does not exist");
     }
 
-    const user = await User.findById(id)
+    const user = await User.findById(id);
 
     if (!user) {
-      return res.status(404).json("user not found")
+      return res.status(404).json("user not found");
     }
-    res.status(200).json(user)
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
@@ -36,7 +36,7 @@ const updateUser = async (req, res, next) => {
   try {
     const id = req.params.id;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json("user does not exist")
+      return res.status(404).json("user does not exist");
     }
     const updatedUser = await User.findByIdAndUpdate(
       id,
@@ -45,8 +45,8 @@ const updateUser = async (req, res, next) => {
     );
 
     if (!updatedUser) {
-        return res.status(404).json("user does not exist")
-      }
+      return res.status(404).json("user does not exist");
+    }
 
     res.status(200).json(updatedUser);
   } catch (err) {
@@ -55,22 +55,21 @@ const updateUser = async (req, res, next) => {
 };
 
 // delete user
-const deleteUser = async(req, res, next) => {
-  try{
+const deleteUser = async (req, res, next) => {
+  try {
     const id = req.params.id;
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json("user does not exist")
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json("user does not exist");
     }
 
-    const deletedUser = await User.findByIdAndDelete(id)
+    const deletedUser = await User.findByIdAndDelete(id);
     if (!deletedUser) {
-        return res.status(404).json("user not found")
-      }
+      return res.status(404).json("user not found");
+    }
 
-      res.status(200).json(deletedUser)
-  }
-  catch(err){
-    next(err)
+    res.status(200).json(deletedUser);
+  } catch (err) {
+    next(err);
   }
 };
 

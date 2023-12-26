@@ -34,6 +34,9 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // use routes
+app.get("/", (req, res) => {
+  res.send("pokoloko active");
+});
 app.use("/users", userRoutes);
 app.use("/schools", schoolRoutes);
 app.use("/auth", authRoutes);
