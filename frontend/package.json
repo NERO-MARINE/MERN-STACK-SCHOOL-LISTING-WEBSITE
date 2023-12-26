@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://naija-school-search-server-1190hxan3-oghenero-okerris-projects.vercel.app/",
+  "proxy": "https://naija-school-search-server-1190hxan3-oghenero-okerris-projects.vercel.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
