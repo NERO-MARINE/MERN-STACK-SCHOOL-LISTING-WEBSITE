@@ -34,9 +34,12 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // use routes
+// for testing vercel backend deployment
 app.get("/", (req, res) => {
   res.send("pokoloko active");
 });
+// for testing vercel backend deployment
+
 app.use("/users", userRoutes);
 app.use("/schools", schoolRoutes);
 app.use("/auth", authRoutes);
