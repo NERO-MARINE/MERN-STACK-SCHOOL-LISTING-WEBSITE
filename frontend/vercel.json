@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/:path*",
-      "destination": "https://naija-school-search-server-1190hxan3-oghenero-okerris-projects.vercel.app/:path*"
+      "destination": "https://naija-school-search-server-h9n773wfy-oghenero-okerris-projects.vercel.app/:path*"
     },
     {
       "source": "/:path*",
