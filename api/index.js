@@ -26,7 +26,7 @@ app.use("/uploads", express.static("uploads"));
 
 const conectToMongoDb = async () => {
   try {
-    mongoose.connect(process.env.MONGO);
+    mongoose.connect(process.env.MONGODB_URI);
     console.log("connected to DB");
   } catch (err) {
     console.log(err);
