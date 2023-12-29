@@ -10,13 +10,13 @@ const Footer = () => {
         <FontAwesomeIcon icon={faFaceLaugh} />
         All Rights Reserved, &copy; Naija School Search 2023
         <br />
-        <p><em>nss@support.com | +2347056961743</em></p>
+        <p>
+          <em>comingsoon@support.com | +234000000000</em>
+        </p>
       </div>
       <div className="P-policy">
-          <Link to="/privacy-policy">
-            See Privacy Policy
-          </Link>
-        </div>
+        <Link to="/privacy-policy">See Privacy Policy</Link>
+      </div>
     </div>
   );
 };

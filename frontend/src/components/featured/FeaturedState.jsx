@@ -34,8 +34,15 @@ const FeaturedState = () => {
           </button>
           <h2 style={{ marginTop: "15px" }}>Steps to List Your School</h2>
           <ul className="listing-steps">
-            <li>Register with us and login into your account </li>
-            <li>Click on list a school</li>
+            <li>
+              {" "}
+              <Link to="/register">Register</Link> with us and{" "}
+              <Link to="/login">Login</Link> into your account{" "}
+            </li>
+            <li>
+              Click on <Link to="/dashboard">List a school</Link> to go to your
+              dashboard
+            </li>
             <li>
               Fill out your school details correctly and upload six quality
               photos of your school!
@@ -45,8 +52,10 @@ const FeaturedState = () => {
               been approved
             </li>
             <li>
-              You can see the approval status of your listed school in the{" "}
-              <q>list a school page</q>
+              You can see the approval status of your listed school in your{" "}
+              <q>
+                <Link to="/dashboard">Dashboard</Link>
+              </q>
             </li>
             <li>
               If for example you have a Nusersy, primary and a secondary school,
