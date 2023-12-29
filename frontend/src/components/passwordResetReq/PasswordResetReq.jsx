@@ -4,6 +4,7 @@ import "./passwordResetReq.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { URL } from "../../App";
 
 const PasswordResetReq = ({ pswResetModal }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,7 +19,9 @@ const PasswordResetReq = ({ pswResetModal }) => {
   const handleRequestReset = async () => {
     try {
       setIsSubmitting(true);
-      const response = await axios.post("/account/request-reset", { email });
+      const response = await axios.post(`${URL}/account/request-reset`, {
+        email,
+      });
 
       if (response.status === 200) {
         setMessage("Reset link has been sent to your email.");
@@ -49,7 +52,10 @@ const PasswordResetReq = ({ pswResetModal }) => {
         value={email}
         onChange={handleEmailChange}
       />
-      <Link onClick={handleRequestReset} className={isSubmitting ? "emailResetLinkDisabled" : "emailResetLink"}>
+      <Link
+        onClick={handleRequestReset}
+        className={isSubmitting ? "emailResetLinkDisabled" : "emailResetLink"}
+      >
         {isSubmitting ? "please wait.." : "Request Reset"}
       </Link>
       <p className="success">{message}</p>

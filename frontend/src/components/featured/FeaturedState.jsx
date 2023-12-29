@@ -3,10 +3,11 @@ import useFetch from "../../useFetch";
 import "./featuredState.css";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
+import { URL } from "../../App";
 
 const FeaturedState = () => {
   const { apiData, isLoading } = useFetch(
-    "/schools/count/countByState/?states=Delta,Enugu,Abuja,Lagos"
+    `${URL}/schools/count/countByState/?states=Delta,Enugu,Abuja,Lagos`
   );
 
   // console.log(apiData)
@@ -101,18 +102,21 @@ const FeaturedState = () => {
             </div>
             <div className="desc">
               {isLoading ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "50px",
-                }}
-              >
-                <TailSpin color="green" height={25} width={25} />
-                {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
-              </div>
-            ) : apiData[1]} schools Available
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50px",
+                  }}
+                >
+                  <TailSpin color="green" height={25} width={25} />
+                  {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+                </div>
+              ) : (
+                apiData[1]
+              )}{" "}
+              schools Available
             </div>
           </div>
 
@@ -123,18 +127,21 @@ const FeaturedState = () => {
             </div>
             <div className="desc">
               {isLoading ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "50px",
-                }}
-              >
-                <TailSpin color="green" height={25} width={25} />
-                {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
-              </div>
-            ) : apiData[2]} schools Available
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50px",
+                  }}
+                >
+                  <TailSpin color="green" height={25} width={25} />
+                  {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+                </div>
+              ) : (
+                apiData[2]
+              )}{" "}
+              schools Available
             </div>
           </div>
 
@@ -145,18 +152,21 @@ const FeaturedState = () => {
             </div>
             <div className="desc">
               {isLoading ? (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "50px",
-                }}
-              >
-                <TailSpin color="green" height={25} width={25} />
-                {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
-              </div>
-            ) : apiData[3]} schools Available
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "50px",
+                  }}
+                >
+                  <TailSpin color="green" height={25} width={25} />
+                  {/* <p style={{ marginLeft: "10px" }}>Loading, please wait...</p> */}
+                </div>
+              ) : (
+                apiData[3]
+              )}{" "}
+              schools Available
             </div>
           </div>
         </div>

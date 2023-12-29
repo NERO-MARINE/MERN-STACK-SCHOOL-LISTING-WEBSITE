@@ -7,6 +7,7 @@ import axios from "axios";
 import PasswordResetReq from "../../components/passwordResetReq/PasswordResetReq";
 // for recaptcha
 import ReCAPTCHA from "react-google-recaptcha";
+import { URL } from "../../App";
 
 const Login = () => {
   // for recaptcha
@@ -45,7 +46,7 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
 
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axios.post(`${URL}/auth/login`, credentials);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       navigate("/");
       // console.log(res.data)
@@ -78,7 +79,7 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-            <ReCAPTCHA
+          <ReCAPTCHA
             sitekey="6LdePyIpAAAAAHxvjU8W1YD3Toff8uvvLpp4YrHc"
             onChange={handleRecaptchaChange}
           />

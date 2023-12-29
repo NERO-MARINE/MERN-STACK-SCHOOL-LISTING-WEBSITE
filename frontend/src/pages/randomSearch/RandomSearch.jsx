@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
+import { URL } from "../../App";
 
 const RandomSearch = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ const RandomSearch = () => {
       try {
         setIsLoading(true);
         const response = await axios.post(
-          `/schools/random-search/${searchTexts}`
+          `${URL}/schools/random-search/${searchTexts}`
         );
         setApiData(response.data);
         setError("");
@@ -67,7 +68,7 @@ const RandomSearch = () => {
                   width="100%"
                   height="120px"
                   style={{ objectFit: "cover" }}
-                  src={"/uploads/" + favSchool.images[0]}
+                  src={`${URL}/uploads/` + favSchool.images[0]}
                   alt={favSchool.name}
                 />
               </div>

@@ -30,7 +30,7 @@ const resetRequest = async (req, res, next) => {
     const token = jwt.sign({ email }, secretKey, { expiresIn: "5m" });
 
     // Send a password reset email to the user
-    const resetLink = `http://localhost:3000/reset-password/${token}`;
+    const resetLink = `https://naijaschoolsearch-api.onrender.com/reset-password/${token}`;
 
     const mailOptions = {
       from: "info@codebadgertech.com",
@@ -45,8 +45,13 @@ const resetRequest = async (req, res, next) => {
 
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
-        console.log(err); 
-        res.status(500).json({ message: "Failed to send reset email! This is unusal, Try again in few minutes" });
+        console.log(err);
+        res
+          .status(500)
+          .json({
+            message:
+              "Failed to send reset email! This is unusal, Try again in few minutes",
+          });
       } else {
         // console.log(info);
         res.json({ message: "Reset email sent successfully" });
@@ -67,8 +72,13 @@ const resetPassword = async (req, res, next) => {
     const decoded = jwt.verify(token, secretKey);
 
     if (!decoded) {
-        return next(createError(404, "Invalid Reset Token. Please Request another rset link!"));
-      }
+      return next(
+        createError(
+          404,
+          "Invalid Reset Token. Please Request another rset link!"
+        )
+      );
+    }
 
     // Hash the new password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -80,7 +90,11 @@ const resetPassword = async (req, res, next) => {
     res.json({ message: "Password reset successfully" });
   } catch (error) {
     // console.error(error);
-    res.status(500).json({ message: "Internal server error! Seems your reset link has expired" });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error! Seems your reset link has expired",
+      });
   }
 };
 

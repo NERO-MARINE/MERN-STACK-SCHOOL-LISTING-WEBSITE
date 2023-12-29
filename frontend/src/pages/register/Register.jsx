@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 // for recaptcha
 import ReCAPTCHA from "react-google-recaptcha";
+import { URL } from "../../App";
 
 const Register = () => {
   // for recaptcha
@@ -53,7 +54,7 @@ const Register = () => {
         recaptchaValue: recaptchaValue,
       };
 
-      await axios.post("/auth/register", registrationData);
+      await axios.post(`${URL}/auth/register`, registrationData);
       // await axios.post("/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
       navigate("/login");
@@ -128,7 +129,8 @@ const Register = () => {
           <div id="terms">
             <input type="checkbox" required />
             <label htmlFor="agreedToTerms">
-              I Agree to <Link to="/terms-and-conditions">Terms and Condition</Link>
+              I Agree to{" "}
+              <Link to="/terms-and-conditions">Terms and Condition</Link>
             </label>
           </div>
 

@@ -12,6 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
+import { URL } from "../../App";
 
 const SearchPage = () => {
   //const location = useLocation()
@@ -26,7 +27,7 @@ const SearchPage = () => {
   const userId = user ? user._id : null;
 
   const { apiData: data, refetch } = useFetch(
-    `/schools/getFavorites/${userId}`
+    `${URL}/schools/getFavorites/${userId}`
   );
 
   // console.log(data); // this gives us the favorite schools of the user
@@ -38,7 +39,7 @@ const SearchPage = () => {
   const [newCategory, setNewCategory] = useState(category);
 
   const { apiData, isLoading, error } = useFetch(
-    `/schools/search/?featured=true&featured=false&approved=true&state=${state}&lga=${lga}&category=${newCategory}`
+    `${URL}/schools/search/?featured=true&featured=false&approved=true&state=${state}&lga=${lga}&category=${newCategory}`
   );
 
   switch (state) {
@@ -992,7 +993,9 @@ const SearchPage = () => {
       try {
         setSubmittingItemId(schoolId);
 
-        await axios.post(`/schools/addSchoolToFavorite/${schoolId}/${userId}`);
+        await axios.post(
+          `${URL}/schools/addSchoolToFavorite/${schoolId}/${userId}`
+        );
         // console.log(res.data);
       } catch (err) {
         console.log(err.response.data);
@@ -1013,7 +1016,9 @@ const SearchPage = () => {
     if (user) {
       try {
         setSubmittingItemId(schoolId);
-        await axios.post(`/schools/removeFavoriteSchool/${schoolId}/${userId}`);
+        await axios.post(
+          `${URL}/schools/removeFavoriteSchool/${schoolId}/${userId}`
+        );
         // console.log(res.data);
       } catch (err) {
         console.log(err.response.data);
@@ -1144,7 +1149,7 @@ const SearchPage = () => {
                       width="100%"
                       height="120px"
                       style={{ objectFit: "cover" }}
-                      src={"/uploads/" + searchResult.images[0]}
+                      src={`${URL}/uploads/` + searchResult.images[0]}
                       alt={searchResult.name}
                     />
                   </div>

@@ -5,6 +5,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import useFetch from "../../useFetch";
 import axios from "axios";
+import { URL } from "../../App";
 
 const SchoolUpdate = () => {
   const location = useLocation();
@@ -12,9 +13,7 @@ const SchoolUpdate = () => {
   const id = location.state;
 
   // fetch school
-  const { apiData, isLoading } = useFetch(
-    `/schools/${id}`
-  );
+  const { apiData, isLoading } = useFetch(`${URL}/schools/${id}`);
   // console.log(apiData);
 
   let lgaList;
@@ -1023,7 +1022,7 @@ const SchoolUpdate = () => {
   const handleSubmit = async (e, schoolId) => {
     e.preventDefault();
     try {
-      await axios.put(`/schools/${schoolId}`, credentials);
+      await axios.put(`${URL}/schools/${schoolId}`, credentials);
       // console.log(res.data); - to use this set const res = axios call
       window.location.reload();
     } catch (err) {
@@ -1166,7 +1165,11 @@ const SchoolUpdate = () => {
             <label>Google Profile Rating</label>
             <input
               type="text"
-              defaultValue={apiData.googleRating === 'undefined'? "N/A" : apiData.googleRating }
+              defaultValue={
+                apiData.googleRating === "undefined"
+                  ? "N/A"
+                  : apiData.googleRating
+              }
               name="googleRating"
               onChange={handleChange}
             />
@@ -1180,7 +1183,9 @@ const SchoolUpdate = () => {
             <label>Link To School Website</label>
             <input
               type="text"
-              defaultValue={apiData.website === 'undefined'? "N/A" : apiData.website}
+              defaultValue={
+                apiData.website === "undefined" ? "N/A" : apiData.website
+              }
               name="website"
               onChange={handleChange}
             />
@@ -1198,7 +1203,11 @@ const SchoolUpdate = () => {
             <label>Google Profile Link</label>
             <input
               type="text"
-              defaultValue={apiData.googleProfile === 'undefined' ? "N/A" : apiData.googleProfile}
+              defaultValue={
+                apiData.googleProfile === "undefined"
+                  ? "N/A"
+                  : apiData.googleProfile
+              }
               name="googleProfile"
               onChange={handleChange}
             />

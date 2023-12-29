@@ -13,6 +13,7 @@ import {
   faQuestion,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { URL } from "../../App";
 
 const Dashboard = () => {
   let lgaList;
@@ -1050,7 +1051,7 @@ const Dashboard = () => {
     }
 
     try {
-      const res = await axios.post(`/schools/${user._id}`, formData);
+      const res = await axios.post(`${URL}/schools/${user._id}`, formData);
       console.log(res.data);
       setResError("");
       alert("School created and awaiting approval");
@@ -1067,7 +1068,7 @@ const Dashboard = () => {
 
   //   get all schools listed by user
   const { apiData, isLoading, error } = useFetch(
-    `/schools/my-schools/${user._id}`
+    `${URL}/schools/my-schools/${user._id}`
   );
 
   // delete school
@@ -1080,7 +1081,9 @@ const Dashboard = () => {
     if (shouldDelete) {
       // Call delete function when confirmed
       try {
-        const res = await axios.delete(`/schools/${schoolId}/${user._id}`);
+        const res = await axios.delete(
+          `${URL}/schools/${schoolId}/${user._id}`
+        );
         console.log(res.data);
         window.location.reload(); // this plain javascript
       } catch (err) {
@@ -1322,9 +1325,7 @@ const Dashboard = () => {
               onChange={handleChange}
             />
             <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-              <h3>
-                upload six(6) quality images of your school*
-              </h3>
+              <h3>upload six(6) quality images of your school*</h3>
               <FontAwesomeIcon
                 icon={faQuestion}
                 style={{

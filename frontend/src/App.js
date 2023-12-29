@@ -18,6 +18,8 @@ import ScrollToTop from "./scrollToTop";
 import TermsAndConditions from "./pages/termsAndConditions/TermsAndConditions";
 import NotFound from "./pages/notFound/NotFound";
 
+export const URL = process.env.REACT_APP_SERVER_URL;
+
 function App() {
   // FOR GOOGLE ANALYTICS STARTS
   useEffect(() => {

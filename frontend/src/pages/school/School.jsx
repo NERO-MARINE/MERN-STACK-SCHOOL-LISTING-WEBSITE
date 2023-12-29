@@ -15,6 +15,7 @@ import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
 // for recaptcha
 import ReCAPTCHA from "react-google-recaptcha";
+import { URL } from "../../App";
 
 const School = () => {
   // for recaptcha
@@ -49,7 +50,7 @@ const School = () => {
   const id = location.pathname.split("/")[2];
   // console.log(id)
 
-  const { apiData, isLoading } = useFetch(`/schools/${id}`);
+  const { apiData, isLoading } = useFetch(`${URL}/schools/${id}`);
 
   const images = apiData.images;
 
@@ -83,7 +84,7 @@ const School = () => {
       };
 
       await axios.post(
-        `/schools/contact/school/${apiData.email}/${apiData.name}`,
+        `${URL}/schools/contact/school/${apiData.email}/${apiData.name}`,
         sendEmailData
       );
       alert(`Message Sent Sucessfully to ${apiData.name}`);
@@ -142,7 +143,7 @@ const School = () => {
 
             <div className="sliderWrapper">
               <img
-                src={images && "/uploads/" + images[slideNumber]}
+                src={images && `${URL}/uploads/` + images[slideNumber]}
                 alt=""
                 className="sliderImg"
               />
@@ -174,7 +175,7 @@ const School = () => {
                 images.map((photo, i) => (
                   <div className="schoolImages" key={i}>
                     <img
-                      src={`/uploads/${photo}`}
+                      src={`${URL}/uploads/${photo}`}
                       alt="schoolImages"
                       className="imageItem responsiveImg"
                       onClick={() => handleOpen(i)}

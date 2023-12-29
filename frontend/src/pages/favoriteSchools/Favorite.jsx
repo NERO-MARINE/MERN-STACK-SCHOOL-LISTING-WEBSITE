@@ -7,12 +7,13 @@ import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../useFetch";
 // install this to use react spinner: npm install react-loader-spinner
 import { TailSpin } from "react-loader-spinner";
+import { URL } from "../../App";
 
 const Favorite = () => {
   const { user } = useContext(AuthContext);
   const userId = user._id;
   const { apiData, isLoading, error } = useFetch(
-    `/schools/favorite/Schools/${userId}`
+    `${URL}/schools/favorite/Schools/${userId}`
   );
 
   //   console.log(apiData)
@@ -49,7 +50,7 @@ const Favorite = () => {
                   width="100%"
                   height="120px"
                   style={{ objectFit: "cover" }}
-                  src={"/uploads/" + favSchool.images[0]}
+                  src={`${URL}/uploads/` + favSchool.images[0]}
                   alt={favSchool.name}
                 />
               </div>
