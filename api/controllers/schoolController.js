@@ -236,6 +236,22 @@ const createSchool = async (req, res, next) => {
       next(err);
     }
 
+    // Set CORS headers
+    // Allow requests from both production and localhost
+    const allowedOrigins = [
+      "https://naijaschoolsearch.onrender.com",
+      "http://localhost:3000",
+    ];
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+      res.header("Access-Control-Allow-Origin", origin);
+    }
+
+    res.header("Access-Control-Allow-Methods", "POST");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Credentials", "true");
+
     res.status(200).json(savedSchool);
 
     // Sending email after school listing application
