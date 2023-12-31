@@ -197,21 +197,14 @@ const searchAllSchools = async (req, res, next) => {
 // };
 // create a school
 const createSchool = async (req, res, next) => {
-  // Handle preflight requests
-  if (req.method === "OPTIONS") {
-    res.header(
-      "Access-Control-Allow-Origin",
-      "https://naijaschoolsearch.onrender.com"
-    );
-    res.header(
-      "Access-Control-Allow-Methods",
-      "GET,HEAD,PUT,PATCH,POST,DELETE"
-    );
-    res.header("Access-Control-Allow-Headers", "Content-Type, ...");
-    res.header("Access-Control-Allow-Credentials", true);
-    res.status(204).end();
-    return;
-  }
+  // Set CORS headers
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://naijaschoolsearch.onrender.com"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Credentials", true);
   const userId = req.params.userId;
 
   try {
