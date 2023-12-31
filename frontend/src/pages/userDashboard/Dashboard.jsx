@@ -1032,6 +1032,7 @@ const Dashboard = () => {
 
   //const [resData, setResData] = useState({});
   const [resError, setResError] = useState(undefined);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -1054,8 +1055,9 @@ const Dashboard = () => {
       const res = await axios.post(`${URL}/schools/${user._id}`, formData);
       console.log(res.data);
       setResError("");
-      alert("School created and awaiting approval");
-      window.location.reload(); // this plain javascript
+      alert("PLEASE REFERESH THIS PAGE! School created and awaiting approval.");
+      // window.location.reload(); // this plain javascript. It seems to be causing problems in production
+      navigate("/dashboard");
     } catch (err) {
       const error = err.response.data;
       const errorMsg = error.message;
@@ -1092,7 +1094,6 @@ const Dashboard = () => {
     }
   };
 
-  const navigate = useNavigate();
   // navigate to edit page
   const handleEdit = (schoolId) => {
     const shouldDelete = window.confirm(

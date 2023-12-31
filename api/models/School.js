@@ -88,8 +88,8 @@ const schoolSchema = new mongoose.Schema(
   {
     collation: { locale: "en", strength: 2 },
   },
-  { timestamps: true}
-  // { timestamps: true, autoCreate: true } // this was used to help create the index
+  { timestamps: true }
+  //{ timestamps: true, autoCreate: true } // this was used to help create the index
 );
 
 //for random search
@@ -101,17 +101,24 @@ schoolSchema.index({
   desc: "text",
 });
 
-
-
 const School = mongoose.model("school", schoolSchema);
 
-// Create search indexes defined in the schema
+// Create search indexes defined in the schema. Make sure to remove the collation property first
 // School.createIndexes()
 //   .then(() => {
-//     console.log('Indexes created successfully');
+//     console.log("Indexes created successfully");
 //   })
 //   .catch((error) => {
-//     console.error('Error creating indexes:', error);
+//     console.error("Error creating indexes:", error);
+//   });
+
+// OR
+// School.init()
+//   .then(() => {
+//     console.log("Indexes created successfully");
+//   })
+//   .catch((error) => {
+//     console.error("Error creating indexes:", error);
 //   });
 
 module.exports = School;
