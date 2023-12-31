@@ -1173,7 +1173,11 @@ const Dashboard = () => {
             </p>
             <p style={{ color: "red" }}>Fields marked (*) are compulsory</p>
           </div>
-          <form className="listSchool" onSubmit={handleSubmit}>
+          <form
+            className="listSchool"
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+          >
             <input
               type="text"
               placeholder="Name of School*"
