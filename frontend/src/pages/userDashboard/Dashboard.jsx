@@ -1055,9 +1055,11 @@ const Dashboard = () => {
       const res = await axios.post(`${URL}/schools/${user._id}`, formData);
       console.log(res.data);
       setResError("");
-      alert("PLEASE REFERESH THIS PAGE! School created and awaiting approval.");
-      // window.location.reload(); // this plain javascript. It seems to be causing problems in production
-      navigate("/dashboard");
+      alert(
+        "School created and awaiting approval. An Email has been sent to you!"
+      );
+      window.location.reload(); // this plain javascript. It seems to be causing problems in production
+      // navigate("/dashboard");
     } catch (err) {
       const error = err.response.data;
       const errorMsg = error.message;
