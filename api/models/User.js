@@ -6,12 +6,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
 
     email: {
       type: String,
       required: true,
       unique: true,
+      trim: true,
     },
 
     password: {
@@ -46,7 +48,7 @@ const UserSchema = new mongoose.Schema(
 
     agreedToTerms: {
       type: String,
-      default: 'I Agree'
+      default: "I Agree",
     },
 
     schools: {

@@ -143,7 +143,11 @@ const School = () => {
 
             <div className="sliderWrapper">
               <img
-                src={images && `${URL}/uploads/` + images[slideNumber]}
+                src={
+                  images &&
+                  `https://res.cloudinary.com/dixtyyrsn/image/upload/` +
+                    images[slideNumber]
+                }
                 alt=""
                 className="sliderImg"
               />
@@ -175,7 +179,7 @@ const School = () => {
                 images.map((photo, i) => (
                   <div className="schoolImages" key={i}>
                     <img
-                      src={`${URL}/uploads/${photo}`}
+                      src={`https://res.cloudinary.com/dixtyyrsn/image/upload/${photo}`}
                       alt="schoolImages"
                       className="imageItem responsiveImg"
                       onClick={() => handleOpen(i)}

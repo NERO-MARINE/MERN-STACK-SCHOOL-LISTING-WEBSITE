@@ -1149,7 +1149,11 @@ const SearchPage = () => {
                       width="100%"
                       height="120px"
                       style={{ objectFit: "cover" }}
-                      src={`${URL}/uploads/` + searchResult.images[0]}
+                      // src={`${URL}/uploads/` + searchResult.images[0]}
+                      src={
+                        `https://res.cloudinary.com/dixtyyrsn/image/upload/` +
+                        searchResult.images[0]
+                      }
                       alt={searchResult.name}
                     />
                   </div>

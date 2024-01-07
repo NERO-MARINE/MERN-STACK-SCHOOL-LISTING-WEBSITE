@@ -5,6 +5,8 @@ const createError = require("../utilitis/error");
 const multer = require("multer");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 
 // for recaptcha verification
 const recaptchaVerification = async (recaptchaValue) => {
@@ -21,18 +23,35 @@ const recaptchaVerification = async (recaptchaValue) => {
 };
 
 // Multer configuration
+/*
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/"); // Set your upload folder
   },
-  // filename: function (req, file, cb) {
-  //   cb(null, file.originalname);
-  // },
 
-  // I want unique names for my files to aviod conflict
+  // unique names for my files
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+*/
+
+// configure multer to use cloundinary
+
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Configure Multer to use Cloudinary as storage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    // folder: "your_folder_name", // optional, specify the folder in Cloudinary
+    allowed_formats: ["jpg", "jpeg", "png"],
   },
 });
 

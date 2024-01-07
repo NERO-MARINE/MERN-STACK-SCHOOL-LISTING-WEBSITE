@@ -50,7 +50,11 @@ const Favorite = () => {
                   width="100%"
                   height="120px"
                   style={{ objectFit: "cover" }}
-                  src={`${URL}/uploads/` + favSchool.images[0]}
+                  // src={`${URL}/uploads/` + favSchool.images[0]}
+                  src={
+                    `https://res.cloudinary.com/dixtyyrsn/image/upload/` +
+                    favSchool.images[0]
+                  }
                   alt={favSchool.name}
                 />
               </div>

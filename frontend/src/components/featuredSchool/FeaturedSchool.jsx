@@ -54,7 +54,11 @@ const FeaturedSchool = () => {
           apiData.map((school) => (
             <div className="F_school" key={school._id}>
               <img
-                src={`${URL}/uploads/` + school.images[0]}
+                // src={`${URL}/uploads/` + school.images[0]}
+                src={
+                  `https://res.cloudinary.com/dixtyyrsn/image/upload/` +
+                  school.images[0]
+                }
                 alt="featuredSchool"
               />
               <div className="F_school_details">

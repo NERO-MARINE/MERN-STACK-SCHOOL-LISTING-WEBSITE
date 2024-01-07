@@ -45,7 +45,7 @@ const RandomSearch = () => {
     <div className="randomSearch">
       <Navbar type="notHomePage" />
       <div className="randomResults container">
-        <h1>Random Search Results</h1>
+        <h4>Random Search Results</h4>
         {isLoading ? (
           <div
             style={{
@@ -68,7 +68,11 @@ const RandomSearch = () => {
                   width="100%"
                   height="120px"
                   style={{ objectFit: "cover" }}
-                  src={`${URL}/uploads/` + favSchool.images[0]}
+                  // src={`${URL}/uploads/` + favSchool.images[0]}
+                  src={
+                    `https://res.cloudinary.com/dixtyyrsn/image/upload/` +
+                    favSchool.images[0]
+                  }
                   alt={favSchool.name}
                 />
               </div>
@@ -99,7 +103,18 @@ const RandomSearch = () => {
           ))
         )}
 
-        <h2>{error && error.message}</h2>
+        {error && (
+          <div className="notFoundDiv">
+            <img
+              src="searchNotFound.svg"
+              alt="error image"
+              width={200}
+              height={100}
+              className="responsiveImg"
+            />
+            <p className="errorPara">{error && error.message}</p>
+          </div>
+        )}
       </div>
       <Footer />
     </div>
