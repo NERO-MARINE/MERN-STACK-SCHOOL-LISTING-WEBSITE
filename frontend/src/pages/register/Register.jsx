@@ -55,8 +55,8 @@ const Register = () => {
       };
 
       await axios.post(`${URL}/auth/register`, registrationData);
-      // await axios.post("/auth/register", credentials);
       //console.log(res.data) - to use this set const res = axios call
+      alert("Registration is Successful. An Email has been sent you.");
       navigate("/login");
     } catch (err) {
       console.log(err.response.data);

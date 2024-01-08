@@ -107,7 +107,7 @@ const RandomSearch = () => {
           <div className="notFoundDiv">
             <img
               src="searchNotFound.svg"
-              alt="error image"
+              alt="notFound"
               width={200}
               height={100}
               className="responsiveImg"
