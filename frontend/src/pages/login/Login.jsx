@@ -31,6 +31,7 @@ const Login = () => {
   };
 
   const handleEmailModal = () => {
+    alert("Kindly Enter Your email in the form Below");
     setOpen(true);
   };
 

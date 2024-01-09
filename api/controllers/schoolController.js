@@ -111,7 +111,10 @@ const searchAllSchools = async (req, res, next) => {
 
     if (allSchools.length == "") {
       return next(
-        createError(404, "No school has been listed yet under these filters!")
+        createError(
+          404,
+          "No school has been listed under the selected filters!"
+        )
       );
     }
 

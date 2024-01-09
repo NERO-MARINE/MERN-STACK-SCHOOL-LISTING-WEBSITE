@@ -32,9 +32,9 @@ const Navbar = ({ type }) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleSearch = async()=>{
-    navigate('/random-search', {state: credentials.search})
-  }
+  const handleSearch = async () => {
+    navigate("/random-search", { state: credentials.search });
+  };
 
   return (
     <div className={type !== "notHomePage" ? "header" : "headerNotHomePage"}>
@@ -44,8 +44,15 @@ const Navbar = ({ type }) => {
             NSS
           </Link>
           <div className="search">
-            <input type="text" placeholder="search..." onChange={handleChange} id="search"/>
-            <button onClick={handleSearch}><FontAwesomeIcon icon={faSearch} className="searchIcon"/></button>
+            <input
+              type="text"
+              placeholder="Search School..."
+              onChange={handleChange}
+              id="search"
+            />
+            <button onClick={handleSearch}>
+              <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+            </button>
           </div>
           <div className="menu-icon" onClick={toggleNavbar}>
             ☰
@@ -86,13 +93,15 @@ const Navbar = ({ type }) => {
             </div>
           )}
         </div>
-       
       </div>
       {type !== "notHomePage" && (
         <div className="intro container grid1">
           <div className="intro_text flex">
             <h1>Welcome To Naija School Search.</h1>
-            <h2>Search and Find The Right School/Skill Acquisition Center For Your Child!</h2>
+            <h2>
+              Search and Find The Right School/Skill Acquisition Center For Your
+              Child!
+            </h2>
             <Link to="/search">
               <button className="button">Search School</button>
             </Link>
