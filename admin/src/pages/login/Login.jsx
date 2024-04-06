@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "./login.scss";
 import axios from "axios";
+import { URL } from "../../App";
 const Login = () => {
   const [credentials, setCredentials] = useState({
     username: undefined,
@@ -24,17 +25,17 @@ const Login = () => {
     dispatch({ type: "LOGIN_START" });
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/auth/login",
-        credentials
-      );
+      const res = await axios.post(`${URL}/auth/login`, credentials);
 
       if (res.data.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/");
         // console.log(res.data)
       } else {
-        dispatch({ type: "LOGIN_FAILURE", payload: {message: "you are not allowed"} });
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "you are not allowed" },
+        });
       }
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });

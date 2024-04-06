@@ -11,7 +11,11 @@ const cors = require("cors");
 
 const app = express();
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://naijaschoolsearch.onrender.com"],
+  origin: [
+    "http://localhost:3000",
+    "https://naijaschoolsearch.onrender.com",
+    "https://naijaschoolsearchadmin.onrender.com",
+  ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Enable credentials (cookies, authorization headers, etc.)
   optionsSuccessStatus: 204, // Some legacy browsers (IE11, various SmartTVs) choke on 204

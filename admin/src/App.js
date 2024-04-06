@@ -12,6 +12,8 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import { schoolColumns, userColumns } from "./datatablesource";
 
+export const URL = process.env.REACT_APP_SERVER_URL;
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -46,7 +48,7 @@ function App() {
                 index
                 element={
                   <ProtectedRoute>
-                    <List columns={userColumns}/>
+                    <List columns={userColumns} />
                   </ProtectedRoute>
                 }
               />
@@ -74,7 +76,7 @@ function App() {
                 index
                 element={
                   <ProtectedRoute>
-                    <List columns={schoolColumns}/>
+                    <List columns={schoolColumns} />
                   </ProtectedRoute>
                 }
               />

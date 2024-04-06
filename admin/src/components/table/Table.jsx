@@ -7,11 +7,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useFetch from "../../hooks/useFetch";
+import { URL } from "../../App";
 
 // This is the table in the homePage
 const SalesList = () => {
   const { apiData, isLoading } = useFetch(
-    "http://localhost:5000/schools/featuredSchools?featured=true"
+    `${URL}/schools/featuredSchools?featured=true`
   );
   // console.log(apiData);
 
