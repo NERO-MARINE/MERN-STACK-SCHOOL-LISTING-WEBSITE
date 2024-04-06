@@ -8,7 +8,7 @@ import axios from "axios";
 import { URL } from "../../App";
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: undefined,
+    email: undefined,
     password: undefined,
   });
 
@@ -49,9 +49,9 @@ const Login = () => {
         <form className="formContainer" onSubmit={handleClick}>
           <h1>Admin Login</h1>
           <input
-            type="text"
-            id="username"
-            placeholder="Enter your username"
+            type="email"
+            id="email"
+            placeholder="Enter your email"
             onChange={handleChange}
             required
           />
